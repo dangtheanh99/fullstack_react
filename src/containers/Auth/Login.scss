@@ -1,0 +1,39 @@
+.login-background {
+  background: linear-gradient(120deg, #2980b9, #8e44ad);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-container {
+  width: 500px;
+  background-color: #fff;
+  border-radius: 16px;
+  // display: flex;
+  padding: 36px;
+
+  .login-content {
+    .login-content-heading {
+      text-align: center;
+    }
+  }
+}
+
+.form-group {
+  font-size: 20px;
+  margin-top: 12px;
+}
+
+.form-control {
+  font-size: 18px;
+  margin-top: 8px;
+}
+
+.btn-login {
+  text-align: center;
+  width: 100%;
+  background: linear-gradient(120deg, #2980b9, #8e44ad);
+  margin-top: 24px;
+  font-size: 16px;
+}
