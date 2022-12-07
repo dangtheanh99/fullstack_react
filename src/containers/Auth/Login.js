@@ -11,7 +11,37 @@ import "./Login.scss";
 class Login extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      username: "",
+      password: "",
+      isShowPassword: false,
+    };
   }
+
+  handleOnChange = (event, type) => {
+    if (type === "username") {
+      this.setState({
+        username: event.target.value,
+      });
+    }
+
+    if (type === "password") {
+      this.setState({
+        password: event.target.value,
+      });
+    }
+  };
+
+  handleLogin = (e) => {
+    e.preventDefault();
+    console.log("state value: ", this.state);
+  };
+
+  handleShowHide = () => {
+    this.setState({
+      isShowPassword: !this.state.isShowPassword,
+    });
+  };
   render() {
     return (
       <div className="login-background">
@@ -26,20 +56,55 @@ class Login extends Component {
                   class="form-control"
                   id="exampleInputEmail1"
                   placeholder="Enter your username"
+                  value={this.state.username}
+                  onChange={(event) => this.handleOnChange(event, "username")}
                 />
               </div>
               <div class="form-group">
                 <label for="exampleInputPassword1">Password</label>
-                <input
-                  type="password"
-                  class="form-control"
-                  id="exampleInputPassword1"
-                  placeholder="Enter your password"
-                />
+                <div className="custom-password">
+                  <input
+                    type={this.state.isShowPassword ? "text" : "password"}
+                    class="form-control"
+                    id="exampleInputPassword1"
+                    placeholder="Enter your password"
+                    value={this.state.password}
+                    onChange={(event) => this.handleOnChange(event, "password")}
+                  />
+                  <span onClick={() => this.handleShowHide()}>
+                    <i
+                      class={
+                        this.state.isShowPassword
+                          ? "far fa-eye"
+                          : "far fa-eye-slash"
+                      }
+                    ></i>
+                  </span>
+                </div>
               </div>
-              <button type="submit" class="btn btn-primary btn-login">
-                Log in
-              </button>
+              <div className="col-12 text-right">Forgot password?</div>
+              <div>
+                <button
+                  // type="submit"
+                  class="btn btn-primary btn-login"
+                  onClick={(e) => this.handleLogin(e)}
+                >
+                  LOGIN
+                </button>
+              </div>
+              <div className="other-login">
+                <div className="other-login-text text-center">
+                  Or login with
+                </div>
+                <div className="social-login">
+                  <a href="#" className="btn-face m-b-10" role={"button"}>
+                    <i className="fa fa-facebook-official"></i>Facebook
+                  </a>
+                  <a href="#" className="btn-google m-b-10" role={"button"}>
+                    <i className="fa-brands fa-google"></i>Google
+                  </a>
+                </div>
+              </div>
             </form>
           </div>
         </div>

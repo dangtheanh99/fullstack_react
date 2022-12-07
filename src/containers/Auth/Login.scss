@@ -23,6 +23,15 @@
 .form-group {
   font-size: 20px;
   margin-top: 12px;
+  .custom-password {
+    position: relative;
+    i {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+
+    }
+  }
 }
 
 .form-control {
@@ -36,4 +45,45 @@
   background: linear-gradient(120deg, #2980b9, #8e44ad);
   margin-top: 24px;
   font-size: 16px;
+  height: 46px;
+  outline: none;
+  border: none;
+  // &:hover {
+  //   background: red;
+  // }
+}
+
+.social-login {
+  display: flex;
+  justify-content: space-around;
+  .btn-face, .btn-google {
+    font-family: Raleway-Bold;
+      font-size: 16px;
+      line-height: 1.2;
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -moz-box;
+      display: -ms-flexbox;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: calc((100% - 10px)/2);
+      height: 40px;
+      border-radius: 3px;
+      border: 1px solid #e6e6e6;
+      background-color: #fff;
+      -webkit-transition: all .4s;
+      -o-transition: all .4s;
+      -moz-transition: all .4s;
+      transition: all .4s;
+      text-decoration: none;
+      color: #000;
+  }
+}
+
+
+.other-login-text {
+  margin: 24px;
+  font-weight: 600;
+  font-style: italic;
 }
