@@ -1,40 +1,52 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { push } from "connected-react-router";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { push } from 'connected-react-router';
 
-import * as actions from "../../store/actions";
-import "./Login.scss";
-// import { FormattedMessage } from "react-intl";
-
+import * as actions from '../../store/actions';
+import './Login.scss';
+import { FormattedMessage } from 'react-intl';
+import { handleLoginApi } from '../../services/userService';
 // import adminService from "../services/adminService";
 
 class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: "",
-      password: "",
+      username: '',
+      password: '',
       isShowPassword: false,
+      errMessage: '',
     };
   }
 
   handleOnChange = (event, type) => {
-    if (type === "username") {
+    if (type === 'username') {
       this.setState({
         username: event.target.value,
       });
     }
 
-    if (type === "password") {
+    if (type === 'password') {
       this.setState({
         password: event.target.value,
       });
     }
   };
 
-  handleLogin = (e) => {
+  handleLogin = async (e) => {
     e.preventDefault();
-    console.log("state value: ", this.state);
+    this.setState({
+      errMessage: '',
+    });
+    console.log('state value: ', this.state);
+    try {
+      await handleLoginApi(this.state.username, this.state.password);
+    } catch (e) {
+      console.log(e);
+      this.setState({
+        errMessage: e.message,
+      });
+    }
   };
 
   handleShowHide = () => {
@@ -44,64 +56,68 @@ class Login extends Component {
   };
   render() {
     return (
-      <div className="login-background">
-        <div className="login-container">
-          <div className="login-content">
-            <h2 className="login-content-heading">Login</h2>
+      <div className='login-background'>
+        <div className='login-container'>
+          <div className='login-content'>
+            <h2 className='login-content-heading'>Login</h2>
             <form>
-              <div class="form-group">
-                <label for="exampleInputEmail1">Username</label>
+              <div class='form-group'>
+                <label for='exampleInputEmail1'>Username</label>
                 <input
-                  type="text"
-                  class="form-control"
-                  id="exampleInputEmail1"
-                  placeholder="Enter your username"
+                  type='text'
+                  class='form-control'
+                  id='exampleInputEmail1'
+                  placeholder='Enter your username'
                   value={this.state.username}
-                  onChange={(event) => this.handleOnChange(event, "username")}
+                  onChange={(event) => this.handleOnChange(event, 'username')}
                 />
               </div>
-              <div class="form-group">
-                <label for="exampleInputPassword1">Password</label>
-                <div className="custom-password">
+              <div class='form-group'>
+                <label for='exampleInputPassword1'>Password</label>
+                <div className='custom-password'>
                   <input
-                    type={this.state.isShowPassword ? "text" : "password"}
-                    class="form-control"
-                    id="exampleInputPassword1"
-                    placeholder="Enter your password"
+                    type={this.state.isShowPassword ? 'text' : 'password'}
+                    class='form-control'
+                    id='exampleInputPassword1'
+                    placeholder='Enter your password'
                     value={this.state.password}
-                    onChange={(event) => this.handleOnChange(event, "password")}
+                    onChange={(event) => this.handleOnChange(event, 'password')}
                   />
                   <span onClick={() => this.handleShowHide()}>
                     <i
                       class={
                         this.state.isShowPassword
-                          ? "far fa-eye"
-                          : "far fa-eye-slash"
+                          ? 'far fa-eye'
+                          : 'far fa-eye-slash'
                       }
                     ></i>
                   </span>
                 </div>
               </div>
-              <div className="col-12 text-right">Forgot password?</div>
+              <div className='col-12' style={{ color: 'red' }}>
+                {this.state.errMessage}
+              </div>
+              <div className='col-12 text-right'>Forgot password?</div>
+
               <div>
                 <button
                   // type="submit"
-                  class="btn btn-primary btn-login"
+                  class='btn btn-primary btn-login'
                   onClick={(e) => this.handleLogin(e)}
                 >
                   LOGIN
                 </button>
               </div>
-              <div className="other-login">
-                <div className="other-login-text text-center">
+              <div className='other-login'>
+                <div className='other-login-text text-center'>
                   Or login with
                 </div>
-                <div className="social-login">
-                  <a href="#" className="btn-face m-b-10" role={"button"}>
-                    <i className="fa fa-facebook-official"></i>Facebook
+                <div className='social-login'>
+                  <a href='#' className='btn-face m-b-10' role={'button'}>
+                    <i className='fa fa-facebook-official'></i>Facebook
                   </a>
-                  <a href="#" className="btn-google m-b-10" role={"button"}>
-                    <i className="fa-brands fa-google"></i>Google
+                  <a href='#' className='btn-google m-b-10' role={'button'}>
+                    <i className='fa-brands fa-google'></i>Google
                   </a>
                 </div>
               </div>
