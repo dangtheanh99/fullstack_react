@@ -3,6 +3,7 @@ import { FormattedMessage } from "react-intl";
 import { connect } from "react-redux";
 import "./UserManage.scss";
 import { getAllUsers } from "../../services/userService";
+import ModalUser from "./ModalUser";
 
 class UserManage extends Component {
   constructor(props) {
@@ -21,12 +22,25 @@ class UserManage extends Component {
     }
   }
 
+  handleAddNewUser = () => {
+    alert("Click me!");
+  };
+
   render() {
     let { allUsers } = this.state;
     return (
       <div className="users-container">
+        <ModalUser />
         <div className="title text-center">Manage users with The Anh</div>
-        <div className="users-table mt-3 mx-1">
+        <div className="my-1">
+          <button
+            className="btn btn-primary px-3"
+            onClick={() => this.handleAddNewUser()}
+          >
+            <i className="fas fa-plus"></i> Add new user
+          </button>
+        </div>
+        <div className="users-table mt-3">
           <table id="customers">
             <tr>
               <th>First name</th>
