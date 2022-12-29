@@ -35,9 +35,36 @@
   margin-right: 20px;
   margin-left: 10px;
   cursor: pointer;
+  i {
+    color: blue;
+  }
 }
 
 .button-delete {
   width: 50px;
   cursor: pointer;
+  i {
+    color: red;
+  }
+}
+
+.custom-modal {
+  .custom-modal-body {
+    .form-row {
+      display: flex;
+      gap: 16px;
+      .form-group {
+        width: 49%;
+      }
+    }
+  }
+
+  .custom-modal-body {
+    button {
+      background: transparent;
+      border: none;
+      font-size: 28px;
+      color: white;
+    }
+  }
 }

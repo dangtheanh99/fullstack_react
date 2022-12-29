@@ -74,23 +74,23 @@ class Login extends Component {
           <div className="login-content">
             <h2 className="login-content-heading">Login</h2>
             <form>
-              <div class="form-group">
+              <div className="form-group">
                 <label for="exampleInputEmail1">Username</label>
                 <input
                   type="text"
-                  class="form-control"
+                  className="form-control"
                   id="exampleInputEmail1"
                   placeholder="Enter your username"
                   value={this.state.username}
                   onChange={(event) => this.handleOnChange(event, "username")}
                 />
               </div>
-              <div class="form-group">
+              <div className="form-group">
                 <label for="exampleInputPassword1">Password</label>
                 <div className="custom-password">
                   <input
                     type={this.state.isShowPassword ? "text" : "password"}
-                    class="form-control"
+                    className="form-control"
                     id="exampleInputPassword1"
                     placeholder="Enter your password"
                     value={this.state.password}
@@ -98,7 +98,7 @@ class Login extends Component {
                   />
                   <span onClick={() => this.handleShowHide()}>
                     <i
-                      class={
+                      className={
                         this.state.isShowPassword
                           ? "far fa-eye"
                           : "far fa-eye-slash"
@@ -115,7 +115,7 @@ class Login extends Component {
               <div>
                 <button
                   // type="submit"
-                  class="btn btn-primary btn-login"
+                  className="btn btn-primary btn-login"
                   onClick={(e) => this.handleLogin(e)}
                 >
                   LOGIN
