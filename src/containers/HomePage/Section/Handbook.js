@@ -1,22 +1,21 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import "./Specialty.scss";
 import Slider from "react-slick";
 
-class Specialty extends Component {
+class Handbook extends Component {
   render() {
     return (
-      <div className="commonSection specialtySection">
+      <div className="commonSection HandbookSection">
         <div className="commonSection__header">
-          <div className="commonSection__header__title">
-            Chuyên khoa phổ biến
-          </div>
-          <button className="commonSection__header__btn">Xem thêm</button>
+          <div className="commonSection__header__title">Cẩm nang</div>
+          <button className="commonSection__header__btn">
+            Tất cả bài viết
+          </button>
         </div>
         <Slider {...this.props.settings} className="commonSection__slider">
           <div className="commonSection__slider__item">
             <img
-              src="https://cdn.bookingcare.vn/fr/w300/2019/12/13/120331-co-xuong-khop.jpg"
+              src="https://cdn.bookingcare.vn/fr/w300/2022/12/30/143149-thumbnail-4.png"
               className="commonSection__slider__item__img"
             />
             <div className="commonSection__slider__item__title">
@@ -25,7 +24,7 @@ class Specialty extends Component {
           </div>
           <div className="commonSection__slider__item">
             <img
-              src="https://cdn.bookingcare.vn/fr/w300/2019/12/13/120331-co-xuong-khop.jpg"
+              src="https://cdn.bookingcare.vn/fr/w300/2022/12/30/143149-thumbnail-4.png"
               className="commonSection__slider__item__img"
             />
             <div className="commonSection__slider__item__title">
@@ -34,7 +33,7 @@ class Specialty extends Component {
           </div>
           <div className="commonSection__slider__item">
             <img
-              src="https://cdn.bookingcare.vn/fr/w300/2019/12/13/120331-co-xuong-khop.jpg"
+              src="https://cdn.bookingcare.vn/fr/w300/2022/12/30/143149-thumbnail-4.png"
               className="commonSection__slider__item__img"
             />
             <div className="commonSection__slider__item__title">
@@ -43,7 +42,7 @@ class Specialty extends Component {
           </div>
           <div className="commonSection__slider__item">
             <img
-              src="https://cdn.bookingcare.vn/fr/w300/2019/12/13/120331-co-xuong-khop.jpg"
+              src="https://cdn.bookingcare.vn/fr/w300/2022/12/30/143149-thumbnail-4.png"
               className="commonSection__slider__item__img"
             />
             <div className="commonSection__slider__item__title">
@@ -52,7 +51,7 @@ class Specialty extends Component {
           </div>
           <div className="commonSection__slider__item">
             <img
-              src="https://cdn.bookingcare.vn/fr/w300/2019/12/13/120331-co-xuong-khop.jpg"
+              src="https://cdn.bookingcare.vn/fr/w300/2022/12/30/143149-thumbnail-4.png"
               className="commonSection__slider__item__img"
             />
             <div className="commonSection__slider__item__title">
@@ -61,7 +60,7 @@ class Specialty extends Component {
           </div>
           <div className="commonSection__slider__item">
             <img
-              src="https://cdn.bookingcare.vn/fr/w300/2019/12/13/120331-co-xuong-khop.jpg"
+              src="https://cdn.bookingcare.vn/fr/w300/2022/12/30/143149-thumbnail-4.png"
               className="commonSection__slider__item__img"
             />
             <div className="commonSection__slider__item__title">
@@ -84,4 +83,4 @@ const mapDispatchToProps = (dispatch) => {
   return {};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Specialty);
+export default connect(mapStateToProps, mapDispatchToProps)(Handbook);

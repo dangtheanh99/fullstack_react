@@ -1,71 +1,68 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import "./Specialty.scss";
 import Slider from "react-slick";
 
-class Specialty extends Component {
+class MedicalFacility extends Component {
   render() {
     return (
-      <div className="commonSection specialtySection">
+      <div className="commonSection medicalSection">
         <div className="commonSection__header">
-          <div className="commonSection__header__title">
-            Chuyên khoa phổ biến
-          </div>
-          <button className="commonSection__header__btn">Xem thêm</button>
+          <div className="commonSection__header__title">Cơ sở y tế nổi bật</div>
+          <button className="commonSection__header__btn">Tìm kiếm</button>
         </div>
         <Slider {...this.props.settings} className="commonSection__slider">
           <div className="commonSection__slider__item">
             <img
-              src="https://cdn.bookingcare.vn/fr/w300/2019/12/13/120331-co-xuong-khop.jpg"
+              src="https://cdn.bookingcare.vn/fr/w500/2020/06/03/114348-bv-viet-duc.jpg"
               className="commonSection__slider__item__img"
             />
             <div className="commonSection__slider__item__title">
-              Cơ Xương Khớp
+              Bệnh viện Hữu nghị Việt Đức
             </div>
           </div>
           <div className="commonSection__slider__item">
             <img
-              src="https://cdn.bookingcare.vn/fr/w300/2019/12/13/120331-co-xuong-khop.jpg"
+              src="https://cdn.bookingcare.vn/fr/w500/2020/06/03/114348-bv-viet-duc.jpg"
               className="commonSection__slider__item__img"
             />
             <div className="commonSection__slider__item__title">
-              Cơ Xương Khớp
+              Bệnh viện Hữu nghị Việt Đức
             </div>
           </div>
           <div className="commonSection__slider__item">
             <img
-              src="https://cdn.bookingcare.vn/fr/w300/2019/12/13/120331-co-xuong-khop.jpg"
+              src="https://cdn.bookingcare.vn/fr/w500/2020/06/03/114348-bv-viet-duc.jpg"
               className="commonSection__slider__item__img"
             />
             <div className="commonSection__slider__item__title">
-              Cơ Xương Khớp
+              Bệnh viện Hữu nghị Việt Đức
             </div>
           </div>
           <div className="commonSection__slider__item">
             <img
-              src="https://cdn.bookingcare.vn/fr/w300/2019/12/13/120331-co-xuong-khop.jpg"
+              src="https://cdn.bookingcare.vn/fr/w500/2020/06/03/114348-bv-viet-duc.jpg"
               className="commonSection__slider__item__img"
             />
             <div className="commonSection__slider__item__title">
-              Cơ Xương Khớp
+              Bệnh viện Hữu nghị Việt Đức
             </div>
           </div>
           <div className="commonSection__slider__item">
             <img
-              src="https://cdn.bookingcare.vn/fr/w300/2019/12/13/120331-co-xuong-khop.jpg"
+              src="https://cdn.bookingcare.vn/fr/w500/2020/06/03/114348-bv-viet-duc.jpg"
               className="commonSection__slider__item__img"
             />
             <div className="commonSection__slider__item__title">
-              Cơ Xương Khớp
+              Bệnh viện Hữu nghị Việt Đức
             </div>
           </div>
           <div className="commonSection__slider__item">
             <img
-              src="https://cdn.bookingcare.vn/fr/w300/2019/12/13/120331-co-xuong-khop.jpg"
+              src="https://cdn.bookingcare.vn/fr/w500/2020/06/03/114348-bv-viet-duc.jpg"
               className="commonSection__slider__item__img"
             />
             <div className="commonSection__slider__item__title">
-              Cơ Xương Khớp
+              Bệnh viện Hữu nghị Việt Đức
             </div>
           </div>
         </Slider>
@@ -84,4 +81,4 @@ const mapDispatchToProps = (dispatch) => {
   return {};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Specialty);
+export default connect(mapStateToProps, mapDispatchToProps)(MedicalFacility);
