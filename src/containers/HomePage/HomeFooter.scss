@@ -1,0 +1,58 @@
+.FooterSection {
+  // display: flex;
+
+  &__bigBlock {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-around;
+    padding-top: 30px;
+    background: #efefef;
+    &__about {
+      &__logo {
+        max-width: 200px;
+        cursor: pointer;
+      }
+      &__name {
+        font-weight: bold;
+        margin: 8px 0;
+      }
+      &__address {
+        i {
+          margin-right: 6px;
+        }
+      }
+    }
+    &__contact {
+      list-style-type: none;
+      color: #64b9e5;
+      li {
+        cursor: pointer;
+        margin-bottom: 8px;
+      }
+    }
+
+    &__support {
+      div {
+        font-weight: bold;
+      }
+    }
+  }
+  &__smallBlock {
+    display: flex;
+    height: 58px;
+    width: 100%;
+    padding: 16px 24px;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #64b9e5;
+    &__copyright {
+      color: #fff;
+    }
+    &__social {
+      i {
+        font-size: 32px;
+        margin: 0 6px;
+      }
+    }
+  }
+}

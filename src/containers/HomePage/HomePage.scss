@@ -128,3 +128,25 @@
     color: #45c3d2;
   }
 }
+
+.AboutSection {
+  padding: 46px 100px;
+  border-top: 1px solid #ccc;
+  &__heading {
+    font-size: 24px;
+    margin-bottom: 16px;
+  }
+
+  &__content {
+    display: flex;
+    gap: 32px;
+    &__video {
+      width: 60%;
+    }
+    &__des {
+      width: 40%;
+      text-align: justify;
+      font-style: italic;
+    }
+  }
+}
