@@ -133,6 +133,7 @@
     "position": "Position",
     "role": "Role",
     "image": "Image",
-    "save": "Save"
+    "save": "Save",
+    "edit": "Update"
   }
 }

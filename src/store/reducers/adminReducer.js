@@ -1,33 +1,65 @@
-import actionTypes from '../actions/actionTypes';
+import actionTypes from "../actions/actionTypes";
+import { toast } from "react-toastify";
 
 const initialState = {
-    isLoggedIn: false,
-    adminInfo: null
-}
+  genders: [],
+  roles: [],
+  positions: [],
+  users: [],
+};
 
-const appReducer = (state = initialState, action) => {
-    switch (action.type) {
-        case actionTypes.ADMIN_LOGIN_SUCCESS:
-            return {
-                ...state,
-                isLoggedIn: true,
-                adminInfo: action.adminInfo
-            }
-        case actionTypes.ADMIN_LOGIN_FAIL:
-            return {
-                ...state,
-                isLoggedIn: false,
-                adminInfo: null
-            }
-        case actionTypes.PROCESS_LOGOUT:
-            return {
-                ...state,
-                isLoggedIn: false,
-                adminInfo: null
-            }
-        default:
-            return state;
-    }
-}
+const adminReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case actionTypes.FETCH_GENDER_START:
+      return {
+        ...state,
+      };
+    case actionTypes.FETCH_GENDER_SUCCESS:
+      state.genders = action.data;
+      return {
+        ...state,
+      };
+    case actionTypes.FETCH_GENDER_FAIL:
+      state.genders = [];
+      return {
+        ...state,
+      };
 
-export default appReducer;
+    case actionTypes.FETCH_ROLE_SUCCESS:
+      state.roles = action.data;
+      return {
+        ...state,
+      };
+    case actionTypes.FETCH_ROLE_FAIL:
+      state.roles = [];
+      return {
+        ...state,
+      };
+
+    case actionTypes.FETCH_POSITION_SUCCESS:
+      state.positions = action.data;
+      return {
+        ...state,
+      };
+    case actionTypes.FETCH_POSITION_FAIL:
+      state.positions = [];
+      return {
+        ...state,
+      };
+    case actionTypes.FETCH_USER_SUCCESS:
+      state.users = action.data;
+      return {
+        ...state,
+      };
+    case actionTypes.FETCH_USER_FAIL:
+      state.users = [];
+      return {
+        ...state,
+      };
+
+    default:
+      return state;
+  }
+};
+
+export default adminReducer;
