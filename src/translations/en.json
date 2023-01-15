@@ -135,5 +135,10 @@
     "image": "Image",
     "save": "Save",
     "edit": "Update"
+  },
+  "homepage": {
+    "out-standing-doctor": "Outstanding Doctor of the Week",
+    "more": "More",
+    "search": "Search"
   }
 }

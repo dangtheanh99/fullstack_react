@@ -63,9 +63,12 @@ class HomeHeader extends Component {
               <div className="homeHeader__content__left__logo"></div>
             </div>
             <div className="homeHeader__content__center">
-              {headerData.map((item) => {
+              {headerData.map((item, index) => {
                 return (
-                  <div className="homeHeader__content__center__item">
+                  <div
+                    className="homeHeader__content__center__item"
+                    key={index}
+                  >
                     <div className="homeHeader__content__center__title">
                       {item.title}
                     </div>
@@ -92,15 +95,15 @@ class HomeHeader extends Component {
               <b>Chăm sóc sức khỏe toàn diện</b>
             </div>
             <div className="banner__search">
-              <i class="fas fa-search"></i>
+              <i className="fas fa-search"></i>
               <input type="text" placeholder="Tìm bệnh viện" />
             </div>
           </div>
           <div className="banner__bottom">
             <div className="banner__options">
-              {option.map((item) => {
+              {option.map((item, index) => {
                 return (
-                  <div className="banner__options__item">
+                  <div className="banner__options__item" key={index}>
                     <div className="banner__options__item__icon">
                       <i className={item.icon}></i>
                     </div>

@@ -95,6 +95,9 @@
       }
     }
   }
+  .slick-disabled {
+    // display: none !important;
+  }
 
   &.doctorSection {
     .commonSection__slider__item {
