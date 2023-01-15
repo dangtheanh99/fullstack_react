@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { FormattedMessage } from "react-intl";
 import { connect } from "react-redux";
 import { getAllCodeService } from "../../../services/userService";
-import { languages, CRUD_ACTIONS } from "../../../utils";
+import { languages, CRUD_ACTIONS, CommonUtils } from "../../../utils";
 import * as actions from "../../../store/actions";
 import { Upload, Button } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
@@ -10,6 +10,7 @@ import "antd/dist/antd.css";
 import Lightbox from "react-image-lightbox";
 import "react-image-lightbox/style.css";
 import TableManageUser from "./TableManageUser";
+
 class UserRedux extends Component {
   constructor(props) {
     super(props);
@@ -77,6 +78,7 @@ class UserRedux extends Component {
           arrPosition && arrPosition.length > 0 ? arrPosition[0].key : "",
         image: "",
         action: CRUD_ACTIONS.CREATE,
+        imageUrl: "",
       });
     }
   }
@@ -95,9 +97,9 @@ class UserRedux extends Component {
         roleId: this.state.role,
         positionId: this.state.position,
         id: this.state.userEditId,
+        image: this.state.image,
       });
     } else {
-      console.log("check state", this.state);
       this.props.createNewUser({
         email: this.state.email,
         password: this.state.password,
@@ -108,12 +110,17 @@ class UserRedux extends Component {
         gender: this.state.gender,
         roleId: this.state.role,
         positionId: this.state.position,
+        image: this.state.image,
       });
     }
   };
 
-  editUser = (user) => {
+  editUser = async (user) => {
     console.log("data from child", user);
+    let imageBase64 = "";
+    if (user.image) {
+      imageBase64 = new Buffer(user.image, "base64").toString("binary");
+    }
     this.setState({
       email: user.email,
       password: "hardcode",
@@ -124,19 +131,30 @@ class UserRedux extends Component {
       role: user.roleId,
       phoneNumber: user.phoneNumber,
       position: user.positionId,
-      image: user.image,
+      image: imageBase64,
       action: CRUD_ACTIONS.EDIT,
       userEditId: user.id,
     });
-    console.log("");
   };
 
   onChangeInput = (e, value) => {
-    let copyState = { ...this.state };
-    copyState[value] = e.target.value;
+    // let copyState = { ...this.state };
+    // copyState[value] = e.target.value;
     this.setState({
-      ...copyState,
+      [value]: e.target.value,
     });
+  };
+
+  handleOnChangeImage = async (file) => {
+    let File = file.file.originFileObj;
+    console.log("file", file);
+    if (File) {
+      let base64 = await CommonUtils.getBase64(File);
+      this.setState({
+        image: base64,
+      });
+      file.file.status = "done";
+    }
   };
 
   checkValidateInput = () => {
@@ -322,21 +340,27 @@ class UserRedux extends Component {
                   <Upload
                     listType="picture-card"
                     accept={"image/*"}
-                    onPreview={(file) => {
-                      const objectUrl = URL.createObjectURL(file.originFileObj);
-                      if (objectUrl) {
-                        this.setState({
-                          isOpen: true,
-                          imageUrl: objectUrl,
-                        });
-                      }
-                    }}
-                    onChange={(file) => {
-                      this.setState({
-                        image: file.file.originFileObj,
-                      });
-                      console.log("image", this.state.image);
-                    }}
+                    fileList={
+                      image
+                        ? [
+                            {
+                              status: "done",
+                              url: image,
+                            },
+                          ]
+                        : null
+                    }
+                    // onPreview={(file) => {
+                    //   const objectUrl = URL.createObjectURL(file.originFileObj);
+                    //   console.log("objectUrl", objectUrl);
+                    //   if (objectUrl) {
+                    //     this.setState({
+                    //       isOpen: true,
+                    //       imageUrl: objectUrl,
+                    //     });
+                    //   }
+                    // }}
+                    onChange={(file) => this.handleOnChangeImage(file)}
                   >
                     <UploadOutlined />
                     <span style={{ marginLeft: "4px" }}>Tải ảnh</span>
@@ -395,9 +419,6 @@ const mapDispatchToProps = (dispatch) => {
     getPositionStart: () => dispatch(actions.fetchPositionStart()),
     createNewUser: (data) => dispatch(actions.createNewUser(data)),
     editUserRedux: (data) => dispatch(actions.editUser(data)),
-    // processLogout: () => dispatch(actions.processLogout()),
-    // changeLanguageAppRedux: (language) =>
-    //   dispatch(actions.changeLanguageApp(language)),
   };
 };
 
