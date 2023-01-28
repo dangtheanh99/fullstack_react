@@ -259,10 +259,10 @@ export const fetchAllDoctorsFail = () => ({
   type: actionTypes.FETCH_ALL_DOCTORS_FAIL,
 });
 
-export const saveDetailDoctor = () => {
+export const saveDetailDoctor = (data) => {
   return async (dispatch, getState) => {
     try {
-      let res = await saveInfoDoctorService();
+      let res = await saveInfoDoctorService(data);
       if (res && res.errCode === 0) {
         dispatch({
           type: actionTypes.SAVE_INFO_DOCTOR_SUCCESS,

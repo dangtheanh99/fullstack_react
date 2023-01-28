@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import "./HomeHeader.scss";
+import { withRouter } from "react-router";
+import { path } from "../../utils";
 // import logo from "../../assets/logo.svg";
 // import
 
@@ -60,7 +62,14 @@ class HomeHeader extends Component {
               <div className="homeHeader__content__left__menu">
                 <i className="fas fa-bars"></i>
               </div>
-              <div className="homeHeader__content__left__logo"></div>
+              <div
+                className="homeHeader__content__left__logo"
+                onClick={() => {
+                  if (this.props.history) {
+                    this.props.history.push(path.HOMEPAGE);
+                  }
+                }}
+              ></div>
             </div>
             <div className="homeHeader__content__center">
               {headerData.map((item, index) => {
@@ -88,34 +97,37 @@ class HomeHeader extends Component {
             </div>
           </div>
         </div>
-        <div className="banner">
-          <div className="banner__top">
-            <div className="banner__heading">
-              Nền tảng y tế <br />
-              <b>Chăm sóc sức khỏe toàn diện</b>
+
+        {this.props.isShowBanner && (
+          <div className="banner">
+            <div className="banner__top">
+              <div className="banner__heading">
+                Nền tảng y tế <br />
+                <b>Chăm sóc sức khỏe toàn diện</b>
+              </div>
+              <div className="banner__search">
+                <i className="fas fa-search"></i>
+                <input type="text" placeholder="Tìm bệnh viện" />
+              </div>
             </div>
-            <div className="banner__search">
-              <i className="fas fa-search"></i>
-              <input type="text" placeholder="Tìm bệnh viện" />
+            <div className="banner__bottom">
+              <div className="banner__options">
+                {option.map((item, index) => {
+                  return (
+                    <div className="banner__options__item" key={index}>
+                      <div className="banner__options__item__icon">
+                        <i className={item.icon}></i>
+                      </div>
+                      <div className="banner__options__item__title">
+                        {item.title}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
             </div>
           </div>
-          <div className="banner__bottom">
-            <div className="banner__options">
-              {option.map((item, index) => {
-                return (
-                  <div className="banner__options__item" key={index}>
-                    <div className="banner__options__item__icon">
-                      <i className={item.icon}></i>
-                    </div>
-                    <div className="banner__options__item__title">
-                      {item.title}
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        </div>
+        )}
       </>
     );
   }
@@ -131,4 +143,6 @@ const mapDispatchToProps = (dispatch) => {
   return {};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(HomeHeader);
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(HomeHeader)
+);

@@ -2,8 +2,9 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import Slider from "react-slick";
 import * as actions from "../../../store/actions";
-import { languages } from "../../../utils";
+import { languages, path } from "../../../utils";
 import { FormattedMessage } from "react-intl";
+import { withRouter } from "react-router";
 
 class Doctor extends Component {
   constructor(props) {
@@ -23,6 +24,12 @@ class Doctor extends Component {
       });
     }
   }
+
+  viewDetailDoctor = (doctor) => {
+    // alert("view detail doctor");
+    console.log("info doctor: ", doctor);
+    this.props.history.push(`${path.DETAIL_DOCTOR}/${doctor.id}`);
+  };
   render() {
     console.log("check props redux", this.props.topDoctors);
     let { arrDoctors } = this.state;
@@ -50,7 +57,11 @@ class Doctor extends Component {
                 );
               }
               return (
-                <div className="commonSection__slider__item" key={index}>
+                <div
+                  className="commonSection__slider__item"
+                  key={index}
+                  onClick={() => this.viewDetailDoctor(item)}
+                >
                   <img
                     src={imageBase64}
                     className="commonSection__slider__item__img"
@@ -84,4 +95,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Doctor);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Doctor));

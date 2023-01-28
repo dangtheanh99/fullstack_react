@@ -1,0 +1,65 @@
+.detailDoctor {
+  padding: 16px 0;
+  margin-top: 78px;
+
+  &__info {
+    display: flex;
+    justify-items: center;
+    gap: 16px;
+    margin: 0 auto;
+    width: 90%;
+
+    &__img {
+      img {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+      }
+    }
+    &__content {
+      width: 55%;
+
+      &__title {
+        font-size: 26px;
+        font-weight: bold;
+        color: #333;
+        line-height: 1.2;
+        margin-bottom: 6px;
+      }
+      &__des {
+        color: #555;
+        font-size: 13px;
+        margin-bottom: 6px;
+      }
+      &__icon {
+        span {
+          padding: 4px 10px;
+          background-color: #1877f2;
+          color: #fff;
+          margin-right: 6px;
+          border-radius: 4px;
+          cursor: pointer;
+          font-size: 12px;
+        }
+      }
+    }
+  }
+  &__schedule {
+  }
+  &__detail {
+    background-color: #f9f9f9;
+    margin: 24px 0;
+    padding: 16px 0;
+    border-top: 1px solid #ccc;
+    &__content {
+      width: 90%;
+      margin-right: auto;
+      margin-left: auto;
+    }
+    img {
+      width: 100%;
+    }
+  }
+  &__comment {
+  }
+}
