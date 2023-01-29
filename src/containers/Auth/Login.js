@@ -62,6 +62,12 @@ class Login extends Component {
     }
   };
 
+  handleOnPressEnter = (e) => {
+    if (e.keyCode === 13) {
+      this.handleLogin();
+    }
+  };
+
   handleShowHide = () => {
     this.setState({
       isShowPassword: !this.state.isShowPassword,
@@ -95,6 +101,7 @@ class Login extends Component {
                     placeholder="Enter your password"
                     value={this.state.password}
                     onChange={(event) => this.handleOnChange(event, "password")}
+                    onKeyPress={(event) => this.handleOnPressEnter(event)}
                   />
                   <span onClick={() => this.handleShowHide()}>
                     <i
@@ -127,10 +134,18 @@ class Login extends Component {
                 </div>
                 <div className="social-login">
                   <a href="#" className="btn-face m-b-10" role={"button"}>
-                    <i className="fa fa-facebook-official"></i>Facebook
+                    <i
+                      className="fab fa-facebook-f"
+                      style={{ color: "#0A82ED" }}
+                    ></i>
+                    Facebook
                   </a>
                   <a href="#" className="btn-google m-b-10" role={"button"}>
-                    <i className="fa-brands fa-google"></i>Google
+                    <i
+                      className="fab fa-google"
+                      style={{ color: "#E94235" }}
+                    ></i>
+                    Google
                   </a>
                 </div>
               </div>

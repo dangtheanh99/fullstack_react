@@ -283,3 +283,29 @@ export const saveDetailDoctor = (data) => {
     }
   };
 };
+
+export const fetchAllcodeTime = () => {
+  return async (dispatch, getState) => {
+    try {
+      let res = await getAllCodeService("TIME");
+      if (res && res.errCode === 0) {
+        dispatch({
+          type: actionTypes.FETCH_ALLCODE_TIME_SUCCESS,
+          data: res.data,
+        });
+        // toast.success("Fetch allcode time successfully!");
+      } else {
+        dispatch({
+          type: actionTypes.FETCH_ALLCODE_TIME_FAIL,
+        });
+        // toast.error("Fetch allcode time failed!");
+      }
+    } catch (e) {
+      dispatch({
+        type: actionTypes.FETCH_ALLCODE_TIME_FAIL,
+      });
+      // toast.error("Fetch allcode time failed!");
+      console.log("Error: ", e);
+    }
+  };
+};
