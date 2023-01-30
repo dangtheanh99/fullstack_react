@@ -21,8 +21,12 @@
         margin-right: 24px;
         margin-bottom: 12px;
         cursor: pointer;
+        border-radius: 4px;
+        &.active {
+          background-color: #fab005;
+        }
         &:hover {
-          border: 1px solid #007bff;
+          border: 1px solid #fab005;
           opacity: 0.8;
         }
       }
