@@ -45,6 +45,16 @@
     }
   }
   &__schedule {
+    display: flex;
+    margin: 0 80px;
+    height: 200px;
+    &__time {
+      background-color: #ccc;
+      flex: 1;
+    }
+    &__address {
+      flex: 1;
+    }
   }
   &__detail {
     background-color: #f9f9f9;

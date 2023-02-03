@@ -4,6 +4,7 @@ import HomeHeader from "../../HomePage/HomeHeader";
 import "./DetailDoctor.scss";
 import { getDetailDoctorService } from "../../../services/userService";
 import { languages } from "../../../utils";
+import DoctorSchedule from "./DoctorSchedule";
 class DetailDoctor extends Component {
   constructor(props) {
     super(props);
@@ -68,7 +69,9 @@ class DetailDoctor extends Component {
               </div>
             </div>
             <div className="detailDoctor__schedule">
-              <div className="detailDoctor__schedule__time"></div>
+              <div className="detailDoctor__schedule__time">
+                <DoctorSchedule />
+              </div>
               <div className="detailDoctor__schedule__address"></div>
             </div>
             <div className="detailDoctor__detail">

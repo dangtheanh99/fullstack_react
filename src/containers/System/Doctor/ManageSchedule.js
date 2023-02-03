@@ -18,7 +18,7 @@ class ManageSchedule extends Component {
       selectedOption: null,
       listDoctors: [],
       rangeTime: [],
-      selectedDate: "",
+      selectedDate: moment(),
     };
   }
   async componentDidMount() {
@@ -45,7 +45,7 @@ class ManageSchedule extends Component {
       data = data.map((item) => {
         return { ...item, isSelected: false };
       });
-      console.log("check data selected", data);
+      // console.log("check data selected", data);
       this.setState({
         rangeTime: data,
       });
@@ -56,7 +56,7 @@ class ManageSchedule extends Component {
   };
 
   handleSelectTime = (itemSelected) => {
-    console.log("check itemSelected", itemSelected);
+    // console.log("check itemSelected", itemSelected);
     let { rangeTime } = this.state;
     let result = rangeTime;
     if (result && result.length > 0) {
@@ -84,10 +84,10 @@ class ManageSchedule extends Component {
     return result;
   };
   onChangeDate = (value) => {
-    let formatedDate = value.format("DD/MM/YYYY");
     this.setState({
-      selectedDate: formatedDate,
+      selectedDate: value,
     });
+    // console.log("selectedDate", this.state.selectedDate);
   };
 
   handleSaveSchedule = async () => {
@@ -101,15 +101,17 @@ class ManageSchedule extends Component {
       toast.error("Missing date selection!");
       return;
     }
+    let formatedDate = selectedDate.format("DD/MM/YYYY");
+
     if (rangeTime && rangeTime.length > 0) {
       let arrTime = rangeTime.filter((item) => item.isSelected === true);
-      console.log("arrTime", arrTime);
+      // console.log("arrTime", arrTime);
       if (arrTime && arrTime.length > 0) {
         arrTime.map((item) => {
           let object = {};
           object.doctorId = selectedOption.value;
-          object.date = selectedDate;
-          object.time = item.keyMap;
+          object.date = formatedDate;
+          object.timeType = item.keyMap;
           result.push(object);
         });
       } else {
@@ -122,17 +124,19 @@ class ManageSchedule extends Component {
         return { ...item, isSelected: false };
       });
       this.setState({
-        selectedDate: "",
+        selectedDate: moment(),
         selectedOption: "",
         rangeTime: initRangeTime,
       });
       toast.success("Save successfully!");
     }
+
     let res = await saveBulkScheduleService({
       arrSchedule: result,
+      doctorId: selectedOption.value,
+      date: formatedDate,
     });
     console.log("check res schedule: ", res);
-    console.log("save schedule", result);
   };
   render() {
     let { selectedOption, listDoctors, rangeTime, selectedDate } = this.state;
@@ -170,7 +174,7 @@ class ManageSchedule extends Component {
                   }}
                   locale="vi"
                   format="DD/MM/YYYY"
-                  //   value={this.state.selectedDate}
+                  value={this.state.selectedDate}
                 />
               </div>
               <div className="pickTime">
