@@ -1,7 +1,7 @@
-import axios from "../axios";
+import axios from '../axios';
 
 const handleLoginApi = (userEmail, userPassword) => {
-  return axios.post("/api/login", { email: userEmail, password: userPassword });
+  return axios.post('/api/login', { email: userEmail, password: userPassword });
 };
 
 const getAllUsers = (inputId) => {
@@ -9,15 +9,15 @@ const getAllUsers = (inputId) => {
 };
 
 const createUserService = (data) => {
-  return axios.post("/api/create-new-user", data);
+  return axios.post('/api/create-new-user', data);
 };
 
 const editUserService = (data) => {
-  return axios.put("/api/edit-user", data);
+  return axios.put('/api/edit-user', data);
 };
 
 const deleteUserService = (userId) => {
-  return axios.delete("/api/delete-user", { data: { id: userId } });
+  return axios.delete('/api/delete-user', { data: { id: userId } });
 };
 
 const getAllCodeService = (inputType) => {
@@ -33,7 +33,7 @@ const getAllDoctorsService = () => {
 };
 
 const saveInfoDoctorService = (data) => {
-  return axios.post("/api/save-info-doctor", data);
+  return axios.post('/api/save-info-doctor', data);
 };
 
 const getDetailDoctorService = (inputId) => {
@@ -41,7 +41,13 @@ const getDetailDoctorService = (inputId) => {
 };
 
 const saveBulkScheduleService = (data) => {
-  return axios.post("/api/bulk-create-schedule", data);
+  return axios.post('/api/bulk-create-schedule', data);
+};
+
+const getScheduleByDateService = (doctorId, date) => {
+  return axios.get(
+    `/api/get-schedule-doctor-by-date?doctorId=${doctorId}&date=${date}`
+  );
 };
 
 export {
@@ -56,4 +62,5 @@ export {
   saveInfoDoctorService,
   getDetailDoctorService,
   saveBulkScheduleService,
+  getScheduleByDateService,
 };

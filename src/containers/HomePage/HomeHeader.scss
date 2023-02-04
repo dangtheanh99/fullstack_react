@@ -60,6 +60,16 @@
 
       &__language {
         margin-right: 24px;
+        .language-vi {
+          margin-right: 10px;
+        }
+        .language-en,
+        .language-vi {
+          cursor: pointer;
+          &.active {
+            color: #49BCE2;
+          }
+        }
       }
       &__support {
         cursor: pointer;
