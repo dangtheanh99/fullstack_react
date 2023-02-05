@@ -10,12 +10,16 @@ class DetailDoctor extends Component {
     super(props);
     this.state = {
       detailDoctor: {},
+      currDoctorId: "",
     };
   }
 
   async componentDidMount() {
     if (this.props.match?.params?.id) {
       let id = this.props.match.params.id;
+      this.setState({
+        currDoctorId: id,
+      });
       let res = await getDetailDoctorService(id);
       if (res && res.errCode === 0) {
         this.setState({
@@ -70,7 +74,7 @@ class DetailDoctor extends Component {
             </div>
             <div className="detailDoctor__schedule">
               <div className="detailDoctor__schedule__time">
-                <DoctorSchedule />
+                <DoctorSchedule doctorId={this.state.currDoctorId} />
               </div>
               <div className="detailDoctor__schedule__address"></div>
             </div>

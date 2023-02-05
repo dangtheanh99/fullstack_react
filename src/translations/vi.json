@@ -149,5 +149,21 @@
     "doctor": "Chọn bác sĩ",
     "date": "Chọn ngày",
     "save": "Lưu"
+  },
+  "patient": {
+    "detail-doctor": {
+      "schedule": "Lịch khám",
+      "description": "Không có lịch hẹn trong thời gian này, vui lòng chọn thời gian khác.",
+      "book": "Chọn và đặt lịch (Miễn phí)"
+    }
+  },
+  "admin": {
+    "manage-doctor": {
+      "title": "Thêm thông tin bác sĩ",
+      "choose-doctor": "Chọn bác sĩ",
+      "intro": "Thông tin giới thiệu",
+      "update": "Cập nhật",
+      "add": "Thêm mới"
+    }
   }
 }

@@ -114,10 +114,14 @@ class ManageDoctor extends Component {
     console.log("state: ", this.state);
     return (
       <div className="manageDoctor">
-        <div className="manageDoctor__title">Thêm thông tin bác sĩ</div>
+        <div className="manageDoctor__title">
+          <FormattedMessage id="admin.manage-doctor.title" />
+        </div>
         <div className="manageDoctor__info">
           <div className="manageDoctor__info__left">
-            <div>Chọn bác sĩ</div>
+            <div>
+              <FormattedMessage id="admin.manage-doctor.choose-doctor" />
+            </div>
             <Select
               value={selectedOption}
               onChange={this.handleChangeSelect}
@@ -125,7 +129,9 @@ class ManageDoctor extends Component {
             />
           </div>
           <div className="manageDoctor__info__right">
-            <div>Thông tin giới thiệu</div>
+            <div>
+              <FormattedMessage id="admin.manage-doctor.intro" />
+            </div>
             <textarea
               className="manageDoctor__info__right__content"
               rows={6}
@@ -146,7 +152,15 @@ class ManageDoctor extends Component {
           className={hasData ? "btn btn-warning px-3" : "btn btn-primary px-3"}
           onClick={() => this.handleSaveInfo()}
         >
-          {hasData ? <span>Cập nhật</span> : <span>Thêm mới</span>}
+          {hasData ? (
+            <span>
+              <FormattedMessage id="admin.manage-doctor.update" />
+            </span>
+          ) : (
+            <span>
+              <FormattedMessage id="admin.manage-doctor.add" />
+            </span>
+          )}
         </button>
       </div>
     );

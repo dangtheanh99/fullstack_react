@@ -47,9 +47,8 @@
   &__schedule {
     display: flex;
     margin: 0 80px;
-    height: 200px;
+    min-height: 200px;
     &__time {
-      background-color: #ccc;
       flex: 1;
     }
     &__address {
