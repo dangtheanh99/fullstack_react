@@ -309,3 +309,42 @@ export const fetchAllcodeTime = () => {
     }
   };
 };
+
+export const getDoctorInfor = () => {
+  return async (dispatch, getState) => {
+    try {
+      let resPrice = await getAllCodeService("PRICE");
+      let resPayment = await getAllCodeService("PAYMENT");
+      let resProvince = await getAllCodeService("PROVINCE");
+      if (
+        resPrice &&
+        resPrice.errCode === 0 &&
+        resPayment &&
+        resPayment.errCode === 0 &&
+        resProvince &&
+        resProvince.errCode === 0
+      ) {
+        let data = {
+          resPrice: resPrice.data,
+          resPayment: resPayment.data,
+          resProvince: resProvince.data,
+        };
+        dispatch(getDoctorInforSuccess(data));
+      } else {
+        dispatch(getDoctorInforFail());
+      }
+    } catch (e) {
+      dispatch(getDoctorInforFail());
+      console.log("Error: ", e);
+    }
+  };
+};
+
+export const getDoctorInforSuccess = (doctorInfor) => ({
+  type: actionTypes.GET_DOCTOR_INFOR_SUCCESS,
+  data: doctorInfor,
+});
+
+export const getDoctorInforFail = () => ({
+  type: actionTypes.GET_DOCTOR_INFOR_FAIL,
+});
