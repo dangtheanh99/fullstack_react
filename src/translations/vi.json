@@ -167,8 +167,8 @@
       "price": "Chọn giá",
       "payment": "Chọn phương thức thanh toán",
       "province": "Chọn tỉnh",
-      "clinicName": "Tên phòng khám",
-      "clinicAddress": "Địa chỉ phòng khám",
+      "nameClinic": "Tên phòng khám",
+      "addressClinic": "Địa chỉ phòng khám",
       "note": "Ghi chú"
     }
   }

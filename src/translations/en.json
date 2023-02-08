@@ -167,8 +167,8 @@
       "price": "Select price",
       "payment": "Select a payment method",
       "province": "Select province",
-      "clinicName": "Clinic name",
-      "clinicAddress": "Clinic address",
+      "nameClinic": "Clinic name",
+      "addressClinic": "Clinic address",
       "note": "Note"
     }
   }

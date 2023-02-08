@@ -31,8 +31,8 @@ class ManageDoctor extends Component {
       selectedPrice: "",
       selectedPayment: "",
       selectedProvince: "",
-      clinicName: "",
-      clinicAddress: "",
+      nameClinic: "",
+      addressClinic: "",
       note: "",
     };
   }
@@ -55,6 +55,7 @@ class ManageDoctor extends Component {
       let listPrice = this.buildDataSelect(resPrice, "PRICE");
       let listPayment = this.buildDataSelect(resPayment, "PAYMENT");
       let listProvince = this.buildDataSelect(resProvince, "PROVINCE");
+
       this.setState({
         listDoctors: selectDoctors,
         listPrice,
@@ -102,8 +103,14 @@ class ManageDoctor extends Component {
     return result;
   };
 
+  findObjSelected = (array, id) => {
+    let item = array.find((item) => item.value === id);
+    return item;
+  };
+
   handleChangeSelect = async (selectedOption) => {
     this.setState({ selectedOption });
+    let { listPrice, listPayment, listProvince } = this.state;
     let res = await getDetailDoctorService(selectedOption.value);
     if (res && res.errCode === 0 && res.data && res.data.Markdown) {
       let markdown = res.data.Markdown;
@@ -119,6 +126,36 @@ class ManageDoctor extends Component {
         contentMarkdown: "",
         description: "",
         hasData: false,
+      });
+    }
+    // doctor_infor
+    if (res && res.errCode === 0 && res.data && res.data.Doctor_infor) {
+      let Doctor_infor = res.data.Doctor_infor;
+      let selectedPrice = this.findObjSelected(listPrice, Doctor_infor.priceId);
+      let selectedPayment = this.findObjSelected(
+        listPayment,
+        Doctor_infor.paymentId
+      );
+      let selectedProvince = this.findObjSelected(
+        listProvince,
+        Doctor_infor.provinceId
+      );
+      this.setState({
+        nameClinic: Doctor_infor.nameClinic,
+        addressClinic: Doctor_infor.addressClinic,
+        note: Doctor_infor.note,
+        selectedPrice,
+        selectedPayment,
+        selectedProvince,
+      });
+    } else {
+      this.setState({
+        nameClinic: "",
+        addressClinic: "",
+        note: "",
+        selectedPrice: "",
+        selectedPayment: "",
+        selectedProvince: "",
       });
     }
     console.log(`Option selected:`, this.state.selectedOption);
@@ -162,8 +199,8 @@ class ManageDoctor extends Component {
       priceId: this.state.selectedPrice.value,
       paymentId: this.state.selectedPayment.value,
       provinceId: this.state.selectedProvince.value,
-      nameClinic: this.state.clinicName,
-      addressClinic: this.state.clinicAddress,
+      nameClinic: this.state.nameClinic,
+      addressClinic: this.state.addressClinic,
       note: this.state.note,
     });
   };
@@ -246,23 +283,22 @@ class ManageDoctor extends Component {
           </div>
           <div className="form-group col-4">
             <label>
-              {" "}
-              <FormattedMessage id="admin.manage-doctor.clinicName" />
+              <FormattedMessage id="admin.manage-doctor.nameClinic" />
             </label>
             <input
               className="form-control"
-              onChange={(e) => this.handleChangeInput(e, "clinicName")}
-              value={this.state.clinicName}
+              onChange={(e) => this.handleChangeInput(e, "nameClinic")}
+              value={this.state.nameClinic}
             ></input>
           </div>
           <div className="form-group col-4">
             <label>
-              <FormattedMessage id="admin.manage-doctor.clinicAddress" />
+              <FormattedMessage id="admin.manage-doctor.addressClinic" />
             </label>
             <input
               className="form-control"
-              onChange={(e) => this.handleChangeInput(e, "clinicAddress")}
-              value={this.state.clinicAddress}
+              onChange={(e) => this.handleChangeInput(e, "addressClinic")}
+              value={this.state.addressClinic}
             ></input>
           </div>
           <div className="form-group col-4">

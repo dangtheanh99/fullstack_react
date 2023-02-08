@@ -1,0 +1,56 @@
+.doctorExtraInfor {
+  &__up {
+    &__title {
+      text-transform: uppercase;
+      font-size: 14px;
+      color: #666;
+      font-weight: bold;
+    }
+    &__nameClinic {
+      font-weight: bold;
+    }
+    &__addressClinic,
+    &__nameClinic {
+      font-size: 13px;
+      padding: 3px 0;
+    }
+  }
+  &__down {
+    .firstBlock {
+      &__title {
+        text-transform: uppercase;
+        font-size: 14px;
+        color: #666;
+        font-weight: bold;
+      }
+      &__price {
+        // text-transform: ;
+      }
+      &__show {
+        cursor: pointer;
+        color: #45c3d2;
+        text-transform: unset;
+      }
+    }
+    .secondBlock {
+      &__title {
+        text-transform: uppercase;
+        font-size: 14px;
+        color: #666;
+        font-weight: bold;
+      }
+      &__price {
+        display: flex;
+        justify-content: space-between;
+        span {
+        }
+      }
+
+      &__payment {
+      }
+      &__hide {
+        cursor: pointer;
+      }
+    }
+  }
+}
