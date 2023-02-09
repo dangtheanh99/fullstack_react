@@ -1,4 +1,5 @@
 .doctorExtraInfor {
+  width: 90%;
   &__up {
     &__title {
       text-transform: uppercase;
@@ -16,7 +17,11 @@
     }
   }
   &__down {
+    border-top: 1px solid #eee;
     .firstBlock {
+      display: flex;
+      gap: 4px;
+      margin: 6px 0;
       &__title {
         text-transform: uppercase;
         font-size: 14px;
@@ -24,6 +29,7 @@
         font-weight: bold;
       }
       &__price {
+        color: #000;
         // text-transform: ;
       }
       &__show {
@@ -38,18 +44,28 @@
         font-size: 14px;
         color: #666;
         font-weight: bold;
+        margin: 6px 0;
       }
       &__price {
         display: flex;
         justify-content: space-between;
+        border: 1px solid #ddd;
+        background-color: #f8f8f8;
+        padding: 4px;
+
         span {
         }
       }
 
       &__payment {
+        border: 1px solid #ddd;
+        background-color: #eeeeee;
+        padding: 4px;
       }
       &__hide {
         cursor: pointer;
+        color: #45c3d2;
+        margin-top: 8px;
       }
     }
   }

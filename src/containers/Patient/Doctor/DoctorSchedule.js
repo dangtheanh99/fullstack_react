@@ -7,6 +7,7 @@ import localization from "moment/locale/vi";
 import { Select } from "antd";
 import { getScheduleByDateService } from "../../../services/userService";
 import { FormattedMessage } from "react-intl";
+import BookingModal from "./BookingModal";
 class DoctorSchedule extends Component {
   constructor(props) {
     super(props);
@@ -110,68 +111,75 @@ class DoctorSchedule extends Component {
     let { language } = this.props;
     console.log("check state", this.state);
     return (
-      <div className="doctorSchedule">
-        <div className="doctorSchedule__day">
-          <Select
-            showSearch
-            placeholder="Select day"
-            onChange={(value) => {
-              this.onHandleSelect(value);
-            }}
-            style={{ width: 150 }}
-            value={selectedDay}
-            filterOption={(input, option) =>
-              (option?.label ?? "").toLowerCase().includes(input.toLowerCase())
-            }
-            options={allDays}
-            className="doctorSchedule__day__select"
-          />
-        </div>
-        <div className="doctorSchedule__time">
-          <div className="doctorSchedule__time__calendar">
-            <span className="doctorSchedule__time__calendar__icon">
-              <i className="fas fa-calendar-alt"></i>
-            </span>
-            <span className="doctorSchedule__time__calendar__text">
-              <FormattedMessage id="patient.detail-doctor.schedule" />
-            </span>
+      <>
+        <div className="doctorSchedule">
+          <div className="doctorSchedule__day">
+            <Select
+              showSearch
+              placeholder="Select day"
+              onChange={(value) => {
+                this.onHandleSelect(value);
+              }}
+              style={{ width: 150 }}
+              value={selectedDay}
+              filterOption={(input, option) =>
+                (option?.label ?? "")
+                  .toLowerCase()
+                  .includes(input.toLowerCase())
+              }
+              options={allDays}
+              className="doctorSchedule__day__select"
+            />
           </div>
-          <div className="doctorSchedule__time__content">
-            {allTime && allTime.length > 0 ? (
-              allTime.map((item, index) => {
-                let timeDisplay =
-                  language === languages.VI
-                    ? item.timeTypeData.valueVi
-                    : item.timeTypeData.valueEn;
-                return (
-                  <span
-                    key={index}
-                    className={language === languages.VI ? "btn-vi" : "btn-en"}
-                  >
-                    {timeDisplay}
-                  </span>
-                );
-              })
-            ) : (
-              <div>
-                <FormattedMessage id="patient.detail-doctor.description" />
+          <div className="doctorSchedule__time">
+            <div className="doctorSchedule__time__calendar">
+              <span className="doctorSchedule__time__calendar__icon">
+                <i className="fas fa-calendar-alt"></i>
+              </span>
+              <span className="doctorSchedule__time__calendar__text">
+                <FormattedMessage id="patient.detail-doctor.schedule" />
+              </span>
+            </div>
+            <div className="doctorSchedule__time__content">
+              {allTime && allTime.length > 0 ? (
+                allTime.map((item, index) => {
+                  let timeDisplay =
+                    language === languages.VI
+                      ? item.timeTypeData.valueVi
+                      : item.timeTypeData.valueEn;
+                  return (
+                    <span
+                      key={index}
+                      className={
+                        language === languages.VI ? "btn-vi" : "btn-en"
+                      }
+                    >
+                      {timeDisplay}
+                    </span>
+                  );
+                })
+              ) : (
+                <div>
+                  <FormattedMessage id="patient.detail-doctor.description" />
+                </div>
+              )}
+            </div>
+
+            {/* <> */}
+            {allTime && allTime.length > 0 && (
+              <div className="doctorSchedule__book">
+                <i
+                  className="far fa-hand-point-up"
+                  style={{ marginRight: "6px" }}
+                ></i>
+                <FormattedMessage id="patient.detail-doctor.book" />
               </div>
             )}
+            {/* </> */}
           </div>
-
-          {/* <> */}
-          {allTime && allTime.length > 0 && (
-            <div className="doctorSchedule__book">
-              <i
-                className="far fa-hand-point-up"
-                style={{ marginRight: "6px" }}
-              ></i>
-              <FormattedMessage id="patient.detail-doctor.book" />
-            </div>
-          )}
-          {/* </> */}
         </div>
-      </div>
+        <BookingModal />
+      </>
     );
   }
 }

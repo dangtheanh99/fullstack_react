@@ -155,6 +155,13 @@
       "schedule": "Schedule",
       "description": "There are no appointments during this time, please choose another time.",
       "book": "Choose and book an appointment (Free)"
+    },
+    "extra-infor-doctor": {
+      "title": "Clinic address",
+      "price": "Examination price",
+      "methodPayment": "The clinic has payment in the form of",
+      "detail": "See details",
+      "hide": "Hide price list"
     }
   },
   "admin": {

@@ -32,8 +32,8 @@ class DetailDoctor extends Component {
 
   componentDidUpdate(prevProps, prevState) {}
   render() {
-    console.log("id", this.props.match.params.id);
-    console.log("check state: ", this.state);
+    // console.log("id", this.props.match.params.id);
+    // console.log("check state: ", this.state);
     let { detailDoctor } = this.state;
     let { language } = this.props;
     let nameVi = "",
@@ -78,7 +78,7 @@ class DetailDoctor extends Component {
                 <DoctorSchedule doctorId={this.state.currDoctorId} />
               </div>
               <div className="detailDoctor__schedule__address">
-                <DoctorExtraInfor />
+                <DoctorExtraInfor doctorId={this.state.currDoctorId} />
               </div>
             </div>
             <div className="detailDoctor__detail">

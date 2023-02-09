@@ -155,6 +155,13 @@
       "schedule": "Lịch khám",
       "description": "Không có lịch hẹn trong thời gian này, vui lòng chọn thời gian khác.",
       "book": "Chọn và đặt lịch (Miễn phí)"
+    },
+    "extra-infor-doctor": {
+      "title": "Địa chỉ khám",
+      "price": "Giá khám",
+      "methodPayment": "Phòng khám có thanh toán bằng hình thức",
+      "detail": "Xem chi tiết",
+      "hide": "Ẩn bảng giá"
     }
   },
   "admin": {
