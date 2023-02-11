@@ -1,0 +1,18 @@
+.bookingModal {
+  //   & :global {
+  //     & .modal-header {
+  //       & .close {
+  //         padding: 1.3rem 1rem;
+  //       }
+  //     }
+  //   }
+  &__header {
+    button {
+      padding: 1.3rem 1rem !important;
+    }
+  }
+  &__body {
+  }
+  &__footer {
+  }
+}
