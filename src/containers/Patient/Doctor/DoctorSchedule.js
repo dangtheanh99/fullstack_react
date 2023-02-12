@@ -115,9 +115,9 @@ class DoctorSchedule extends Component {
     });
   };
 
-  toggleModal = () => {
+  closeModal = () => {
     this.setState({
-      isOpenModal: !this.state.isOpenModal,
+      isOpenModal: false,
     });
   };
 
@@ -196,8 +196,8 @@ class DoctorSchedule extends Component {
         </div>
         <BookingModal
           isOpen={this.state.isOpenModal}
-          toggle={this.toggleModal}
-          data={dataSchedulTime}
+          closeModal={this.closeModal}
+          dataTime={dataSchedulTime}
         />
       </>
     );

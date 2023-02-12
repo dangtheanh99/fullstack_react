@@ -42,12 +42,20 @@ class ProfileDoctor extends Component {
     }
     return result;
   };
+
+  capitalizeFirstLetter = (string) => {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  };
   renderTimeBooking = (dataTime) => {
     let { language } = this.props;
     if (dataTime && !_.isEmpty(dataTime)) {
+      let dateVi = moment(dataTime.date, "DD/MM/YYYY").format(
+        "dddd - DD/MM/YYYY"
+      );
+
       let date =
         language === languages.VI
-          ? moment(dataTime.date, "DD/MM/YYYY").format("dddd - DD/MM/YYYY")
+          ? this.capitalizeFirstLetter(dateVi)
           : moment(dataTime.date, "DD/MM/YYYY")
               .locale("en")
               .format("dddd - DD/MM/YYYY");
@@ -60,7 +68,9 @@ class ProfileDoctor extends Component {
           <div>
             {time} - {date}
           </div>
-          <div>Đặt lịch miễn phí</div>
+          <div>
+            <FormattedMessage id="patient.booking.free" />
+          </div>
         </div>
       );
     }
@@ -70,7 +80,7 @@ class ProfileDoctor extends Component {
   render() {
     let { profileDoctor } = this.state;
     let { language, isShowDesc, dataTime } = this.props;
-    console.log("check props profile: ", this.props);
+    // console.log("check props profile: ", this.props);
     let nameVi = "",
       nameEn = "";
 
@@ -134,7 +144,7 @@ class ProfileDoctor extends Component {
           </div>
         </div>
         <div className="profileDoctor__price">
-          Giá khám:{" "}
+          <FormattedMessage id="patient.booking.price" />:{" "}
           {extraInforDoctor &&
             extraInforDoctor.priceData &&
             language === languages.VI && (

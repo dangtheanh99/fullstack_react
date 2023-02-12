@@ -162,6 +162,22 @@
       "methodPayment": "The clinic has payment in the form of",
       "detail": "See details",
       "hide": "Hide price list"
+    },
+    "booking": {
+      "title": "Information to book a medical appointment",
+      "fullName": "Full name",
+      "phoneNumber": "Phone number",
+      "email": "Email",
+      "address": "Address",
+      "reason": "Reason for examination",
+      "birthday": "Date of birth",
+      "chooseDate": "Choose date of birth",
+      "gender": "Gender",
+      "chooseGender": "Choose gender",
+      "confirm": "Confirm",
+      "cancel": "Cancel",
+      "price": "Examination price",
+      "free": "Book an appointment for free"
     }
   },
   "admin": {
