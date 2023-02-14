@@ -5,6 +5,7 @@ export const path = {
   SYSTEM: "/system",
   HOMEPAGE: "/home",
   DETAIL_DOCTOR: "/detail-doctor",
+  VERIFY_EMAIL_BOOKING: "/verify-booking",
 };
 
 export const languages = {
