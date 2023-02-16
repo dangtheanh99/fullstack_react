@@ -142,12 +142,23 @@
   "homepage": {
     "out-standing-doctor": "Bác sỹ nổi bật tuần qua",
     "more": "Xem thêm",
-    "search": "Tìm kiếm"
+    "search": "Tìm kiếm",
+    "popular-specialty": "Chuyên khoa phổ biến",
+    "outstanding-medical-facility": "Cơ sở y tế nổi bật",
+    "handbook": "Cẩm nang",
+    "all-posts": "Tất cả bài viết"
   },
   "manage-schedule": {
     "title": "Quản lý kế hoạch khám bệnh của bác sĩ",
     "doctor": "Chọn bác sĩ",
     "date": "Chọn ngày",
+    "save": "Lưu"
+  },
+  "manage-specialty": {
+    "title": "Quản lý chuyên khoa",
+    "nameSpecialty": "Tên chuyên khoa",
+    "image": "Ảnh chuyên khoa",
+    "description": "Mô tả",
     "save": "Lưu"
   },
   "patient": {

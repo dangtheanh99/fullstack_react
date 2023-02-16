@@ -8,6 +8,8 @@ import { CommonUtils } from "../../../utils";
 import { createNewSpecialty } from "../../../services/userService";
 import { toast } from "react-toastify";
 import "react-markdown-editor-lite/lib/index.css";
+import { languages } from "../../../utils";
+// import { getAllSpecialty } from "../../../services/userService";
 
 const mdParser = new MarkdownIt();
 
@@ -15,7 +17,8 @@ class ManageSpecialty extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: "",
+      nameVi: "",
+      nameEn: "",
       imageBase64: "",
       descriptionHTML: "",
       descriptionMarkdown: "",
@@ -47,7 +50,8 @@ class ManageSpecialty extends Component {
     if (res && res.errCode === 0) {
       toast.success("Create a new specialty successfully!");
       this.setState({
-        name: "",
+        nameVi: "",
+        nameEn: "",
         imageBase64: "",
         descriptionHTML: "",
         descriptionMarkdown: "",
@@ -68,21 +72,46 @@ class ManageSpecialty extends Component {
   };
 
   render() {
+    let { language } = this.props;
     return (
       <div className="manageSpecialty">
-        <div className="manageSpecialty__title">Quản lý chuyên khoa</div>
+        <div className="manageSpecialty__title">
+          <FormattedMessage id="manage-specialty.title" />{" "}
+        </div>
         <div className="manageSpecialty__content row">
           <div className="manageSpecialty__content__name form-group col-6">
-            <label>Tên chuyên khoa</label>
+            <label>
+              <FormattedMessage id="manage-specialty.nameSpecialty" />
+            </label>
             <input
               className="form-control"
               type="text"
-              value={this.state.name}
-              onChange={(event) => this.handleChangeInput(event, "name")}
+              value={this.state.nameVi}
+              placeholder={
+                language === languages.VI
+                  ? "Nhập tên Tiếng Việt"
+                  : "Enter Vietnamese name"
+              }
+              style={{ width: "70%" }}
+              onChange={(event) => this.handleChangeInput(event, "nameVi")}
+            ></input>
+            <input
+              className="form-control"
+              type="text"
+              value={this.state.nameEn}
+              placeholder={
+                language === languages.VI
+                  ? "Nhập tên Tiếng Anh"
+                  : "Enter English name"
+              }
+              style={{ width: "70%" }}
+              onChange={(event) => this.handleChangeInput(event, "nameEn")}
             ></input>
           </div>
           <div className="manageSpecialty__content__image form-group col-6">
-            <label>Ảnh</label>
+            <label style={{ marginBottom: "16px" }}>
+              <FormattedMessage id="manage-specialty.image" />
+            </label>
             <input
               className="form-control-file"
               type="file"
@@ -90,7 +119,9 @@ class ManageSpecialty extends Component {
             ></input>
           </div>
           <div className="manageSpecialty__content__description form-group col-12 ">
-            <label>Mô tả</label>
+            <label>
+              <FormattedMessage id="manage-specialty.description" />
+            </label>
             <MdEditor
               style={{ height: "300px" }}
               renderHTML={(text) => mdParser.render(text)}
@@ -103,7 +134,7 @@ class ManageSpecialty extends Component {
           className="btn btn-primary px-3"
           onClick={() => this.handleSaveSpecialty()}
         >
-          Save
+          <FormattedMessage id="manage-specialty.save" />
         </button>
       </div>
     );
@@ -111,7 +142,9 @@ class ManageSpecialty extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return {};
+  return {
+    language: state.app.language,
+  };
 };
 
 const mapDispatchToProps = (dispatch) => {

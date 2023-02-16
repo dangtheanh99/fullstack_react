@@ -142,12 +142,23 @@
   "homepage": {
     "out-standing-doctor": "Outstanding Doctor of the Week",
     "more": "More",
-    "search": "Search"
+    "search": "Search",
+    "popular-specialty": "Popular specialties",
+    "outstanding-medical-facility": "Outstanding medical facility",
+    "handbook": "Handbook",
+    "all-posts": "All posts"
   },
   "manage-schedule": {
     "title": "Manage doctor's examination plan",
     "doctor": "Choose a doctor",
     "date": "Choose a date",
+    "save": "Save"
+  },
+  "manage-specialty": {
+    "title": "Specialized management",
+    "nameSpecialty": "Specialty name",
+    "image": "Specialty photo",
+    "description": "Description",
     "save": "Save"
   },
   "patient": {

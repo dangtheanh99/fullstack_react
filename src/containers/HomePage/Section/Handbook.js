@@ -1,15 +1,18 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import Slider from "react-slick";
+import { FormattedMessage } from "react-intl";
 
 class Handbook extends Component {
   render() {
     return (
       <div className="commonSection HandbookSection">
         <div className="commonSection__header">
-          <div className="commonSection__header__title">Cẩm nang</div>
+          <div className="commonSection__header__title">
+            <FormattedMessage id="homepage.handbook" />
+          </div>
           <button className="commonSection__header__btn">
-            Tất cả bài viết
+            <FormattedMessage id="homepage.all-posts" />
           </button>
         </div>
         <Slider {...this.props.settings} className="commonSection__slider">
