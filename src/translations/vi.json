@@ -122,7 +122,16 @@
     }
   },
   "homeheader": {
-    "welcome": "Xin chào"
+    "welcome": "Xin chào",
+    "support": "Hỗ trợ",
+    "specialty": "Chuyên khoa",
+    "des-specialty": "Tìm bác sĩ theo chuyên khoa",
+    "health-facility": "Cơ sở y tế",
+    "des-health-facility": "Chọn bệnh viện phòng khám",
+    "doctor": "Bác sĩ",
+    "des-doctor": "Chọn bác sĩ giỏi",
+    "checkup-package": "Gói khám",
+    "des-checkup-package": "Khám sức khỏe tổng quát"
   },
   "manage-user": {
     "add": "Thêm mới người dùng",
@@ -161,6 +170,13 @@
     "description": "Mô tả",
     "save": "Lưu"
   },
+  "manage-clinic": {
+    "title": "Quản lý phòng khám",
+    "nameSpecialty": "Tên phòng khám",
+    "image": "Ảnh phòng khám",
+    "description": "Mô tả",
+    "save": "Lưu"
+  },
   "patient": {
     "detail-doctor": {
       "schedule": "Lịch khám",
@@ -189,6 +205,9 @@
       "cancel": "Hủy",
       "price": "Giá khám",
       "free": "Đặt lịch miễn phí"
+    },
+    "profile": {
+      "more": "Xem thêm"
     }
   },
   "admin": {

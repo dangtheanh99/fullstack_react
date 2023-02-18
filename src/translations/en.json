@@ -122,7 +122,16 @@
     }
   },
   "homeheader": {
-    "welcome": "Welcome"
+    "welcome": "Welcome",
+    "support": "Support",
+    "specialty": "Specialty",
+    "des-specialty": "Find a doctor by specialty",
+    "health-facility": "Health facilities",
+    "des-health-facility": "Choose hospital clinic",
+    "doctor": "Doctor",
+    "des-doctor": "Choose a good doctor",
+    "checkup-package": "Checkup package",
+    "des-checkup-package": "General health check"
   },
   "manage-user": {
     "add": "Add a new user",
@@ -161,6 +170,13 @@
     "description": "Description",
     "save": "Save"
   },
+  "manage-clinic": {
+    "title": "Clinic Management",
+    "nameSpecialty": "Clinic name",
+    "image": "Clinic photo",
+    "description": "Description",
+    "save": "Save"
+  },
   "patient": {
     "detail-doctor": {
       "schedule": "Schedule",
@@ -189,6 +205,9 @@
       "cancel": "Cancel",
       "price": "Examination price",
       "free": "Book an appointment for free"
+    },
+    "profile": {
+      "more": "See more"
     }
   },
   "admin": {

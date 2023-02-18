@@ -1,27 +1,26 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import "./ManageSpecialty.scss";
+import "./ManageClinic.scss";
 import { FormattedMessage } from "react-intl";
 import MarkdownIt from "markdown-it";
 import MdEditor from "react-markdown-editor-lite";
 import { CommonUtils } from "../../../utils";
-import { createNewSpecialty } from "../../../services/userService";
+import { createNewClinic } from "../../../services/userService";
 import { toast } from "react-toastify";
 import "react-markdown-editor-lite/lib/index.css";
 import { languages } from "../../../utils";
-// import { getAllSpecialty } from "../../../services/userService";
 
 const mdParser = new MarkdownIt();
 
-class ManageSpecialty extends Component {
+class ManageClinic extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      nameVi: "",
-      nameEn: "",
+      name: "",
       imageBase64: "",
       descriptionHTML: "",
       descriptionMarkdown: "",
+      address: "",
     };
   }
 
@@ -44,17 +43,16 @@ class ManageSpecialty extends Component {
     });
   };
 
-  handleSaveSpecialty = async () => {
-    // console.log("check state:", this.state);
-    let res = await createNewSpecialty(this.state);
+  handleSaveClinic = async () => {
+    let res = await createNewClinic(this.state);
     if (res && res.errCode === 0) {
-      toast.success("Create a new specialty successfully!");
+      toast.success("Create a new clinic successfully!");
       this.setState({
-        nameVi: "",
-        nameEn: "",
+        name: "",
         imageBase64: "",
         descriptionHTML: "",
         descriptionMarkdown: "",
+        address: "",
       });
     } else {
       toast.error("Create a new specialty failed!");
@@ -76,41 +74,35 @@ class ManageSpecialty extends Component {
     return (
       <div className="manageSpecialty">
         <div className="manageSpecialty__title">
-          <FormattedMessage id="manage-specialty.title" />{" "}
+          <FormattedMessage id="manage-clinic.title" />{" "}
         </div>
         <div className="manageSpecialty__content row">
           <div className="manageSpecialty__content__name form-group col-6">
             <label>
-              <FormattedMessage id="manage-specialty.nameSpecialty" />
+              <FormattedMessage id="manage-clinic.nameSpecialty" />
             </label>
             <input
               className="form-control"
               type="text"
-              value={this.state.nameVi}
-              placeholder={
-                language === languages.VI
-                  ? "Nhập tên Tiếng Việt"
-                  : "Enter Vietnamese name"
-              }
-              style={{ width: "70%" }}
-              onChange={(event) => this.handleChangeInput(event, "nameVi")}
+              value={this.state.name}
+              onChange={(event) => this.handleChangeInput(event, "name")}
             ></input>
+          </div>
+          <div className="manageSpecialty__content__address form-group col-6">
+            <label>
+              {/* <FormattedMessage id="manage-clinic.nameSpecialty" /> */}
+              Địa chỉ
+            </label>
             <input
               className="form-control"
               type="text"
-              value={this.state.nameEn}
-              placeholder={
-                language === languages.VI
-                  ? "Nhập tên Tiếng Anh"
-                  : "Enter English name"
-              }
-              style={{ width: "70%" }}
-              onChange={(event) => this.handleChangeInput(event, "nameEn")}
+              value={this.state.address}
+              onChange={(event) => this.handleChangeInput(event, "address")}
             ></input>
           </div>
           <div className="manageSpecialty__content__image form-group col-6">
             <label style={{ marginBottom: "16px" }}>
-              <FormattedMessage id="manage-specialty.image" />
+              <FormattedMessage id="manage-clinic.image" />
             </label>
             <input
               className="form-control-file"
@@ -120,7 +112,7 @@ class ManageSpecialty extends Component {
           </div>
           <div className="manageSpecialty__content__description form-group col-12 ">
             <label>
-              <FormattedMessage id="manage-specialty.description" />
+              <FormattedMessage id="manage-clinic.description" />
             </label>
             <MdEditor
               style={{ height: "300px" }}
@@ -132,9 +124,9 @@ class ManageSpecialty extends Component {
         </div>
         <button
           className="btn btn-primary px-3"
-          onClick={() => this.handleSaveSpecialty()}
+          onClick={() => this.handleSaveClinic()}
         >
-          <FormattedMessage id="manage-specialty.save" />
+          <FormattedMessage id="manage-clinic.save" />
         </button>
       </div>
     );
@@ -151,4 +143,4 @@ const mapDispatchToProps = (dispatch) => {
   return {};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ManageSpecialty);
+export default connect(mapStateToProps, mapDispatchToProps)(ManageClinic);

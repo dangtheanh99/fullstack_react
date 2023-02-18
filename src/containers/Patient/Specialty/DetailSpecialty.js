@@ -6,46 +6,149 @@ import HomeHeader from "../../HomePage/HomeHeader";
 import DoctorSchedule from "../Doctor/DoctorSchedule";
 import ProfileDoctor from "../Doctor/ProfileDoctor";
 import DoctorExtraInfor from "../Doctor/DoctorExtraInfor";
+import {
+  getDetailSpecialtyById,
+  getAllCodeService,
+} from "../../../services/userService";
+import _, { orderBy } from "lodash";
+import Select from "react-select";
+import { languages } from "../../../utils";
 
 class DetailSpecialty extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      arrDoctorId: [1, 2],
+      arrDoctorId: [],
+      detailSpecialty: {},
+      listProvince: [],
+      selectedProvince: "",
     };
   }
 
-  async componentDidMount() {}
+  async componentDidMount() {
+    if (this.props.match?.params?.id) {
+      let id = this.props.match.params.id;
+      let res = await getDetailSpecialtyById(id);
+      let resProvince = await getAllCodeService("PROVINCE");
+      if (res && res.errCode === 0) {
+        let data = res.data;
+        let arrDoctorId = [];
+        if (data && !_.isEmpty(data)) {
+          let arr = orderBy(data.doctorSpecialty, "doctorId", "asc");
+          if (arr && arr.length > 0) {
+            arr.map((item) => {
+              arrDoctorId.push(item.doctorId);
+            });
+          }
+        }
+        this.setState({
+          detailSpecialty: res.data,
+          arrDoctorId,
+        });
+      }
+      if (resProvince && resProvince.errCode === 0) {
+        let listProvince = this.buildDataSelect(resProvince.data);
+        console.log("listProvince", listProvince);
+        this.setState({
+          listProvince,
+        });
+      }
+    }
+  }
 
-  componentDidUpdate(prevProps, prevState) {}
+  async componentDidUpdate(prevProps, prevState) {
+    if (prevProps.language !== this.props.language) {
+      let resProvince = await getAllCodeService("PROVINCE");
+      if (resProvince && resProvince.errCode === 0) {
+        let listProvince = this.buildDataSelect(resProvince.data);
+        this.setState({
+          listProvince,
+        });
+      }
+    }
+  }
 
+  handleChangeSelect = async (selectedOption) => {
+    let { selectedProvince } = this.state;
+    await this.setState({
+      selectedProvince: selectedOption,
+    });
+    console.log("selectedOption", selectedOption);
+    if (this.props.match?.params?.id) {
+      let id = this.props.match.params.id;
+      let res = await getDetailSpecialtyById(id);
+      if (res && res.errCode === 0) {
+        let data = res.data;
+        let arrDoctorId = [];
+        if (data && !_.isEmpty(data)) {
+          let arr = orderBy(data.doctorSpecialty, "doctorId", "asc");
+          if (arr && arr.length > 0) {
+            if (selectedOption.value !== "ALL") {
+              arr = arr.filter(
+                (item) => item.provinceId === selectedOption.value
+              );
+            }
+            arr.map((item) => {
+              arrDoctorId.push(item.doctorId);
+            });
+          }
+        }
+        this.setState({
+          detailSpecialty: res.data,
+          arrDoctorId,
+        });
+      }
+    }
+  };
+  buildDataSelect = (inputData) => {
+    let { language } = this.props;
+    let result = [];
+    if (inputData && inputData.length > 0) {
+      inputData.unshift({
+        valueVi: "Toàn quốc",
+        valueEn: "All",
+        keyMap: "ALL",
+      });
+      inputData.map((item) => {
+        let object = {};
+        object.label = language === languages.VI ? item.valueVi : item.valueEn;
+        object.value = item.keyMap;
+        result.push(object);
+      });
+    }
+    return result;
+  };
   render() {
-    let { arrDoctorId } = this.state;
+    let { arrDoctorId, detailSpecialty, listProvince, selectedProvince } =
+      this.state;
+    let { language } = this.props;
+    console.log("check state detail specialty: ", this.state);
     return (
       <>
         <HomeHeader />
         <div className="detailSpecialty">
           <div className="detailSpecialty__description">
-            <h1>Cơ Xương Khớp</h1>
-            <ul>
-              <li>
-                Các chuyên gia có quá trình đào tạo bài bản, nhiều kinh nghiệm
-              </li>
-              <li>
-                Các giáo sư, phó giáo sư đang trực tiếp nghiên cứu và giảng dạy
-                tại Đại học Y khoa Hà Nội
-              </li>
-              <li>
-                Là thành viên hoặc lãnh đạo các tổ chức chuyên môn như: Hiệp hội
-                Cơ Xương Khớp, Hội Thấp khớp học,...
-              </li>
-              <li>
-                Được nhà nước công nhận các danh hiệu Thầy thuốc Nhân dân, Thầy
-                thuốc Ưu tú, Bác sĩ Cao cấp,...
-              </li>
-            </ul>
+            {detailSpecialty && !_.isEmpty(detailSpecialty) && (
+              <div
+                // className="detailSpecialty__description__content"
+                dangerouslySetInnerHTML={{
+                  __html: detailSpecialty.descriptionHTML,
+                }}
+              ></div>
+            )}
           </div>
+
           <div className="detailSpecialty__content">
+            <div className="detailSpecialty__content__filterLocation">
+              <Select
+                value={selectedProvince}
+                onChange={this.handleChangeSelect}
+                options={listProvince}
+                placeholder={
+                  <FormattedMessage id="admin.manage-doctor.chooseProvince" />
+                }
+              />
+            </div>
             {arrDoctorId &&
               arrDoctorId.length > 0 &&
               arrDoctorId.map((item, index) => {
@@ -55,6 +158,8 @@ class DetailSpecialty extends Component {
                       <ProfileDoctor
                         doctorId={item}
                         isShowDesc={true}
+                        isShowPrice={false}
+                        isShowDetail={true}
                         // dataTime={dataTime}
                       />
                     </div>
@@ -77,7 +182,9 @@ class DetailSpecialty extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return {};
+  return {
+    language: state.app.language,
+  };
 };
 
 const mapDispatchToProps = (dispatch) => {

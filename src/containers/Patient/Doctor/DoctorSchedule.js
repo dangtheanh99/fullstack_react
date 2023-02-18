@@ -30,7 +30,7 @@ class DoctorSchedule extends Component {
     if (this.props.doctorId) {
       let res = await getScheduleByDateService(
         this.props.doctorId,
-        this.state.selectedDay
+        allDays[0]?.value
       );
       this.setState({
         allTime: res.data ? res.data : [],
@@ -125,7 +125,7 @@ class DoctorSchedule extends Component {
   render() {
     let { allDays, selectedDay, allTime, dataSchedulTime } = this.state;
     let { language } = this.props;
-    console.log("check state", this.state);
+    // console.log("check state", this.state);
     return (
       <>
         <div className="doctorSchedule">

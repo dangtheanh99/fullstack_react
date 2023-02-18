@@ -1,0 +1,19 @@
+.manageSpecialty {
+  margin: 12px 24px;
+  &__title {
+    font-size: 20px;
+    text-transform: uppercase;
+    text-align: center;
+    margin: 12px 0;
+    font-weight: 600;
+  }
+  &__content {
+    margin-bottom: 8px;
+    &__name {
+    }
+    &__image {
+    }
+    &__description {
+    }
+  }
+}

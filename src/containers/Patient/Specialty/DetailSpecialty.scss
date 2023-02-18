@@ -1,12 +1,15 @@
 .detailSpecialty {
   margin-top: 90px;
   &__description {
-    height: 200px;
     padding: 0 90px;
   }
   &__content {
     background-color: #eee;
     padding: 20px 90px 10px;
+    &__filterLocation {
+      width: 200px;
+      margin-bottom: 12px;
+    }
   }
   &__item {
     display: flex;
