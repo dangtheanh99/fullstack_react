@@ -3,8 +3,9 @@ import { connect } from "react-redux";
 import "./Specialty.scss";
 import Slider from "react-slick";
 import { getAllSpecialty } from "../../../services/userService";
-import { languages } from "../../../utils";
+import { languages, path } from "../../../utils";
 import { FormattedMessage } from "react-intl";
+import { withRouter } from "react-router";
 
 class Specialty extends Component {
   constructor(props) {
@@ -24,6 +25,11 @@ class Specialty extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {}
+
+  viewDetailSpecialty = (specialty) => {
+    console.log("info specialty: ", specialty);
+    this.props.history.push(`${path.DETAIL_SPECIALTY}/${specialty.id}`);
+  };
   render() {
     let { allSpecialty } = this.state;
 
@@ -42,7 +48,11 @@ class Specialty extends Component {
             allSpecialty.length > 0 &&
             allSpecialty.map((item, index) => {
               return (
-                <div className="commonSection__slider__item" key={index}>
+                <div
+                  className="commonSection__slider__item"
+                  key={index}
+                  onClick={() => this.viewDetailSpecialty(item)}
+                >
                   <img
                     src={item.image}
                     className="commonSection__slider__item__img"
@@ -72,4 +82,6 @@ const mapDispatchToProps = (dispatch) => {
   return {};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Specialty);
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(Specialty)
+);

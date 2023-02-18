@@ -27,13 +27,15 @@ class DoctorSchedule extends Component {
       allDays,
       selectedDay: allDays[0]?.value,
     });
-    // if (this.props.doctorId) {
-    //   let res = await getScheduleByDateService(
-    //     this.props.doctorId,
-    //     this.state.selectedDay
-    //   );
-    //   console.log("check res by date 1: ", res);
-    // }
+    if (this.props.doctorId) {
+      let res = await getScheduleByDateService(
+        this.props.doctorId,
+        this.state.selectedDay
+      );
+      this.setState({
+        allTime: res.data ? res.data : [],
+      });
+    }
   }
 
   async componentDidUpdate(prevProps, prevState) {
@@ -41,7 +43,6 @@ class DoctorSchedule extends Component {
       let allDays = this.getArrDays(this.props.language);
       this.setState({
         allDays,
-        // selectedDay: allDays[0]?.value,
       });
     }
 

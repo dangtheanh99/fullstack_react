@@ -194,16 +194,24 @@
   "admin": {
     "manage-doctor": {
       "title": "Adding doctor's information",
+      "doctor": "Doctor",
       "choose-doctor": "Choose a doctor",
       "intro": "Introduction information",
       "update": "Update",
       "add": "Add",
-      "price": "Select price",
-      "payment": "Select a payment method",
-      "province": "Select province",
+      "price": "Price",
+      "payment": "Payment method",
+      "province": "Province",
+      "choosePrice": "Select price",
+      "choosePayment": "Select a payment method",
+      "chooseProvince": "Select province",
       "nameClinic": "Clinic name",
       "addressClinic": "Clinic address",
-      "note": "Note"
+      "note": "Note",
+      "specialty": "Specialty",
+      "clinic": "Clinic",
+      "chooseSpecialty": "Choose a specialty",
+      "chooseClinic": "Choose a clinic"
     }
   }
 }

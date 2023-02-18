@@ -194,16 +194,24 @@
   "admin": {
     "manage-doctor": {
       "title": "Thêm thông tin bác sĩ",
+      "doctor": "Bác sĩ",
       "choose-doctor": "Chọn bác sĩ",
       "intro": "Thông tin giới thiệu",
       "update": "Cập nhật",
       "add": "Thêm mới",
-      "price": "Chọn giá",
-      "payment": "Chọn phương thức thanh toán",
-      "province": "Chọn tỉnh",
+      "price": "Giá",
+      "payment": "Phương thức thanh toán",
+      "province": "Tỉnh",
+      "choosePrice": "Chọn giá",
+      "choosePayment": "Chọn phương thức thanh toán",
+      "chooseProvince": "Chọn tỉnh",
       "nameClinic": "Tên phòng khám",
       "addressClinic": "Địa chỉ phòng khám",
-      "note": "Ghi chú"
+      "note": "Ghi chú",
+      "specialty": "Chuyên khoa",
+      "clinic": "Phòng khám",
+      "chooseSpecialty": "Chọn chuyên khoa",
+      "chooseClinic": "Chọn phòng khám"
     }
   }
 }
