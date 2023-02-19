@@ -1,0 +1,261 @@
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { Redirect, Route, Switch } from "react-router-dom";
+import "./ManagePatient.scss";
+import { FormattedMessage } from "react-intl";
+import Select from "react-select";
+import * as actions from "../../../store/actions";
+import { languages } from "../../../utils";
+import { DatePicker } from "antd";
+import moment from "moment";
+import { toast } from "react-toastify";
+import _, { result } from "lodash";
+import { getListPatientService } from "../../../services/userService";
+import RemedyModal from "./RemedyModal";
+
+class ManagePatient extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      selectedDate: moment(),
+      listPatient: [],
+      isOpenModal: false,
+      dataModal: {},
+    };
+  }
+  async componentDidMount() {
+    await this.getListPatient(this.props.user, this.state.selectedDate);
+  }
+
+  getListPatient = async (user, date) => {
+    let formatedDate = date.format("DD/MM/YYYY");
+    let res = await getListPatientService(user.id, formatedDate);
+    console.log("check res patient", res.data);
+    if (res && res.errCode === 0) {
+      this.setState({
+        listPatient: res.data,
+      });
+    }
+  };
+  componentDidUpdate(prevProps, prevState) {
+    // if (prevProps.allDoctors !== this.props.allDoctors) {
+    //   let selectDoctors = this.buildDataSelect(this.props.allDoctors);
+    //   this.setState({
+    //     listDoctors: selectDoctors,
+    //   });
+    // }
+    // if (prevProps.language !== this.props.language) {
+    //   let selectDoctors = this.buildDataSelect(this.props.allDoctors);
+    //   this.setState({
+    //     listDoctors: selectDoctors,
+    //   });
+    // }
+    // if (prevProps.listTime !== this.props.listTime) {
+    //   let data = this.props.listTime;
+    //   data = data.map((item) => {
+    //     return { ...item, isSelected: false };
+    //   });
+    //   // console.log("check data selected", data);
+    //   this.setState({
+    //     rangeTime: data,
+    //   });
+    // }
+  }
+  // handleChangeSelect = async (selectedOption) => {
+  //   this.setState({ selectedOption });
+  // };
+
+  // handleSelectTime = (itemSelected) => {
+  //   // console.log("check itemSelected", itemSelected);
+  //   let { rangeTime } = this.state;
+  //   let result = rangeTime;
+  //   if (result && result.length > 0) {
+  //     let indexItem = result.findIndex((item) => item.id === itemSelected.id);
+  //     result[indexItem].isSelected = !result[indexItem].isSelected;
+  //     this.setState({
+  //       rangeTime: result,
+  //     });
+  //   }
+  // };
+
+  // buildDataSelect = (inputData) => {
+  //   let result = [];
+  //   let { language } = this.props;
+  //   if (inputData && inputData.length > 0) {
+  //     inputData.map((item, index) => {
+  //       let object = {};
+  //       let labelVi = `${item.lastName} ${item.firstName}`;
+  //       let labelEn = `${item.firstName} ${item.lastName}`;
+  //       object.label = language === languages.VI ? labelVi : labelEn;
+  //       object.value = item.id;
+  //       result.push(object);
+  //     });
+  //   }
+  //   return result;
+  // };
+
+  onChangeDate = (value) => {
+    this.setState(
+      {
+        selectedDate: value,
+      },
+      () => {
+        this.getListPatient(this.props.user, this.state.selectedDate);
+      }
+    );
+  };
+
+  handleConfirmPatient = (item) => {
+    console.log("check item", item);
+    let data = {
+      doctorId: item.doctorId,
+      patientId: item.patientId,
+      email: item.patientData.email,
+    };
+    this.setState({
+      isOpenModal: true,
+      dataModal: data,
+    });
+  };
+
+  closeModal = () => {
+    this.setState({
+      isOpenModal: false,
+    });
+  };
+
+  sendDataModal = (data) => {
+    console.log("check data from parent: ", data);
+  };
+
+  render() {
+    let { listPatient, isOpenModal, dataModal } = this.state;
+    let { language } = this.props;
+    return (
+      <>
+        <div className="managePatient">
+          <div className="managePatient__heading">
+            <FormattedMessage id="manage-patient.title" />
+          </div>
+          <div className="managePatient__content">
+            <div className="container">
+              <div className="row">
+                <div className="col-6 form-group">
+                  <label>
+                    <FormattedMessage id="manage-patient.date" />
+                  </label>
+                  <DatePicker
+                    onChange={this.onChangeDate}
+                    className="form-control"
+                    disabledDate={(current) => {
+                      let customDate = moment().format("DD-MM-YYYY");
+                      return (
+                        current && current < moment(customDate, "DD-MM-YYYY")
+                      );
+                    }}
+                    locale="vi"
+                    format="DD/MM/YYYY"
+                    value={this.state.selectedDate}
+                  />
+                </div>
+                <div className="col-12 form-group">
+                  <table class="table table-hover table-sm table-bordered">
+                    <thead class="thead-light">
+                      <tr>
+                        <th scope="col">
+                          <FormattedMessage id="manage-patient.order" />
+                        </th>
+                        <th scope="col">
+                          <FormattedMessage id="manage-patient.time" />
+                        </th>
+                        <th scope="col">
+                          <FormattedMessage id="manage-patient.fullName" />
+                        </th>
+                        <th scope="col">
+                          <FormattedMessage id="manage-patient.gender" />
+                        </th>
+                        <th scope="col">
+                          <FormattedMessage id="manage-patient.address" />
+                        </th>
+                        <th scope="col">
+                          <FormattedMessage id="manage-patient.action" />
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {listPatient && listPatient.length > 0 ? (
+                        listPatient.map((item, index) => {
+                          let timeVi = item.timeTypePatient.valueVi;
+                          let timeEn = item.timeTypePatient.valueEn;
+                          let genderVi = item.patientData.genderData.valueVi;
+                          let genderEn = item.patientData.genderData.valueEn;
+
+                          return (
+                            <tr key={index}>
+                              <th scope="row">{index + 1}</th>
+                              <td>
+                                {language === languages.VI ? timeVi : timeEn}
+                              </td>
+                              <td>{item.patientData.firstName}</td>
+                              <td>
+                                {language === languages.VI
+                                  ? genderVi
+                                  : genderEn}
+                              </td>
+                              <td>{item.patientData.address}</td>
+                              <td>
+                                <button
+                                  className="btn btn-primary px-3"
+                                  // style={{ marginRight: "8px" }}
+                                  onClick={() =>
+                                    this.handleConfirmPatient(item)
+                                  }
+                                >
+                                  <FormattedMessage id="manage-patient.confirm" />
+                                </button>
+                                {/* <button className="btn btn-success px-3">
+                                <FormattedMessage id="manage-patient.send" />
+                              </button> */}
+                              </td>
+                            </tr>
+                          );
+                        })
+                      ) : (
+                        <td>Không có lịch đặt</td>
+                      )}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <RemedyModal
+          isOpenModal={isOpenModal}
+          dataModal={dataModal}
+          closeModal={this.closeModal}
+          sendDataModal={this.sendDataModal}
+        />
+      </>
+    );
+  }
+}
+
+const mapStateToProps = (state) => {
+  return {
+    isLoggedIn: state.user.isLoggedIn,
+    user: state.user.userInfo,
+    language: state.app.language,
+    // allDoctors: state.admin.allDoctors,
+    // listTime: state.admin.listTime,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchAllDoctorsRedux: () => dispatch(actions.fetchAllDoctorsStart()),
+    fetchAllcodeTimeRedux: () => dispatch(actions.fetchAllcodeTime()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ManagePatient);

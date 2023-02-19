@@ -40,7 +40,8 @@
       "manage-handbook": "Handbook Management"
     },
     "doctor": {
-      "manage-schedule": "Medical examination plan management"
+      "manage-schedule": "Medical examination plan management",
+      "manage-patient": "Management of medical examination patients"
     }
   },
   "system": {
@@ -162,6 +163,18 @@
     "doctor": "Choose a doctor",
     "date": "Choose a date",
     "save": "Save"
+  },
+  "manage-patient": {
+    "title": "Manage patients with doctor's examination",
+    "date": "Choose a date",
+    "order": "STT",
+    "time": "Time",
+    "fullName": "Full name",
+    "gender": "Gender",
+    "address": "Address",
+    "action": "Action",
+    "confirm": "Confirm",
+    "send": "Send bill"
   },
   "manage-specialty": {
     "title": "Specialized management",

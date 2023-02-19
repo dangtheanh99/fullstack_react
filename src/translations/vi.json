@@ -40,7 +40,8 @@
       "manage-handbook": "Quản lý cẩm nang"
     },
     "doctor": {
-      "manage-schedule": "Quản lý kế hoạch khám bệnh"
+      "manage-schedule": "Quản lý kế hoạch khám bệnh",
+      "manage-patient": "Quản lý bệnh nhân khám bệnh"
     }
   },
   "system": {
@@ -162,6 +163,18 @@
     "doctor": "Chọn bác sĩ",
     "date": "Chọn ngày",
     "save": "Lưu"
+  },
+  "manage-patient": {
+    "title": "Quản lý bệnh nhân khám bệnh của bác sĩ",
+    "date": "Chọn ngày",
+    "order": "STT",
+    "time": "Thời gian",
+    "fullName": "Họ và tên",
+    "gender": "Giới tính",
+    "address": "Địa chỉ",
+    "action": "Hành động",
+    "confirm": "Xác nhận",
+    "send": "Gửi hóa đơn"
   },
   "manage-specialty": {
     "title": "Quản lý chuyên khoa",

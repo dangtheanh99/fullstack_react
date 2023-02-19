@@ -50,6 +50,12 @@ const getScheduleByDateService = (doctorId, date) => {
   );
 };
 
+const getListPatientService = (doctorId, date) => {
+  return axios.get(
+    `/api/get-list-patient-for-doctor?doctorId=${doctorId}&date=${date}`
+  );
+};
+
 const getExtraInforDoctorService = (doctorId) => {
   return axios.get(`/api/get-extra-infor-doctor-by-id?doctorId=${doctorId}`);
 };
@@ -111,4 +117,5 @@ export {
   createNewClinic,
   getAllClinic,
   getDetailClinicById,
+  getListPatientService,
 };
