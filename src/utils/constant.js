@@ -6,6 +6,7 @@ export const path = {
   HOMEPAGE: "/home",
   DETAIL_DOCTOR: "/detail-doctor",
   DETAIL_SPECIALTY: "/detail-specialty",
+  DETAIL_CLINIC: "/detail-clinic",
   VERIFY_EMAIL_BOOKING: "/verify-booking",
 };
 
