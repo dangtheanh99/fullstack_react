@@ -94,6 +94,10 @@ const getDetailClinicById = (inputId) => {
   return axios.get(`/api/get-detail-clinic-by-id?id=${inputId}`);
 };
 
+const sendRemedyService = (data) => {
+  return axios.post("/api/send-remedy", data);
+};
+
 export {
   handleLoginApi,
   getAllUsers,
@@ -118,4 +122,5 @@ export {
   getAllClinic,
   getDetailClinicById,
   getListPatientService,
+  sendRemedyService,
 };

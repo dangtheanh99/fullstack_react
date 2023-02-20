@@ -10,7 +10,10 @@ import { DatePicker } from "antd";
 import moment from "moment";
 import { toast } from "react-toastify";
 import _, { result } from "lodash";
-import { getListPatientService } from "../../../services/userService";
+import {
+  getListPatientService,
+  sendRemedyService,
+} from "../../../services/userService";
 import RemedyModal from "./RemedyModal";
 
 class ManagePatient extends Component {
@@ -111,6 +114,8 @@ class ManagePatient extends Component {
       doctorId: item.doctorId,
       patientId: item.patientId,
       email: item.patientData.email,
+      timeType: item.timeType,
+      patientName: item.patientData.firstName,
     };
     this.setState({
       isOpenModal: true,
@@ -124,8 +129,24 @@ class ManagePatient extends Component {
     });
   };
 
-  sendDataModal = (data) => {
-    console.log("check data from parent: ", data);
+  sendDataModal = async (dataFromModal) => {
+    let { dataModal } = this.state;
+    let res = await sendRemedyService({
+      ...dataFromModal,
+      doctorId: dataModal.doctorId,
+      patientId: dataModal.patientId,
+      timeType: dataModal.timeType,
+      language: this.props.language,
+      patientName: dataModal.patientName,
+    });
+    if (res && res.errCode === 0) {
+      toast.success("Send Remedy successfully!");
+      this.closeModal();
+      await this.getListPatient(this.props.user, this.state.selectedDate);
+    } else {
+      toast.error("Send Remedy failed!");
+    }
+    console.log("check res change status: ", res);
   };
 
   render() {
@@ -159,8 +180,8 @@ class ManagePatient extends Component {
                   />
                 </div>
                 <div className="col-12 form-group">
-                  <table class="table table-hover table-sm table-bordered">
-                    <thead class="thead-light">
+                  <table className="table table-hover table-sm table-bordered">
+                    <thead className="thead-light">
                       <tr>
                         <th scope="col">
                           <FormattedMessage id="manage-patient.order" />
@@ -206,22 +227,20 @@ class ManagePatient extends Component {
                               <td>
                                 <button
                                   className="btn btn-primary px-3"
-                                  // style={{ marginRight: "8px" }}
                                   onClick={() =>
                                     this.handleConfirmPatient(item)
                                   }
                                 >
                                   <FormattedMessage id="manage-patient.confirm" />
                                 </button>
-                                {/* <button className="btn btn-success px-3">
-                                <FormattedMessage id="manage-patient.send" />
-                              </button> */}
                               </td>
                             </tr>
                           );
                         })
                       ) : (
-                        <td>Không có lịch đặt</td>
+                        <tr>
+                          <td colSpan={6}>Không có lịch đặt</td>
+                        </tr>
                       )}
                     </tbody>
                   </table>
