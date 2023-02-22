@@ -17,7 +17,8 @@
     "forbiden-request": "Invalid input data",
     "fail-to-load-all-code": "Fail to load data from allcode",
     "sum": "Sum",
-    "date-range-invalid": "Date range invalid"
+    "date-range-invalid": "Date range invalid",
+    "select": "Select"
   },
   "login": {
     "login": "Login",
@@ -27,11 +28,11 @@
   },
   "menu": {
     "admin": {
-      "manage-user": "User management",
+      "manage-user": "General Management",
       "manage-doctor": "Doctor management",
       "manage-admin": "Admin Management",
       "crud": "CRUD User",
-      "crud-redux": "CRUD Redux",
+      "crud-redux": "User management",
       "clinic": "Clinic",
       "manage-clinic": "Clinic Management",
       "specialty": "Specialty",
@@ -132,9 +133,14 @@
     "doctor": "Doctor",
     "des-doctor": "Choose a good doctor",
     "checkup-package": "Checkup package",
-    "des-checkup-package": "General health check"
+    "des-checkup-package": "General health check",
+    "medical-background": "Medical background",
+    "health-care": "Comprehensive health care",
+    "find-hospital": "Find a hospital"
   },
   "manage-user": {
+    "title": "User management",
+    "edit": "Edit user",
     "add": "Add a new user",
     "email": "Email",
     "password": "Password",
@@ -147,7 +153,10 @@
     "role": "Role",
     "image": "Image",
     "save": "Save",
-    "edit": "Update"
+    "update": "Update",
+    "reset": "Reset",
+    "table": "All User Information",
+    "action": "Action"
   },
   "homepage": {
     "out-standing-doctor": "Outstanding Doctor of the Week",
@@ -160,7 +169,9 @@
   },
   "manage-schedule": {
     "title": "Manage doctor's examination plan",
-    "doctor": "Choose a doctor",
+    "doctor": "Doctor",
+    "choose-doctor": "Choose a doctor",
+    "choose-time": "Choose time",
     "date": "Choose a date",
     "save": "Save"
   },

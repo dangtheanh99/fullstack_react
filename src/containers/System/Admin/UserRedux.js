@@ -11,27 +11,44 @@ import Lightbox from "react-image-lightbox";
 import "react-image-lightbox/style.css";
 import TableManageUser from "./TableManageUser";
 
+const initialState = {
+  imageUrl: undefined,
+  email: "",
+  password: "",
+  firstName: "",
+  lastName: "",
+  address: "",
+  gender: "",
+  role: "",
+  phoneNumber: "",
+  position: "",
+  image: "",
+  action: "",
+  userEditId: "",
+};
 class UserRedux extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
       arrGender: [],
       arrRole: [],
       arrPosition: [],
       isOpen: false,
-      imageUrl: undefined,
-      email: "",
-      password: "",
-      firstName: "",
-      lastName: "",
-      address: "",
-      gender: "",
-      role: "",
-      phoneNumber: "",
-      position: "",
-      image: "",
-      action: "",
-      userEditId: "",
+      // imageUrl: undefined,
+      // email: "",
+      // password: "",
+      // firstName: "",
+      // lastName: "",
+      // address: "",
+      // gender: "",
+      // role: "",
+      // phoneNumber: "",
+      // position: "",
+      // image: "",
+      // action: "",
+      // userEditId: "",
+      ...initialState,
     };
   }
   async componentDidMount() {
@@ -116,7 +133,6 @@ class UserRedux extends Component {
   };
 
   editUser = async (user) => {
-    console.log("data from child", user);
     let imageBase64 = "";
     if (user.image) {
       imageBase64 = new Buffer(user.image, "base64").toString("binary");
@@ -197,12 +213,21 @@ class UserRedux extends Component {
     let lang = this.props.language;
     return (
       <div className="user-redux-container">
-        <div className="title">User Redux with TheAnh</div>
+        <div className="title">
+          <FormattedMessage id="manage-user.title" />
+        </div>
         <div className="user-redux-body">
           <div className="container">
             <div className="row">
-              <div className="col-12 my-3">
-                <FormattedMessage id="manage-user.add" />
+              <div
+                className="col-12 my-3"
+                style={{ fontSize: "16px", fontWeight: "500" }}
+              >
+                {action === CRUD_ACTIONS.EDIT ? (
+                  <FormattedMessage id="manage-user.edit" />
+                ) : (
+                  <FormattedMessage id="manage-user.add" />
+                )}
               </div>
               <div className="col-3">
                 <label>
@@ -381,17 +406,32 @@ class UserRedux extends Component {
                       : "btn btn-primary px-3"
                   }
                   onClick={() => this.handleSaveUser()}
+                  style={{ marginRight: "8px" }}
                 >
                   {action === CRUD_ACTIONS.EDIT ? (
-                    <FormattedMessage id="manage-user.edit" />
+                    <FormattedMessage id="manage-user.update" />
                   ) : (
                     <FormattedMessage id="manage-user.save" />
                   )}
+                </button>
+
+                <button
+                  className="btn btn-secondary px-3"
+                  onClick={() => {
+                    this.setState({
+                      ...initialState,
+                    });
+                  }}
+                >
+                  <FormattedMessage id="manage-user.reset" />
                 </button>
               </div>
             </div>
             <div className="row">
               <div className="col-12">
+                <h5 style={{ marginTop: "12px", textAlign: "center" }}>
+                  <FormattedMessage id="manage-user.table" />
+                </h5>
                 <TableManageUser editUser={this.editUser} />
               </div>
             </div>

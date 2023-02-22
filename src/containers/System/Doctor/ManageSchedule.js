@@ -11,6 +11,8 @@ import moment from "moment";
 import { toast } from "react-toastify";
 import _, { result } from "lodash";
 import { saveBulkScheduleService } from "../../../services/userService";
+import vi_VN from "antd/es/date-picker/locale/vi_VN";
+import en_US from "antd/es/date-picker/locale/en_US";
 class ManageSchedule extends Component {
   constructor(props) {
     super(props);
@@ -94,18 +96,17 @@ class ManageSchedule extends Component {
     let { selectedDate, selectedOption, rangeTime } = this.state;
     let result = [];
     if (!selectedOption) {
-      toast.error("Missing doctor selection!");
+      toast.error("Missing Doctor selection!");
       return;
     }
     if (!selectedDate) {
-      toast.error("Missing date selection!");
+      toast.error("Missing Date selection!");
       return;
     }
     let formatedDate = selectedDate.format("DD/MM/YYYY");
 
     if (rangeTime && rangeTime.length > 0) {
       let arrTime = rangeTime.filter((item) => item.isSelected === true);
-      // console.log("arrTime", arrTime);
       if (arrTime && arrTime.length > 0) {
         arrTime.map((item) => {
           let object = {};
@@ -115,7 +116,7 @@ class ManageSchedule extends Component {
           result.push(object);
         });
       } else {
-        toast.error("Missing time selection!");
+        toast.error("Missing Time selection!");
         return;
       }
     }
@@ -125,7 +126,7 @@ class ManageSchedule extends Component {
       });
       this.setState({
         selectedDate: moment(),
-        selectedOption: "",
+        // selectedOption: "",
         rangeTime: initRangeTime,
       });
       toast.success("Save successfully!");
@@ -157,37 +158,44 @@ class ManageSchedule extends Component {
                   value={selectedOption}
                   onChange={this.handleChangeSelect}
                   options={listDoctors}
+                  placeholder={
+                    <FormattedMessage id="manage-schedule.choose-doctor" />
+                  }
+                  className="chooseDoctor"
                 />
               </div>
               <div className="col-6 form-group">
-                <label>
+                <label style={{ display: "block" }}>
                   <FormattedMessage id="manage-schedule.date" />
                 </label>
                 <DatePicker
                   onChange={this.onChangeDate}
-                  className="form-control"
+                  className="form-control chooseDate"
                   disabledDate={(current) => {
                     let customDate = moment().format("DD-MM-YYYY");
                     return (
                       current && current < moment(customDate, "DD-MM-YYYY")
                     );
                   }}
-                  locale="vi"
+                  locale={language === languages.VI ? vi_VN : en_US}
                   format="DD/MM/YYYY"
                   value={this.state.selectedDate}
                 />
               </div>
               <div className="pickTime">
+                <div className="pickTime__title">
+                  <FormattedMessage id="manage-schedule.choose-time" />
+                </div>
                 {rangeTime &&
                   rangeTime.length > 0 &&
                   rangeTime.map((item, index) => {
                     return (
                       <div
-                        className={
+                        className={`${
                           item.isSelected
                             ? "pickTime__item active"
                             : "pickTime__item"
-                        }
+                        } ${language === languages.VI ? "vi" : "en"}`}
                         key={index}
                         onClick={() => this.handleSelectTime(item)}
                       >

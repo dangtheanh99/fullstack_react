@@ -7,48 +7,35 @@ import { languages } from "../../utils";
 import * as actions from "../../store/actions";
 import { FormattedMessage } from "react-intl";
 
-const headerData = [
+const options = [
   {
-    title: "Chuyên khoa",
-    description: "Tìm bác sĩ theo chuyên khoa",
-  },
-  {
-    title: "Cơ sở y tế",
-    description: "Chọn bệnh viện phòng khám",
-  },
-  {
-    title: "Bác sĩ",
-    description: "Chọn bác sĩ giỏi",
-  },
-  {
-    title: "Gói khám",
-    description: "Khám sức khỏe tổng quát",
-  },
-];
-
-const option = [
-  {
-    title: "Khám Chuyên khoa",
+    titleVi: "Khám Chuyên khoa",
+    titleEn: "Specialist Examination",
     icon: "far fa-hospital",
   },
   {
-    title: "Khám từ xa",
+    titleVi: "Khám từ xa",
+    titleEn: "Remote examination",
     icon: "fas fa-phone-square",
   },
   {
-    title: "Khám tổng quát",
+    titleVi: "Khám tổng quát",
+    titleEn: "General examination",
     icon: "fas fa-hospital-alt",
   },
   {
-    title: "Xét nghiệm y học",
+    titleVi: "Xét nghiệm y học",
+    titleEn: "Medical test",
     icon: "fas fa-vials",
   },
   {
-    title: "Sức khỏe tinh thần",
+    titleVi: "Sức khỏe tinh thần",
+    titleEn: "Mental health",
     icon: "far fa-hospital",
   },
   {
-    title: "Khám nha khoa",
+    titleVi: "Khám nha khoa",
+    titleEn: "Dental examination",
     icon: "fas fa-syringe",
   },
 ];
@@ -76,12 +63,6 @@ class HomeHeader extends Component {
               ></div>
             </div>
             <div className="homeHeader__content__center">
-              {/* {headerData.map((item, index) => {
-                return (
-                  
-                );
-              })} */}
-
               <div className="homeHeader__content__center__item">
                 <div className="homeHeader__content__center__title">
                   <FormattedMessage id="homeheader.specialty" />
@@ -150,24 +131,35 @@ class HomeHeader extends Component {
           <div className="banner">
             <div className="banner__top">
               <div className="banner__heading">
-                Nền tảng y tế <br />
-                <b>Chăm sóc sức khỏe toàn diện</b>
+                <FormattedMessage id="homeheader.medical-background" /> <br />
+                <b>
+                  <FormattedMessage id="homeheader.health-care" />
+                </b>
               </div>
               <div className="banner__search">
                 <i className="fas fa-search"></i>
-                <input type="text" placeholder="Tìm bệnh viện" />
+                <input
+                  type="text"
+                  placeholder={
+                    language === languages.VI
+                      ? "Tìm bệnh viện"
+                      : "Find a hospital"
+                  }
+                />
               </div>
             </div>
             <div className="banner__bottom">
               <div className="banner__options">
-                {option.map((item, index) => {
+                {options.map((item, index) => {
                   return (
                     <div className="banner__options__item" key={index}>
                       <div className="banner__options__item__icon">
                         <i className={item.icon}></i>
                       </div>
                       <div className="banner__options__item__title">
-                        {item.title}
+                        {language === languages.VI
+                          ? item.titleVi
+                          : item.titleEn}
                       </div>
                     </div>
                   );

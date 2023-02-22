@@ -31,7 +31,7 @@ class Doctor extends Component {
     this.props.history.push(`${path.DETAIL_DOCTOR}/${doctor.id}`);
   };
   render() {
-    console.log("check props redux", this.props.topDoctors);
+    console.log("check state arrDoctors", this.state.arrDoctors);
     let { arrDoctors } = this.state;
     let { language } = this.props;
     return (

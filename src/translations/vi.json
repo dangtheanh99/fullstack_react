@@ -17,7 +17,8 @@
     "forbiden-request": "Thông tin truyền vào không hợp lệ",
     "fail-to-load-all-code": "Không thể tải về dữ liệu allcode",
     "sum": "Tổng",
-    "date-range-invalid": "Khoảng thời gian không hợp lệ"
+    "date-range-invalid": "Khoảng thời gian không hợp lệ",
+    "select": "Chọn"
   },
   "login": {
     "login": "Đăng nhập",
@@ -27,11 +28,11 @@
   },
   "menu": {
     "admin": {
-      "manage-user": "Quản lý người dùng",
+      "manage-user": "Quản lý chung",
       "manage-doctor": "Quản lý bác sỹ",
       "manage-admin": "Quản lý admin",
       "crud": "CRUD User",
-      "crud-redux": "CRUD Redux",
+      "crud-redux": "Quản lý người dùng",
       "clinic": "Phòng khám",
       "manage-clinic": "Quản lý phòng khám",
       "specialty": "Chuyên khoa",
@@ -132,10 +133,15 @@
     "doctor": "Bác sĩ",
     "des-doctor": "Chọn bác sĩ giỏi",
     "checkup-package": "Gói khám",
-    "des-checkup-package": "Khám sức khỏe tổng quát"
+    "des-checkup-package": "Khám sức khỏe tổng quát",
+    "medical-background": "Nền tảng y tế",
+    "health-care": "Chăm sóc sức khỏe toàn diện",
+    "find-hospital": "Tìm bệnh viện"
   },
   "manage-user": {
+    "title": "Quản lý người dùng",
     "add": "Thêm mới người dùng",
+    "edit": "Chỉnh sửa người dùng",
     "email": "Email",
     "password": "Mật khẩu",
     "firstName": "Tên",
@@ -147,7 +153,10 @@
     "role": "Vai trò",
     "image": "Ảnh đại diện",
     "save": "Lưu",
-    "edit": "Cập nhật"
+    "update": "Cập nhật",
+    "reset": "Đặt lại",
+    "table": "Thông tin tất cả người dùng",
+    "action": "Hành động"
   },
   "homepage": {
     "out-standing-doctor": "Bác sỹ nổi bật tuần qua",
@@ -160,7 +169,9 @@
   },
   "manage-schedule": {
     "title": "Quản lý kế hoạch khám bệnh của bác sĩ",
-    "doctor": "Chọn bác sĩ",
+    "doctor": "Bác sĩ",
+    "choose-doctor": "Chọn bác sĩ",
+    "choose-time": "Chọn thời gian",
     "date": "Chọn ngày",
     "save": "Lưu"
   },
