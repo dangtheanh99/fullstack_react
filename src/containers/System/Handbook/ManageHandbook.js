@@ -1,26 +1,25 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import "./ManageClinic.scss";
+import "./ManageHandbook.scss";
 import { FormattedMessage } from "react-intl";
 import MarkdownIt from "markdown-it";
 import MdEditor from "react-markdown-editor-lite";
 import { CommonUtils } from "../../../utils";
-import { createNewClinic } from "../../../services/userService";
+import { createNewHandbook } from "../../../services/userService";
 import { toast } from "react-toastify";
 import "react-markdown-editor-lite/lib/index.css";
 import { languages } from "../../../utils";
 
 const mdParser = new MarkdownIt();
 
-class ManageClinic extends Component {
+class ManageHandbook extends Component {
   constructor(props) {
     super(props);
     this.state = {
       name: "",
-      imageBase64: "",
+      image: "",
       descriptionHTML: "",
       descriptionMarkdown: "",
-      address: "",
     };
   }
 
@@ -44,18 +43,17 @@ class ManageClinic extends Component {
   };
 
   handleSaveClinic = async () => {
-    let res = await createNewClinic(this.state);
+    let res = await createNewHandbook(this.state);
     if (res && res.errCode === 0) {
-      toast.success("Create a new clinic successfully!");
+      toast.success("Create a new handbook successfully!");
       this.setState({
         name: "",
-        imageBase64: "",
+        image: "",
         descriptionHTML: "",
         descriptionMarkdown: "",
-        address: "",
       });
     } else {
-      toast.error("Create a new specialty failed!");
+      toast.error("Create a new handbook failed!");
     }
   };
   handleOnChangeImage = async (event) => {
@@ -64,7 +62,7 @@ class ManageClinic extends Component {
     if (file) {
       let base64 = await CommonUtils.getBase64(file);
       this.setState({
-        imageBase64: base64,
+        image: base64,
       });
     }
   };
@@ -72,14 +70,14 @@ class ManageClinic extends Component {
   render() {
     let { language } = this.props;
     return (
-      <div className="manageClinic">
-        <div className="manageClinic__title">
-          <FormattedMessage id="manage-clinic.title" />{" "}
+      <div className="manageHandbook">
+        <div className="manageHandbook__title">
+          <FormattedMessage id="manage-handbook.title" />{" "}
         </div>
-        <div className="manageClinic__content row">
-          <div className="manageClinic__content__name form-group col-6">
+        <div className="manageHandbook__content row">
+          <div className="manageHandbook__content__name form-group col-6">
             <label>
-              <FormattedMessage id="manage-clinic.nameSpecialty" />
+              <FormattedMessage id="manage-handbook.name" />
             </label>
             <input
               className="form-control"
@@ -88,21 +86,9 @@ class ManageClinic extends Component {
               onChange={(event) => this.handleChangeInput(event, "name")}
             ></input>
           </div>
-          <div className="manageClinic__content__address form-group col-6">
-            <label>
-              {/* <FormattedMessage id="manage-clinic.nameSpecialty" /> */}
-              Địa chỉ
-            </label>
-            <input
-              className="form-control"
-              type="text"
-              value={this.state.address}
-              onChange={(event) => this.handleChangeInput(event, "address")}
-            ></input>
-          </div>
-          <div className="manageClinic__content__image form-group col-6">
+          <div className="manageHandbook__content__image form-group col-6">
             <label style={{ marginBottom: "16px" }}>
-              <FormattedMessage id="manage-clinic.image" />
+              <FormattedMessage id="manage-handbook.image" />
             </label>
             <input
               className="form-control-file"
@@ -110,9 +96,9 @@ class ManageClinic extends Component {
               onChange={(event) => this.handleOnChangeImage(event)}
             ></input>
           </div>
-          <div className="manageClinic__content__description form-group col-12 ">
+          <div className="manageHandbook__content__description form-group col-12 ">
             <label>
-              <FormattedMessage id="manage-clinic.description" />
+              <FormattedMessage id="manage-handbook.description" />
             </label>
             <MdEditor
               style={{ height: "300px" }}
@@ -126,7 +112,7 @@ class ManageClinic extends Component {
           className="btn btn-primary px-3"
           onClick={() => this.handleSaveClinic()}
         >
-          <FormattedMessage id="manage-clinic.save" />
+          <FormattedMessage id="manage-handbook.save" />
         </button>
       </div>
     );
@@ -143,4 +129,4 @@ const mapDispatchToProps = (dispatch) => {
   return {};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ManageClinic);
+export default connect(mapStateToProps, mapDispatchToProps)(ManageHandbook);

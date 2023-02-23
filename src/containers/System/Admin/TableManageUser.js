@@ -30,22 +30,16 @@ class TableManageUser extends Component {
   handleDeleteUser = (user) => {
     Modal.confirm({
       onOk: async () => {
-        try {
-          // this.setState({
-          //   loading: true,
-          // });
-          this.props.deleteUserRedux(user.id);
-          // this.setState({
-          //   loading: false,
-          // });
-          notification.success({
-            message: "Xóa người dùng thành công!",
-          });
-        } catch (error) {
-          notification.error({
-            message: "Có lỗi trong quá trình xử lý!",
-          });
-        }
+        // try {
+        this.props.deleteUserRedux(user.id);
+        // notification.success({
+        //   message: "Xóa người dùng thành công!",
+        // });
+        // } catch (error) {
+        //   notification.error({
+        //     message: "Có lỗi trong quá trình xử lý!",
+        //   });
+        // }
       },
       onCancel() {},
       content: <div>Xác nhận xóa người dùng?</div>,

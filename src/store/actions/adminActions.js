@@ -157,14 +157,14 @@ export const deleteUser = (userId) => {
       if (res && res.errCode === 0) {
         dispatch(deleteUserSuccess());
         dispatch(fetchUserStart());
-        // toast.success("Delete a new user successfully!");
+        toast.success("Delete a new user successfully!");
       } else {
         dispatch(deleteUserFail());
-        // toast.error("Delete a new user failed!");
+        toast.error("Delete a new user failed!");
       }
     } catch (e) {
       dispatch(deleteUserFail());
-      // toast.error("Delete a new user failed!");
+      toast.error("Delete a new user failed!");
       console.log("Error: ", e);
     }
   };

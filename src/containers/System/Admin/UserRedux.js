@@ -12,7 +12,7 @@ import "react-image-lightbox/style.css";
 import TableManageUser from "./TableManageUser";
 
 const initialState = {
-  imageUrl: undefined,
+  // imageUrl: undefined,
   email: "",
   password: "",
   firstName: "",
@@ -95,7 +95,7 @@ class UserRedux extends Component {
           arrPosition && arrPosition.length > 0 ? arrPosition[0].keyMap : "",
         image: "",
         action: CRUD_ACTIONS.CREATE,
-        imageUrl: "",
+        // imageUrl: "",
       });
     }
   }
@@ -155,6 +155,8 @@ class UserRedux extends Component {
 
   onChangeInput = (e, value) => {
     let copyState = { ...this.state };
+    delete copyState.image;
+    // let copyState = { ...this.state };
     copyState[value] = e.target.value;
     this.setState({
       ...copyState,
@@ -212,7 +214,7 @@ class UserRedux extends Component {
     } = this.state;
     let lang = this.props.language;
     return (
-      <div className="user-redux-container">
+      <div className="user-redux-container" style={{ marginBottom: "30px" }}>
         <div className="title">
           <FormattedMessage id="manage-user.title" />
         </div>
@@ -221,7 +223,7 @@ class UserRedux extends Component {
             <div className="row">
               <div
                 className="col-12 my-3"
-                style={{ fontSize: "16px", fontWeight: "500" }}
+                style={{ fontSize: "20px", fontWeight: "500" }}
               >
                 {action === CRUD_ACTIONS.EDIT ? (
                   <FormattedMessage id="manage-user.edit" />
@@ -229,7 +231,7 @@ class UserRedux extends Component {
                   <FormattedMessage id="manage-user.add" />
                 )}
               </div>
-              <div className="col-3">
+              <div className="col-3 form-group">
                 <label>
                   <FormattedMessage id="manage-user.email" />
                 </label>
@@ -241,7 +243,7 @@ class UserRedux extends Component {
                   disabled={action === CRUD_ACTIONS.EDIT}
                 />
               </div>
-              <div className="col-3">
+              <div className="col-3 form-group">
                 <label>
                   <FormattedMessage id="manage-user.password" />
                 </label>
@@ -253,18 +255,7 @@ class UserRedux extends Component {
                   disabled={action === CRUD_ACTIONS.EDIT}
                 />
               </div>
-              <div className="col-3">
-                <label>
-                  <FormattedMessage id="manage-user.firstName" />
-                </label>
-                <input
-                  type="text"
-                  className="form-control"
-                  value={firstName}
-                  onChange={(e) => this.onChangeInput(e, "firstName")}
-                />
-              </div>
-              <div className="col-3">
+              <div className="col-3 form-group">
                 <label>
                   <FormattedMessage id="manage-user.lastName" />
                 </label>
@@ -275,7 +266,18 @@ class UserRedux extends Component {
                   onChange={(e) => this.onChangeInput(e, "lastName")}
                 />
               </div>
-              <div className="col-3">
+              <div className="col-3 form-group">
+                <label>
+                  <FormattedMessage id="manage-user.firstName" />
+                </label>
+                <input
+                  type="text"
+                  className="form-control"
+                  value={firstName}
+                  onChange={(e) => this.onChangeInput(e, "firstName")}
+                />
+              </div>
+              <div className="col-3 form-group">
                 <label>
                   <FormattedMessage id="manage-user.phoneNumber" />
                 </label>
@@ -286,7 +288,7 @@ class UserRedux extends Component {
                   onChange={(e) => this.onChangeInput(e, "phoneNumber")}
                 />
               </div>
-              <div className="col-6">
+              <div className="col-6 form-group">
                 <label>
                   <FormattedMessage id="manage-user.address" />
                 </label>
@@ -297,7 +299,7 @@ class UserRedux extends Component {
                   onChange={(e) => this.onChangeInput(e, "address")}
                 />
               </div>
-              <div className="col-3">
+              <div className="col-3 form-group">
                 <label>
                   <FormattedMessage id="manage-user.gender" />
                 </label>
@@ -317,7 +319,7 @@ class UserRedux extends Component {
                     })}
                 </select>
               </div>
-              <div className="col-3">
+              <div className="col-3 form-group">
                 <label>
                   <FormattedMessage id="manage-user.position" />
                 </label>
@@ -337,7 +339,7 @@ class UserRedux extends Component {
                     })}
                 </select>
               </div>
-              <div className="col-3">
+              <div className="col-3 form-group">
                 <label>
                   <FormattedMessage id="manage-user.role" />
                 </label>
@@ -357,7 +359,7 @@ class UserRedux extends Component {
                     })}
                 </select>
               </div>
-              <div className="col-3">
+              <div className="col-3 form-group">
                 <label>
                   <FormattedMessage id="manage-user.image" />
                 </label>
@@ -373,8 +375,10 @@ class UserRedux extends Component {
                               url: image,
                             },
                           ]
-                        : null
+                        : undefined
                     }
+                    multiple={false}
+                    maxCount={1}
                     // onPreview={(file) => {
                     //   const objectUrl = URL.createObjectURL(file.originFileObj);
                     //   console.log("objectUrl", objectUrl);
@@ -388,14 +392,16 @@ class UserRedux extends Component {
                     onChange={(file) => this.handleOnChangeImage(file)}
                   >
                     <UploadOutlined />
-                    <span style={{ marginLeft: "4px" }}>Tải ảnh</span>
+                    <span style={{ marginLeft: "4px", fontSize: "12px" }}>
+                      <FormattedMessage id="manage-user.upload" />
+                    </span>
                   </Upload>
-                  {this.state.isOpen && (
+                  {/* {this.state.isOpen && (
                     <Lightbox
                       mainSrc={this.state.imageUrl}
                       onCloseRequest={() => this.setState({ isOpen: false })}
                     />
-                  )}
+                  )} */}
                 </div>
               </div>
               <div className="col-12 mt-4">
@@ -429,7 +435,13 @@ class UserRedux extends Component {
             </div>
             <div className="row">
               <div className="col-12">
-                <h5 style={{ marginTop: "12px", textAlign: "center" }}>
+                <h5
+                  style={{
+                    marginTop: "12px",
+                    textAlign: "center",
+                    fontSize: "20px",
+                  }}
+                >
                   <FormattedMessage id="manage-user.table" />
                 </h5>
                 <TableManageUser editUser={this.editUser} />

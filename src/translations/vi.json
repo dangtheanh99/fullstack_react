@@ -156,7 +156,8 @@
     "update": "Cập nhật",
     "reset": "Đặt lại",
     "table": "Thông tin tất cả người dùng",
-    "action": "Hành động"
+    "action": "Hành động",
+    "upload": "Tải ảnh"
   },
   "homepage": {
     "out-standing-doctor": "Bác sỹ nổi bật tuần qua",
@@ -198,6 +199,13 @@
     "title": "Quản lý phòng khám",
     "nameSpecialty": "Tên phòng khám",
     "image": "Ảnh phòng khám",
+    "description": "Mô tả",
+    "save": "Lưu"
+  },
+  "manage-handbook": {
+    "title": "Quản lý cẩm nang",
+    "name": "Tên cẩm nang",
+    "image": "Ảnh cẩm nang",
     "description": "Mô tả",
     "save": "Lưu"
   },

@@ -94,6 +94,19 @@ const getDetailClinicById = (inputId) => {
   return axios.get(`/api/get-detail-clinic-by-id?id=${inputId}`);
 };
 
+// Handbook
+const createNewHandbook = (data) => {
+  return axios.post("/api/create-new-handbook", data);
+};
+
+const getAllHandbook = () => {
+  return axios.get(`/api/get-all-handbook`);
+};
+
+const getDetailHandbookById = (inputId) => {
+  return axios.get(`/api/get-detail-handbook-by-id?id=${inputId}`);
+};
+
 const sendRemedyService = (data) => {
   return axios.post("/api/send-remedy", data);
 };
@@ -123,4 +136,7 @@ export {
   getDetailClinicById,
   getListPatientService,
   sendRemedyService,
+  createNewHandbook,
+  getAllHandbook,
+  getDetailHandbookById,
 };

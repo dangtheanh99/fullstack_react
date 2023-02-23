@@ -156,7 +156,8 @@
     "update": "Update",
     "reset": "Reset",
     "table": "All User Information",
-    "action": "Action"
+    "action": "Action",
+    "upload": "Upload image"
   },
   "homepage": {
     "out-standing-doctor": "Outstanding Doctor of the Week",
@@ -198,6 +199,13 @@
     "title": "Clinic Management",
     "nameSpecialty": "Clinic name",
     "image": "Clinic photo",
+    "description": "Description",
+    "save": "Save"
+  },
+  "manage-handbook": {
+    "title": "Handbook Management",
+    "name": "Name of the handbook",
+    "image": "Handbook photo",
     "description": "Description",
     "save": "Save"
   },
