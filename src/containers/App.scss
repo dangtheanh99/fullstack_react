@@ -1,1 +1,27 @@
 @import "../styles/common.scss";
+
+.uploadBtn {
+  border: 1px solid #ccc;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 3px 12px;
+  border-radius: 4px;
+  font-size: 16px;
+  &:hover {
+    cursor: pointer;
+    border: 1px solid #0071ba;
+    color: #0071ba;
+  }
+  &__icon {
+    margin-top: 2px;
+  }
+}
+
+.imageUpload {
+  width: 120px;
+  height: fit-content;
+  cursor: pointer;
+  margin-right: 12px;
+}

@@ -9,7 +9,10 @@ import { createNewSpecialty } from "../../../services/userService";
 import { toast } from "react-toastify";
 import "react-markdown-editor-lite/lib/index.css";
 import { languages } from "../../../utils";
-// import { getAllSpecialty } from "../../../services/userService";
+import { UploadOutlined } from "@ant-design/icons";
+import Lightbox from "react-image-lightbox";
+import "react-image-lightbox/style.css";
+import "../../App.scss";
 
 const mdParser = new MarkdownIt();
 
@@ -22,6 +25,7 @@ class ManageSpecialty extends Component {
       imageBase64: "",
       descriptionHTML: "",
       descriptionMarkdown: "",
+      isOpen: false,
     };
   }
 
@@ -45,7 +49,6 @@ class ManageSpecialty extends Component {
   };
 
   handleSaveSpecialty = async () => {
-    // console.log("check state:", this.state);
     let res = await createNewSpecialty(this.state);
     if (res && res.errCode === 0) {
       toast.success("Create a new specialty successfully!");
@@ -73,6 +76,8 @@ class ManageSpecialty extends Component {
 
   render() {
     let { language } = this.props;
+    let { imageBase64, nameEn, nameVi, descriptionMarkdown, isOpen } =
+      this.state;
     return (
       <div className="manageSpecialty">
         <div className="manageSpecialty__title">
@@ -112,11 +117,35 @@ class ManageSpecialty extends Component {
             <label style={{ marginBottom: "16px" }}>
               <FormattedMessage id="manage-specialty.image" />
             </label>
-            <input
-              className="form-control-file"
-              type="file"
-              onChange={(event) => this.handleOnChangeImage(event)}
-            ></input>
+            <div>
+              <input
+                id="upload"
+                type="file"
+                hidden
+                onChange={(event) => this.handleOnChangeImage(event)}
+              />
+              {imageBase64 && (
+                <img
+                  src={imageBase64}
+                  className="imageUpload"
+                  onClick={() => {
+                    this.setState({
+                      isOpen: true,
+                    });
+                  }}
+                />
+              )}
+              <label htmlFor="upload" className="uploadBtn">
+                <UploadOutlined className="uploadBtn__icon" />{" "}
+                <FormattedMessage id="manage-user.upload" />
+              </label>
+              {isOpen && (
+                <Lightbox
+                  mainSrc={imageBase64}
+                  onCloseRequest={() => this.setState({ isOpen: false })}
+                />
+              )}
+            </div>
           </div>
           <div className="manageSpecialty__content__description form-group col-12 ">
             <label>

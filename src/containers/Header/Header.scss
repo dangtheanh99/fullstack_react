@@ -32,16 +32,9 @@
     .language-vi {
       margin-right: 10px;
     }
-    // .language-en {
-    //   cursor: pointer;
-    // }
-
     .language-en,
     .language-vi {
       cursor: pointer;
-      &.active {
-        color: yellow;
-      }
     }
   }
 }

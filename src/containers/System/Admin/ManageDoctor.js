@@ -9,6 +9,7 @@ import "./ManageDoctor.scss";
 import Select from "react-select";
 import { CRUD_ACTIONS, languages } from "../../../utils";
 import { getDetailDoctorService } from "../../../services/userService";
+import { toast } from "react-toastify";
 
 const mdParser = new MarkdownIt();
 
@@ -228,25 +229,62 @@ class ManageDoctor extends Component {
     });
   };
 
-  handleSaveInfo = () => {
-    console.log("Thông tin khi lưu vào database: ", this.state);
-    this.props.saveDetailDoctor({
-      contentHTML: this.state.contentHTML,
-      contentMarkdown: this.state.contentMarkdown,
-      description: this.state.description,
-      doctorId: this.state.selectedOption.value,
-      action:
-        this.state.hasData === true ? CRUD_ACTIONS.EDIT : CRUD_ACTIONS.CREATE,
+  checkValidateInput = () => {
+    let { language } = this.props;
+    let isValid = true;
+    let arrCheck = [
+      "contentHTML",
+      "contentMarkdown",
+      "description",
+      "selectedOption",
+      "selectedPrice",
+      "selectedPayment",
+      "selectedProvince",
+      "selectedSpecialty",
+      "selectedClinic",
+      "nameClinic",
+      "addressClinic",
+      "note",
+    ];
 
-      priceId: this.state.selectedPrice.value,
-      paymentId: this.state.selectedPayment.value,
-      provinceId: this.state.selectedProvince.value,
-      specialtyId: this.state.selectedSpecialty.value,
-      clinicId: this.state.selectedClinic.value,
-      nameClinic: this.state.nameClinic,
-      addressClinic: this.state.addressClinic,
-      note: this.state.note,
-    });
+    for (let i = 0; i < arrCheck.length; i++) {
+      if (!this.state[arrCheck[i]]) {
+        isValid = false;
+        if (language === languages.VI) {
+          toast.error(`Thiếu trường, vui lòng nhập đủ thông tin`);
+        } else {
+          toast.error(`Missing field, please enter enough information`);
+        }
+        break;
+      }
+    }
+
+    return isValid;
+  };
+
+  handleSaveInfo = async () => {
+    let { language } = this.props;
+    console.log("Thông tin khi lưu vào database: ", this.state);
+    if (this.checkValidateInput()) {
+      this.props.saveDetailDoctor({
+        contentHTML: this.state.contentHTML,
+        contentMarkdown: this.state.contentMarkdown,
+        description: this.state.description,
+        doctorId: this.state.selectedOption.value,
+        action:
+          this.state.hasData === true ? CRUD_ACTIONS.EDIT : CRUD_ACTIONS.CREATE,
+
+        priceId: this.state.selectedPrice.value,
+        paymentId: this.state.selectedPayment.value,
+        provinceId: this.state.selectedProvince.value,
+        specialtyId: this.state.selectedSpecialty.value,
+        clinicId: this.state.selectedClinic.value,
+        nameClinic: this.state.nameClinic,
+        addressClinic: this.state.addressClinic,
+        note: this.state.note,
+        language,
+      });
+    }
   };
   render() {
     const {
@@ -269,10 +307,11 @@ class ManageDoctor extends Component {
         <div className="manageDoctor__title">
           <FormattedMessage id="admin.manage-doctor.title" />
         </div>
-        <div className="manageDoctor__info">
-          <div className="manageDoctor__info__left form-group">
-            <label></label>
-            <FormattedMessage id="admin.manage-doctor.doctor" />
+        <div className="manageDoctor__info row">
+          <div className="manageDoctor__info__left form-group col-4">
+            <label>
+              <FormattedMessage id="admin.manage-doctor.doctor" />
+            </label>
             <Select
               value={selectedOption}
               onChange={this.handleChangeSelect}
@@ -282,7 +321,7 @@ class ManageDoctor extends Component {
               }
             />
           </div>
-          <div className="manageDoctor__info__right form-group">
+          <div className="manageDoctor__info__right form-group col-8">
             <label>
               <FormattedMessage id="admin.manage-doctor.intro" />
             </label>
@@ -297,7 +336,6 @@ class ManageDoctor extends Component {
         <div className="row">
           <div className="form-group col-4">
             <label>
-              {" "}
               <FormattedMessage id="admin.manage-doctor.price" />
             </label>
             <Select
@@ -399,8 +437,11 @@ class ManageDoctor extends Component {
           </div>
         </div>
         <div className="manageDoctor__editor">
+          <p style={{ fontSize: "20px" }}>
+            <FormattedMessage id="admin.manage-doctor.description" />
+          </p>
           <MdEditor
-            style={{ height: "300px" }}
+            style={{ height: "400px" }}
             renderHTML={(text) => mdParser.render(text)}
             onChange={this.handleEditorChange}
             value={this.state.contentMarkdown}

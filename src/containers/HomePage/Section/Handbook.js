@@ -2,9 +2,26 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import Slider from "react-slick";
 import { FormattedMessage } from "react-intl";
+import { getAllHandbook } from "../../../services/userService";
 
 class Handbook extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      arrHandbook: [],
+    };
+  }
+
+  async componentDidMount() {
+    let res = await getAllHandbook();
+    if (res && res.errCode === 0) {
+      this.setState({
+        arrHandbook: res.data,
+      });
+    }
+  }
   render() {
+    let { arrHandbook } = this.state;
     return (
       <div className="commonSection HandbookSection">
         <div className="commonSection__header">
@@ -16,60 +33,21 @@ class Handbook extends Component {
           </button>
         </div>
         <Slider {...this.props.settings} className="commonSection__slider">
-          <div className="commonSection__slider__item">
-            <img
-              src="https://cdn.bookingcare.vn/fr/w300/2022/12/30/143149-thumbnail-4.png"
-              className="commonSection__slider__item__img"
-            />
-            <div className="commonSection__slider__item__title">
-              Cơ Xương Khớp
-            </div>
-          </div>
-          <div className="commonSection__slider__item">
-            <img
-              src="https://cdn.bookingcare.vn/fr/w300/2022/12/30/143149-thumbnail-4.png"
-              className="commonSection__slider__item__img"
-            />
-            <div className="commonSection__slider__item__title">
-              Cơ Xương Khớp
-            </div>
-          </div>
-          <div className="commonSection__slider__item">
-            <img
-              src="https://cdn.bookingcare.vn/fr/w300/2022/12/30/143149-thumbnail-4.png"
-              className="commonSection__slider__item__img"
-            />
-            <div className="commonSection__slider__item__title">
-              Cơ Xương Khớp
-            </div>
-          </div>
-          <div className="commonSection__slider__item">
-            <img
-              src="https://cdn.bookingcare.vn/fr/w300/2022/12/30/143149-thumbnail-4.png"
-              className="commonSection__slider__item__img"
-            />
-            <div className="commonSection__slider__item__title">
-              Cơ Xương Khớp
-            </div>
-          </div>
-          <div className="commonSection__slider__item">
-            <img
-              src="https://cdn.bookingcare.vn/fr/w300/2022/12/30/143149-thumbnail-4.png"
-              className="commonSection__slider__item__img"
-            />
-            <div className="commonSection__slider__item__title">
-              Cơ Xương Khớp
-            </div>
-          </div>
-          <div className="commonSection__slider__item">
-            <img
-              src="https://cdn.bookingcare.vn/fr/w300/2022/12/30/143149-thumbnail-4.png"
-              className="commonSection__slider__item__img"
-            />
-            <div className="commonSection__slider__item__title">
-              Cơ Xương Khớp
-            </div>
-          </div>
+          {arrHandbook &&
+            arrHandbook.length > 0 &&
+            arrHandbook.map((item, index) => {
+              return (
+                <div className="commonSection__slider__item" key={index}>
+                  <img
+                    src={item.image}
+                    className="commonSection__slider__item__img"
+                  />
+                  <div className="commonSection__slider__item__title">
+                    {item.name}
+                  </div>
+                </div>
+              );
+            })}
         </Slider>
       </div>
     );

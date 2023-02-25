@@ -6,6 +6,8 @@ import { path } from "../../utils";
 import { languages } from "../../utils";
 import * as actions from "../../store/actions";
 import { FormattedMessage } from "react-intl";
+import vi from "../../assets/vi.png";
+import en from "../../assets/en.png";
 
 const options = [
   {
@@ -99,24 +101,24 @@ class HomeHeader extends Component {
             <div className="homeHeader__content__right">
               <div className="homeHeader__content__right__language">
                 <span
-                  className={
-                    language == languages.VI
-                      ? "language-vi active"
-                      : "language-vi"
-                  }
+                  className="language-vi"
                   onClick={() => this.handleChangLanguage(languages.VI)}
                 >
-                  VN
+                  <img
+                    src={vi}
+                    title={
+                      language === languages.VI ? "Tiếng Việt" : "Vietnamese"
+                    }
+                  />
                 </span>
                 <span
-                  className={
-                    language == languages.EN
-                      ? "language-en active"
-                      : "language-en"
-                  }
+                  className="language-en"
                   onClick={() => this.handleChangLanguage(languages.EN)}
                 >
-                  EN
+                  <img
+                    src={en}
+                    title={language === languages.VI ? "Tiếng Anh" : "English"}
+                  />
                 </span>
               </div>
               <div className="homeHeader__content__right__support">

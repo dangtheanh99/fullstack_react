@@ -12,6 +12,7 @@ import {
   getAllClinic,
 } from "../../services/userService";
 import { toast } from "react-toastify";
+import { languages } from "../../utils";
 
 export const fetchGenderStart = () => {
   return async (dispatch, getState) => {
@@ -98,14 +99,26 @@ export const createNewUser = (data) => {
       if (res && res.errCode === 0) {
         dispatch(createUserSuccess());
         dispatch(fetchUserStart());
-        toast.success("Create a new user successfully!");
+        if (data.language === languages.VI) {
+          toast.success("Tạo người dùng mới thành công!");
+        } else {
+          toast.success("Create a new user successfully!");
+        }
       } else {
         dispatch(createUserFail());
-        toast.error("Create a new user failed!");
+        if (data.language === languages.VI) {
+          toast.error("Tạo người dùng mới không thành công!");
+        } else {
+          toast.error("Create a new user failed!");
+        }
       }
     } catch (e) {
       dispatch(createUserFail());
-      toast.error("Create a new user failed!");
+      if (data.language === languages.VI) {
+        toast.error("Tạo người dùng mới không thành công!");
+      } else {
+        toast.error("Create a new user failed!");
+      }
       console.log("Error: ", e);
     }
   };
@@ -149,7 +162,7 @@ export const fetchUserFail = () => ({
   type: actionTypes.FETCH_USER_FAIL,
 });
 
-export const deleteUser = (userId) => {
+export const deleteUser = (userId, language) => {
   return async (dispatch, getState) => {
     try {
       let res = await deleteUserService(userId);
@@ -157,14 +170,26 @@ export const deleteUser = (userId) => {
       if (res && res.errCode === 0) {
         dispatch(deleteUserSuccess());
         dispatch(fetchUserStart());
-        toast.success("Delete a new user successfully!");
+        if (language === languages.VI) {
+          toast.success("Xóa người dùng thành công!");
+        } else {
+          toast.success("Delete user successfully!");
+        }
       } else {
         dispatch(deleteUserFail());
-        toast.error("Delete a new user failed!");
+        if (language === languages.VI) {
+          toast.error("Xóa người dùng không thành công!");
+        } else {
+          toast.error("Delete user failed!");
+        }
       }
     } catch (e) {
       dispatch(deleteUserFail());
-      toast.error("Delete a new user failed!");
+      if (language === languages.VI) {
+        toast.error("Xóa người dùng không thành công!");
+      } else {
+        toast.error("Delete user failed!");
+      }
       console.log("Error: ", e);
     }
   };
@@ -187,14 +212,26 @@ export const editUser = (data) => {
       if (res && res.errCode === 0) {
         dispatch(editUserSuccess());
         dispatch(fetchUserStart());
-        toast.success("Update a new user successfully!");
+        if (data.language === languages.VI) {
+          toast.success("Cập nhật người dùng thành công!");
+        } else {
+          toast.success("Update user successfully!");
+        }
       } else {
         dispatch(editUserFail());
-        toast.error("Update a new user failed!");
+        if (data.language === languages.VI) {
+          toast.error("Cập nhật người dùng không thành công!");
+        } else {
+          toast.error("Update a new user failed!");
+        }
       }
     } catch (e) {
       dispatch(editUserFail());
-      toast.error("Update a new user failed!");
+      if (data.language === languages.VI) {
+        toast.error("Cập nhật người dùng không thành công!");
+      } else {
+        toast.error("Update a new user failed!");
+      }
       console.log("Error: ", e);
     }
   };
@@ -295,18 +332,15 @@ export const fetchAllcodeTime = () => {
           type: actionTypes.FETCH_ALLCODE_TIME_SUCCESS,
           data: res.data,
         });
-        // toast.success("Fetch allcode time successfully!");
       } else {
         dispatch({
           type: actionTypes.FETCH_ALLCODE_TIME_FAIL,
         });
-        // toast.error("Fetch allcode time failed!");
       }
     } catch (e) {
       dispatch({
         type: actionTypes.FETCH_ALLCODE_TIME_FAIL,
       });
-      // toast.error("Fetch allcode time failed!");
       console.log("Error: ", e);
     }
   };

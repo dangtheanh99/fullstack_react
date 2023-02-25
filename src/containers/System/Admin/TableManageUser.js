@@ -3,6 +3,8 @@ import { FormattedMessage } from "react-intl";
 import { connect } from "react-redux";
 import * as actions from "../../../store/actions";
 import { Modal, notification, Spin } from "antd";
+import { languages } from "../../../utils";
+import { toast } from "react-toastify";
 
 class TableManageUser extends Component {
   constructor(props) {
@@ -28,29 +30,24 @@ class TableManageUser extends Component {
   };
 
   handleDeleteUser = (user) => {
+    let { language } = this.props;
     Modal.confirm({
       onOk: async () => {
-        // try {
-        this.props.deleteUserRedux(user.id);
-        // notification.success({
-        //   message: "Xóa người dùng thành công!",
-        // });
-        // } catch (error) {
-        //   notification.error({
-        //     message: "Có lỗi trong quá trình xử lý!",
-        //   });
-        // }
+        this.props.deleteUserRedux(user.id, language);
       },
       onCancel() {},
-      content: <div>Xác nhận xóa người dùng?</div>,
-      okText: "Đồng ý",
-      cancelText: "Hủy",
+      content:
+        language === languages.VI ? (
+          <div>Xác nhận xóa người dùng?</div>
+        ) : (
+          <div>Confirm user deletion?</div>
+        ),
+      okText: language === languages.VI ? "Đồng ý" : "Confirm",
+      cancelText: language === languages.VI ? "Hủy" : "Cancel",
     });
   };
 
   render() {
-    // console.log("check props all users: ", this.props.allUsers);
-    // console.log("check state: ", this.state.usersRedux);
     let arrUsers = this.state.usersRedux;
     return (
       <>
@@ -59,20 +56,20 @@ class TableManageUser extends Component {
             <table id="customers">
               <thead>
                 <tr>
-                  <th>
+                  <th scope="col">
                     <FormattedMessage id="manage-user.lastName" />
                   </th>
-                  <th>
+                  <th scope="col">
                     <FormattedMessage id="manage-user.firstName" />
                   </th>
 
-                  <th>
+                  <th scope="col">
                     <FormattedMessage id="manage-user.email" />
                   </th>
-                  <th>
+                  <th scope="col">
                     <FormattedMessage id="manage-user.address" />
                   </th>
-                  <th>
+                  <th scope="col">
                     <FormattedMessage id="manage-user.action" />
                   </th>
                 </tr>
@@ -121,13 +118,15 @@ class TableManageUser extends Component {
 const mapStateToProps = (state) => {
   return {
     allUsers: state.admin.users,
+    language: state.app.language,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     fetchUserRedux: () => dispatch(actions.fetchUserStart()),
-    deleteUserRedux: (userId) => dispatch(actions.deleteUser(userId)),
+    deleteUserRedux: (userId, language) =>
+      dispatch(actions.deleteUser(userId, language)),
   };
 };
 

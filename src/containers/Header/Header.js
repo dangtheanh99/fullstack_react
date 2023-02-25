@@ -8,6 +8,8 @@ import "./Header.scss";
 import { languages, USER_ROLE } from "../../utils";
 import { FormattedMessage } from "react-intl";
 import _ from "lodash";
+import vi from "../../assets/vi.png";
+import en from "../../assets/en.png";
 // import { changeLanguageApp } from "../../store/actions"
 class Header extends Component {
   constructor(props) {
@@ -57,20 +59,23 @@ class Header extends Component {
           </span>
           <div className="language">
             <span
-              className={
-                language == languages.VI ? "language-vi active" : "language-vi"
-              }
+              className="language-vi"
               onClick={() => this.handleChangLanguage(languages.VI)}
             >
-              VN
+              <img
+                src={vi}
+                title={language === languages.VI ? "Tiếng Việt" : "Vietnamese"}
+              />
             </span>
             <span
-              className={
-                language == languages.EN ? "language-en active" : "language-en"
-              }
+              className="language-en"
               onClick={() => this.handleChangLanguage(languages.EN)}
             >
-              EN
+              {/* EN */}
+              <img
+                src={en}
+                title={language === languages.VI ? "Tiếng Anh" : "English"}
+              />
             </span>
           </div>
 
@@ -78,7 +83,7 @@ class Header extends Component {
           <div
             className="btn btn-logout"
             onClick={processLogout}
-            title="Log out"
+            title={language === languages.VI ? "Đăng xuất" : "Log out"}
           >
             <i className="fas fa-sign-out-alt"></i>
           </div>

@@ -157,7 +157,7 @@
     "reset": "Reset",
     "table": "All User Information",
     "action": "Action",
-    "upload": "Upload image"
+    "upload": "Upload"
   },
   "homepage": {
     "out-standing-doctor": "Outstanding Doctor of the Week",
@@ -192,21 +192,22 @@
     "title": "Specialized management",
     "nameSpecialty": "Specialty name",
     "image": "Specialty photo",
-    "description": "Description",
+    "description": "Description of the specialty",
     "save": "Save"
   },
   "manage-clinic": {
     "title": "Clinic Management",
     "nameSpecialty": "Clinic name",
     "image": "Clinic photo",
-    "description": "Description",
+    "description": "Description of the clinic",
+    "address": "Address",
     "save": "Save"
   },
   "manage-handbook": {
     "title": "Handbook Management",
     "name": "Name of the handbook",
     "image": "Handbook photo",
-    "description": "Description",
+    "description": "Description of the handbook",
     "save": "Save"
   },
   "patient": {
@@ -262,7 +263,8 @@
       "specialty": "Specialty",
       "clinic": "Clinic",
       "chooseSpecialty": "Choose a specialty",
-      "chooseClinic": "Choose a clinic"
+      "chooseClinic": "Choose a clinic",
+      "description": "Description of the doctor"
     }
   }
 }

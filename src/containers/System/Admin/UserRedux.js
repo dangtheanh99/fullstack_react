@@ -4,15 +4,16 @@ import { connect } from "react-redux";
 import { getAllCodeService } from "../../../services/userService";
 import { languages, CRUD_ACTIONS, CommonUtils } from "../../../utils";
 import * as actions from "../../../store/actions";
-import { Upload, Button } from "antd";
-import { UploadOutlined } from "@ant-design/icons";
 import "antd/dist/antd.css";
+import TableManageUser from "./TableManageUser";
+import { UploadOutlined } from "@ant-design/icons";
 import Lightbox from "react-image-lightbox";
 import "react-image-lightbox/style.css";
-import TableManageUser from "./TableManageUser";
+import "../../App.scss";
+import { toast } from "react-toastify";
 
 const initialState = {
-  // imageUrl: undefined,
+  imageUrl: "",
   email: "",
   password: "",
   firstName: "",
@@ -29,25 +30,11 @@ const initialState = {
 class UserRedux extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       arrGender: [],
       arrRole: [],
       arrPosition: [],
       isOpen: false,
-      // imageUrl: undefined,
-      // email: "",
-      // password: "",
-      // firstName: "",
-      // lastName: "",
-      // address: "",
-      // gender: "",
-      // role: "",
-      // phoneNumber: "",
-      // position: "",
-      // image: "",
-      // action: "",
-      // userEditId: "",
       ...initialState,
     };
   }
@@ -95,39 +82,53 @@ class UserRedux extends Component {
           arrPosition && arrPosition.length > 0 ? arrPosition[0].keyMap : "",
         image: "",
         action: CRUD_ACTIONS.CREATE,
-        // imageUrl: "",
       });
     }
   }
   handleSaveUser = () => {
+    let {
+      email,
+      password,
+      firstName,
+      lastName,
+      address,
+      phoneNumber,
+      gender,
+      role,
+      position,
+      userEditId,
+      image,
+    } = this.state;
     let isValidated = this.checkValidateInput();
     let { action } = this.state;
     if (!isValidated) return;
 
     if (action === CRUD_ACTIONS.EDIT) {
       this.props.editUserRedux({
-        firstName: this.state.firstName,
-        lastName: this.state.lastName,
-        address: this.state.address,
-        phoneNumber: this.state.phoneNumber,
-        gender: this.state.gender,
-        roleId: this.state.role,
-        positionId: this.state.position,
-        id: this.state.userEditId,
-        image: this.state.image,
+        firstName: firstName,
+        lastName: lastName,
+        address: address,
+        phoneNumber: phoneNumber,
+        gender: gender,
+        roleId: role,
+        positionId: position,
+        id: userEditId,
+        image: image,
+        language: this.props.language,
       });
     } else {
       this.props.createNewUser({
-        email: this.state.email,
-        password: this.state.password,
-        firstName: this.state.firstName,
-        lastName: this.state.lastName,
-        address: this.state.address,
-        phoneNumber: this.state.phoneNumber,
-        gender: this.state.gender,
-        roleId: this.state.role,
-        positionId: this.state.position,
-        image: this.state.image,
+        email: email,
+        password: password,
+        firstName: firstName,
+        lastName: lastName,
+        address: address,
+        phoneNumber: phoneNumber,
+        gender: gender,
+        roleId: role,
+        positionId: position,
+        image: image,
+        language: this.props.language,
       });
     }
   };
@@ -155,27 +156,25 @@ class UserRedux extends Component {
 
   onChangeInput = (e, value) => {
     let copyState = { ...this.state };
-    delete copyState.image;
-    // let copyState = { ...this.state };
     copyState[value] = e.target.value;
     this.setState({
       ...copyState,
     });
   };
 
-  handleOnChangeImage = async (file) => {
-    let File = file.file.originFileObj;
-    console.log("file", file);
-    if (File) {
-      let base64 = await CommonUtils.getBase64(File);
+  handleOnChangeImage = async (event) => {
+    let data = event.target.files;
+    let file = data[0];
+    if (file) {
+      let base64 = await CommonUtils.getBase64(file);
       this.setState({
         image: base64,
       });
-      file.file.status = "done";
     }
   };
 
   checkValidateInput = () => {
+    let { language } = this.props;
     let isValid = true;
     let arrCheck = [
       "email",
@@ -189,7 +188,11 @@ class UserRedux extends Component {
     for (let i = 0; i < arrCheck.length; i++) {
       if (!this.state[arrCheck[i]]) {
         isValid = false;
-        alert(`Missing parameter: ${arrCheck[i]}`);
+        if (language === languages.VI) {
+          toast.error(`Thiếu trường, vui lòng nhập đủ thông tin`);
+        } else {
+          toast.error(`Missing field, please enter enough information`);
+        }
         break;
       }
     }
@@ -364,44 +367,33 @@ class UserRedux extends Component {
                   <FormattedMessage id="manage-user.image" />
                 </label>
                 <div style={{ marginTop: "8px" }}>
-                  <Upload
-                    listType="picture-card"
-                    accept={"image/*"}
-                    fileList={
-                      image
-                        ? [
-                            {
-                              status: "done",
-                              url: image,
-                            },
-                          ]
-                        : undefined
-                    }
-                    multiple={false}
-                    maxCount={1}
-                    // onPreview={(file) => {
-                    //   const objectUrl = URL.createObjectURL(file.originFileObj);
-                    //   console.log("objectUrl", objectUrl);
-                    //   if (objectUrl) {
-                    //     this.setState({
-                    //       isOpen: true,
-                    //       imageUrl: objectUrl,
-                    //     });
-                    //   }
-                    // }}
-                    onChange={(file) => this.handleOnChangeImage(file)}
-                  >
-                    <UploadOutlined />
-                    <span style={{ marginLeft: "4px", fontSize: "12px" }}>
-                      <FormattedMessage id="manage-user.upload" />
-                    </span>
-                  </Upload>
-                  {/* {this.state.isOpen && (
+                  <input
+                    id="upload"
+                    type="file"
+                    hidden
+                    onChange={(event) => this.handleOnChangeImage(event)}
+                  />
+                  {image && (
+                    <img
+                      src={image}
+                      className="imageUpload"
+                      onClick={() => {
+                        this.setState({
+                          isOpen: true,
+                        });
+                      }}
+                    />
+                  )}
+                  <label htmlFor="upload" className="uploadBtn">
+                    <UploadOutlined className="uploadBtn__icon" />{" "}
+                    <FormattedMessage id="manage-user.upload" />
+                  </label>
+                  {this.state.isOpen && (
                     <Lightbox
-                      mainSrc={this.state.imageUrl}
+                      mainSrc={image}
                       onCloseRequest={() => this.setState({ isOpen: false })}
                     />
-                  )} */}
+                  )}
                 </div>
               </div>
               <div className="col-12 mt-4">

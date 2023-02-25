@@ -192,21 +192,22 @@
     "title": "Quản lý chuyên khoa",
     "nameSpecialty": "Tên chuyên khoa",
     "image": "Ảnh chuyên khoa",
-    "description": "Mô tả",
+    "description": "Mô tả chuyên khoa",
     "save": "Lưu"
   },
   "manage-clinic": {
     "title": "Quản lý phòng khám",
     "nameSpecialty": "Tên phòng khám",
     "image": "Ảnh phòng khám",
-    "description": "Mô tả",
+    "description": "Mô tả phòng khám",
+    "address": "Địa chỉ",
     "save": "Lưu"
   },
   "manage-handbook": {
     "title": "Quản lý cẩm nang",
     "name": "Tên cẩm nang",
     "image": "Ảnh cẩm nang",
-    "description": "Mô tả",
+    "description": "Mô tả cẩm nang",
     "save": "Lưu"
   },
   "patient": {
@@ -262,7 +263,8 @@
       "specialty": "Chuyên khoa",
       "clinic": "Phòng khám",
       "chooseSpecialty": "Chọn chuyên khoa",
-      "chooseClinic": "Chọn phòng khám"
+      "chooseClinic": "Chọn phòng khám",
+      "description": "Mô tả về bác sĩ"
     }
   }
 }

@@ -9,6 +9,10 @@ import { createNewHandbook } from "../../../services/userService";
 import { toast } from "react-toastify";
 import "react-markdown-editor-lite/lib/index.css";
 import { languages } from "../../../utils";
+import { UploadOutlined } from "@ant-design/icons";
+import Lightbox from "react-image-lightbox";
+import "react-image-lightbox/style.css";
+import "../../App.scss";
 
 const mdParser = new MarkdownIt();
 
@@ -20,6 +24,7 @@ class ManageHandbook extends Component {
       image: "",
       descriptionHTML: "",
       descriptionMarkdown: "",
+      isOpen: false,
     };
   }
 
@@ -44,6 +49,7 @@ class ManageHandbook extends Component {
 
   handleSaveClinic = async () => {
     let res = await createNewHandbook(this.state);
+    console.log("res", res);
     if (res && res.errCode === 0) {
       toast.success("Create a new handbook successfully!");
       this.setState({
@@ -69,6 +75,7 @@ class ManageHandbook extends Component {
 
   render() {
     let { language } = this.props;
+    let { image, name, descriptionMarkdown, isOpen } = this.state;
     return (
       <div className="manageHandbook">
         <div className="manageHandbook__title">
@@ -82,7 +89,7 @@ class ManageHandbook extends Component {
             <input
               className="form-control"
               type="text"
-              value={this.state.name}
+              value={name}
               onChange={(event) => this.handleChangeInput(event, "name")}
             ></input>
           </div>
@@ -90,11 +97,35 @@ class ManageHandbook extends Component {
             <label style={{ marginBottom: "16px" }}>
               <FormattedMessage id="manage-handbook.image" />
             </label>
-            <input
-              className="form-control-file"
-              type="file"
-              onChange={(event) => this.handleOnChangeImage(event)}
-            ></input>
+            <div>
+              <input
+                id="upload"
+                type="file"
+                hidden
+                onChange={(event) => this.handleOnChangeImage(event)}
+              />
+              {image && (
+                <img
+                  src={image}
+                  className="imageUpload"
+                  onClick={() => {
+                    this.setState({
+                      isOpen: true,
+                    });
+                  }}
+                />
+              )}
+              <label htmlFor="upload" className="uploadBtn">
+                <UploadOutlined className="uploadBtn__icon" />{" "}
+                <FormattedMessage id="manage-user.upload" />
+              </label>
+              {isOpen && (
+                <Lightbox
+                  mainSrc={image}
+                  onCloseRequest={() => this.setState({ isOpen: false })}
+                />
+              )}
+            </div>
           </div>
           <div className="manageHandbook__content__description form-group col-12 ">
             <label>
@@ -104,7 +135,7 @@ class ManageHandbook extends Component {
               style={{ height: "300px" }}
               renderHTML={(text) => mdParser.render(text)}
               onChange={this.handleEditorChange}
-              value={this.state.descriptionMarkdown}
+              value={descriptionMarkdown}
             />
           </div>
         </div>

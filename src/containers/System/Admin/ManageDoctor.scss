@@ -9,17 +9,13 @@
     color: #0071ba;
   }
   &__info {
-    display: flex;
-    gap: 24px;
-
     &__left {
-      flex: 1;
     }
     &__right {
-      flex: 2;
       &__content {
         width: 100%;
         outline: none;
+        resize: none;
       }
     }
   }

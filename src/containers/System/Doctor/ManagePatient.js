@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Redirect, Route, Switch } from "react-router-dom";
 import "./ManagePatient.scss";
 import { FormattedMessage } from "react-intl";
 import Select from "react-select";
@@ -40,62 +39,7 @@ class ManagePatient extends Component {
       });
     }
   };
-  componentDidUpdate(prevProps, prevState) {
-    // if (prevProps.allDoctors !== this.props.allDoctors) {
-    //   let selectDoctors = this.buildDataSelect(this.props.allDoctors);
-    //   this.setState({
-    //     listDoctors: selectDoctors,
-    //   });
-    // }
-    // if (prevProps.language !== this.props.language) {
-    //   let selectDoctors = this.buildDataSelect(this.props.allDoctors);
-    //   this.setState({
-    //     listDoctors: selectDoctors,
-    //   });
-    // }
-    // if (prevProps.listTime !== this.props.listTime) {
-    //   let data = this.props.listTime;
-    //   data = data.map((item) => {
-    //     return { ...item, isSelected: false };
-    //   });
-    //   // console.log("check data selected", data);
-    //   this.setState({
-    //     rangeTime: data,
-    //   });
-    // }
-  }
-  // handleChangeSelect = async (selectedOption) => {
-  //   this.setState({ selectedOption });
-  // };
-
-  // handleSelectTime = (itemSelected) => {
-  //   // console.log("check itemSelected", itemSelected);
-  //   let { rangeTime } = this.state;
-  //   let result = rangeTime;
-  //   if (result && result.length > 0) {
-  //     let indexItem = result.findIndex((item) => item.id === itemSelected.id);
-  //     result[indexItem].isSelected = !result[indexItem].isSelected;
-  //     this.setState({
-  //       rangeTime: result,
-  //     });
-  //   }
-  // };
-
-  // buildDataSelect = (inputData) => {
-  //   let result = [];
-  //   let { language } = this.props;
-  //   if (inputData && inputData.length > 0) {
-  //     inputData.map((item, index) => {
-  //       let object = {};
-  //       let labelVi = `${item.lastName} ${item.firstName}`;
-  //       let labelEn = `${item.firstName} ${item.lastName}`;
-  //       object.label = language === languages.VI ? labelVi : labelEn;
-  //       object.value = item.id;
-  //       result.push(object);
-  //     });
-  //   }
-  //   return result;
-  // };
+  componentDidUpdate(prevProps, prevState) {}
 
   onChangeDate = (value) => {
     this.setState(
