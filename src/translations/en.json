@@ -18,7 +18,8 @@
     "fail-to-load-all-code": "Fail to load data from allcode",
     "sum": "Sum",
     "date-range-invalid": "Date range invalid",
-    "select": "Select"
+    "select": "Select",
+    "cancel": "Cancel"
   },
   "login": {
     "login": "Login",
@@ -186,7 +187,11 @@
     "address": "Address",
     "action": "Action",
     "confirm": "Confirm",
-    "send": "Send bill"
+    "send": "Send bill",
+    "no-booking": "No appointment scheduled",
+    "email-patient": "Patient email",
+    "file": "Attached files",
+    "bill": "Send medical bills"
   },
   "manage-specialty": {
     "title": "Specialized management",

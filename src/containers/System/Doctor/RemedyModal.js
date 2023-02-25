@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { FormattedMessage } from "react-intl";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import { CommonUtils } from "../../../utils";
+import { Spin } from "antd";
 
 class RemedyModal extends Component {
   constructor(props) {
@@ -51,8 +52,14 @@ class RemedyModal extends Component {
       email: event.target.value,
     });
   };
-  handleSaveInfo = () => {
-    this.props.sendDataModal(this.state);
+  handleSaveInfo = async () => {
+    // this.setState({
+    //   loading: true,
+    // });
+    await this.props.sendDataModal(this.state);
+    // this.setState({
+    //   loading: false,
+    // });
   };
 
   render() {
@@ -60,52 +67,62 @@ class RemedyModal extends Component {
     let { email, imageBase64 } = this.state;
     console.log("check prop modal", this.props);
     return (
-      <Modal
-        isOpen={isOpenModal}
-        // toggle={closeModal}
-        className="bookingModal"
-        size="lg"
-        centered
-      >
-        <ModalHeader className="bookingModal__header" toggle={closeModal}>
-          {/* <FormattedMessage id="patient.booking.title" /> */}
-          Gửi hóa đơn khám bệnh
-        </ModalHeader>
-        <ModalBody className="bookingModal__body">
-          <div className="row">
-            <div className="col-6 form-group">
-              <label>Email bệnh nhân</label>
-              <input
-                className="form-control"
-                value={email}
-                onChange={(event) => this.handleChangeEmail(event)}
-              />
-              {/* {dataModal ? dataModal.email : ""} */}
-              {/* {dataModal.email} */}
+      // <Spin spinning={loading} tip="Loading">
+      <>
+        <Modal
+          isOpen={isOpenModal}
+          // toggle={closeModal}
+          className="bookingModal"
+          size="lg"
+          centered
+        >
+          <ModalHeader className="bookingModal__header" toggle={closeModal}>
+            <FormattedMessage id="manage-patient.bill" />
+          </ModalHeader>
+          <ModalBody className="bookingModal__body">
+            <div className="row">
+              <div className="col-6 form-group">
+                <label>
+                  {" "}
+                  <FormattedMessage id="manage-patient.email-patient" />
+                </label>
+                <input
+                  className="form-control"
+                  value={email}
+                  onChange={(event) => this.handleChangeEmail(event)}
+                />
+                {/* {dataModal ? dataModal.email : ""} */}
+                {/* {dataModal.email} */}
+              </div>
+              <div className="col-6 form-group">
+                <label>
+                  {" "}
+                  <FormattedMessage id="manage-patient.file" />
+                </label>
+                <input
+                  type="file"
+                  className="form-control-file"
+                  onChange={(event) => this.handleOnChangeImage(event)}
+                ></input>
+              </div>
             </div>
-            <div className="col-6 form-group">
-              <label>File đính kèm</label>
-              <input
-                type="file"
-                className="form-control-file"
-                onChange={(event) => this.handleOnChangeImage(event)}
-              ></input>
-            </div>
-          </div>
-        </ModalBody>
-        <ModalFooter className="bookingModal__footer">
-          <Button
-            color="primary"
-            className="px-3"
-            onClick={() => this.handleSaveInfo()}
-          >
-            <FormattedMessage id="patient.booking.confirm" />
-          </Button>{" "}
-          <Button color="secondary" className="px-3" onClick={closeModal}>
-            <FormattedMessage id="patient.booking.cancel" />
-          </Button>
-        </ModalFooter>
-      </Modal>
+          </ModalBody>
+          <ModalFooter className="bookingModal__footer">
+            <Button
+              color="primary"
+              className="px-3"
+              onClick={() => this.handleSaveInfo()}
+            >
+              <FormattedMessage id="common.confirm" />
+            </Button>{" "}
+            <Button color="secondary" className="px-3" onClick={closeModal}>
+              <FormattedMessage id="common.cancel" />
+            </Button>
+          </ModalFooter>
+        </Modal>
+        <Spin spinning={true} />
+      </>
+      // </Spin>
     );
   }
 }

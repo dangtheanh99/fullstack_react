@@ -89,18 +89,28 @@ class ManageSchedule extends Component {
     this.setState({
       selectedDate: value,
     });
-    // console.log("selectedDate", this.state.selectedDate);
   };
 
   handleSaveSchedule = async () => {
     let { selectedDate, selectedOption, rangeTime } = this.state;
+    let { language, user } = this.props;
     let result = [];
-    if (!selectedOption) {
-      toast.error("Missing Doctor selection!");
-      return;
+    if (user.roleId !== "R2") {
+      if (!selectedOption) {
+        if (language === languages.VI) {
+          toast.error("Chưa chọn bác sĩ!");
+        } else {
+          toast.error("Missing Doctor selection!");
+        }
+        return;
+      }
     }
     if (!selectedDate) {
-      toast.error("Missing Date selection!");
+      if (language === languages.VI) {
+        toast.error("Chưa chọn ngày khám!");
+      } else {
+        toast.error("Missing Date selection!");
+      }
       return;
     }
     let formatedDate = selectedDate.format("DD/MM/YYYY");
@@ -110,13 +120,18 @@ class ManageSchedule extends Component {
       if (arrTime && arrTime.length > 0) {
         arrTime.map((item) => {
           let object = {};
-          object.doctorId = selectedOption.value;
+          object.doctorId =
+            user.roleId === "R2" ? user.id : selectedOption.value;
           object.date = formatedDate;
           object.timeType = item.keyMap;
           result.push(object);
         });
       } else {
-        toast.error("Missing Time selection!");
+        if (language === languages.VI) {
+          toast.error("Chưa chọn thời gian khám!");
+        } else {
+          toast.error("Missing Time selection!");
+        }
         return;
       }
     }
@@ -129,19 +144,32 @@ class ManageSchedule extends Component {
         // selectedOption: "",
         rangeTime: initRangeTime,
       });
-      toast.success("Save successfully!");
     }
 
     let res = await saveBulkScheduleService({
       arrSchedule: result,
-      doctorId: selectedOption.value,
+      doctorId: user.roleId === "R2" ? user.id : selectedOption.value,
       date: formatedDate,
     });
+    if (res && res.errCode === 0) {
+      if (language === languages.VI) {
+        toast.success("Lưu thành công!");
+      } else {
+        toast.success("Save successfully!");
+      }
+    } else {
+      if (language === languages.VI) {
+        toast.error("Lưu thất bại!");
+      } else {
+        toast.error("Save failed!");
+      }
+    }
     console.log("check res schedule: ", res);
   };
   render() {
     let { selectedOption, listDoctors, rangeTime, selectedDate } = this.state;
-    let { language } = this.props;
+    let { language, user } = this.props;
+    // console.log("user info", this.props.user);
     return (
       <div className="manageSchedule">
         <div className="manageSchedule__heading">
@@ -150,20 +178,22 @@ class ManageSchedule extends Component {
         <div className="manageSchedule__content">
           <div className="container">
             <div className="row">
-              <div className="col-6 form-group">
-                <label>
-                  <FormattedMessage id="manage-schedule.doctor" />
-                </label>
-                <Select
-                  value={selectedOption}
-                  onChange={this.handleChangeSelect}
-                  options={listDoctors}
-                  placeholder={
-                    <FormattedMessage id="manage-schedule.choose-doctor" />
-                  }
-                  className="chooseDoctor"
-                />
-              </div>
+              {user && user.roleId !== "R2" && (
+                <div className="col-6 form-group">
+                  <label>
+                    <FormattedMessage id="manage-schedule.doctor" />
+                  </label>
+                  <Select
+                    value={selectedOption}
+                    onChange={this.handleChangeSelect}
+                    options={listDoctors}
+                    placeholder={
+                      <FormattedMessage id="manage-schedule.choose-doctor" />
+                    }
+                    className="chooseDoctor"
+                  />
+                </div>
+              )}
               <div className="col-6 form-group">
                 <label style={{ display: "block" }}>
                   <FormattedMessage id="manage-schedule.date" />
@@ -179,7 +209,7 @@ class ManageSchedule extends Component {
                   }}
                   locale={language === languages.VI ? vi_VN : en_US}
                   format="DD/MM/YYYY"
-                  value={this.state.selectedDate}
+                  value={selectedDate}
                 />
               </div>
               <div className="pickTime">
@@ -226,6 +256,7 @@ const mapStateToProps = (state) => {
     allDoctors: state.admin.allDoctors,
     language: state.app.language,
     listTime: state.admin.listTime,
+    user: state.user.userInfo,
   };
 };
 

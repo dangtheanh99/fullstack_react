@@ -47,11 +47,38 @@ class ManageHandbook extends Component {
     });
   };
 
+  checkValidateInput = () => {
+    let { language } = this.props;
+    let isValid = true;
+    let arrCheck = ["name", "image", "descriptionHTML", "descriptionMarkdown"];
+
+    for (let i = 0; i < arrCheck.length; i++) {
+      if (!this.state[arrCheck[i]]) {
+        isValid = false;
+        if (language === languages.VI) {
+          toast.error(`Thiếu trường, vui lòng nhập đủ thông tin`);
+        } else {
+          toast.error(`Missing field, please enter enough information`);
+        }
+        break;
+      }
+    }
+
+    return isValid;
+  };
+
   handleSaveClinic = async () => {
+    let { language } = this.props;
+    if (!this.checkValidateInput()) return;
     let res = await createNewHandbook(this.state);
     console.log("res", res);
     if (res && res.errCode === 0) {
-      toast.success("Create a new handbook successfully!");
+      if (language === languages.VI) {
+        toast.success("Tạo mới cẩm nang thành công!");
+      } else {
+        toast.success("Create a new handbook successfully!");
+      }
+
       this.setState({
         name: "",
         image: "",
@@ -59,7 +86,11 @@ class ManageHandbook extends Component {
         descriptionMarkdown: "",
       });
     } else {
-      toast.error("Create a new handbook failed!");
+      if (language === languages.VI) {
+        toast.error("Tạo mới cẩm nang không thành công!");
+      } else {
+        toast.error("Create a new handbook failed!");
+      }
     }
   };
   handleOnChangeImage = async (event) => {

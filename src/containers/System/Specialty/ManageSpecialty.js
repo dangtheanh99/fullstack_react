@@ -48,10 +48,42 @@ class ManageSpecialty extends Component {
     });
   };
 
+  checkValidateInput = () => {
+    let { language } = this.props;
+    let isValid = true;
+    let arrCheck = [
+      "nameVi",
+      "nameEn",
+      "imageBase64",
+      "descriptionHTML",
+      "descriptionMarkdown",
+    ];
+    for (let i = 0; i < arrCheck.length; i++) {
+      if (!this.state[arrCheck[i]]) {
+        isValid = false;
+        if (language === languages.VI) {
+          toast.error(`Thiếu trường, vui lòng nhập đủ thông tin`);
+        } else {
+          toast.error(`Missing field, please enter enough information`);
+        }
+        break;
+      }
+    }
+
+    return isValid;
+  };
+
   handleSaveSpecialty = async () => {
+    let { language } = this.props;
+    if (!this.checkValidateInput()) return;
     let res = await createNewSpecialty(this.state);
     if (res && res.errCode === 0) {
-      toast.success("Create a new specialty successfully!");
+      if (language === languages.VI) {
+        toast.success("Tạo mới chuyên khoa thành công!");
+      } else {
+        toast.success("Create a new specialty successfully!");
+      }
+
       this.setState({
         nameVi: "",
         nameEn: "",
@@ -60,7 +92,11 @@ class ManageSpecialty extends Component {
         descriptionMarkdown: "",
       });
     } else {
-      toast.error("Create a new specialty failed!");
+      if (language === languages.VI) {
+        toast.error("Tạo mới chuyên khoa không thành công!");
+      } else {
+        toast.error("Create a new specialty failed!");
+      }
     }
   };
   handleOnChangeImage = async (event) => {

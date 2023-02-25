@@ -11,7 +11,6 @@ class TableManageUser extends Component {
     super(props);
     this.state = {
       usersRedux: [],
-      // loading: false,
     };
   }
   async componentDidMount() {

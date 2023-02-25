@@ -1,18 +1,35 @@
 .bookingModal {
-  //   & :global {
-  //     & .modal-header {
-  //       & .close {
-  //         padding: 1.3rem 1rem;
-  //       }
-  //     }
-  //   }
   &__header {
     button {
       padding: 1.3rem 1rem !important;
     }
+    > h5 {
+      color: #fff !important;
+    }
   }
   &__body {
+    padding: 14px 24px 4px;
+    .form-group {
+      font-size: 18px;
+      margin-bottom: 0;
+      .form-control {
+        margin-top: 0;
+      }
+    }
   }
   &__footer {
   }
+  .modal-footer {
+    border-top: none;
+  }
 }
+
+// .modal {
+//   .modal-dialog {
+//     .modal-content {
+//       .modal-header {
+
+//       }
+//     }
+//   }
+// }

@@ -191,7 +191,7 @@ class BookingModal extends Component {
     return (
       <Modal
         isOpen={isOpen}
-        toggle={closeModal}
+        // toggle={closeModal}
         className="bookingModal"
         size="lg"
         centered

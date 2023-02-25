@@ -5,7 +5,7 @@ import { FormattedMessage } from "react-intl";
 import Select from "react-select";
 import * as actions from "../../../store/actions";
 import { languages } from "../../../utils";
-import { DatePicker } from "antd";
+import { DatePicker, Spin } from "antd";
 import moment from "moment";
 import { toast } from "react-toastify";
 import _, { result } from "lodash";
@@ -14,6 +14,8 @@ import {
   sendRemedyService,
 } from "../../../services/userService";
 import RemedyModal from "./RemedyModal";
+import vi_VN from "antd/es/date-picker/locale/vi_VN";
+import en_US from "antd/es/date-picker/locale/en_US";
 
 class ManagePatient extends Component {
   constructor(props) {
@@ -23,6 +25,7 @@ class ManagePatient extends Component {
       listPatient: [],
       isOpenModal: false,
       dataModal: {},
+      loading: true,
     };
   }
   async componentDidMount() {
@@ -53,6 +56,9 @@ class ManagePatient extends Component {
   };
 
   handleConfirmPatient = (item) => {
+    // this.setState({
+    //   loading: true
+    // })
     console.log("check item", item);
     let data = {
       doctorId: item.doctorId,
@@ -75,6 +81,10 @@ class ManagePatient extends Component {
 
   sendDataModal = async (dataFromModal) => {
     let { dataModal } = this.state;
+    let { language } = this.props;
+    // this.setState({
+    //   loading: true,
+    // });
     let res = await sendRemedyService({
       ...dataFromModal,
       doctorId: dataModal.doctorId,
@@ -84,17 +94,28 @@ class ManagePatient extends Component {
       patientName: dataModal.patientName,
     });
     if (res && res.errCode === 0) {
-      toast.success("Send Remedy successfully!");
+      if (language === languages.VI) {
+        toast.success("Gửi hóa đơn thành công!");
+      } else {
+        toast.success("Send Remedy successfully!");
+      }
+      // this.setState({
+      //   loading: false,
+      // });
       this.closeModal();
       await this.getListPatient(this.props.user, this.state.selectedDate);
     } else {
-      toast.error("Send Remedy failed!");
+      if (language === languages.VI) {
+        toast.error("Gửi hóa đơn không thành công!");
+      } else {
+        toast.error("Send Remedy failed!");
+      }
     }
     console.log("check res change status: ", res);
   };
 
   render() {
-    let { listPatient, isOpenModal, dataModal } = this.state;
+    let { listPatient, isOpenModal, dataModal, loading } = this.state;
     let { language } = this.props;
     return (
       <>
@@ -118,7 +139,7 @@ class ManagePatient extends Component {
                         current && current < moment(customDate, "DD-MM-YYYY")
                       );
                     }}
-                    locale="vi"
+                    locale={language === languages.VI ? vi_VN : en_US}
                     format="DD/MM/YYYY"
                     value={this.state.selectedDate}
                   />
@@ -157,7 +178,7 @@ class ManagePatient extends Component {
 
                           return (
                             <tr key={index}>
-                              <th scope="row">{index + 1}</th>
+                              <td scope="row">{index + 1}</td>
                               <td>
                                 {language === languages.VI ? timeVi : timeEn}
                               </td>
@@ -183,7 +204,9 @@ class ManagePatient extends Component {
                         })
                       ) : (
                         <tr>
-                          <td colSpan={6}>Không có lịch đặt</td>
+                          <td colSpan={6} style={{ textAlign: "center" }}>
+                            <FormattedMessage id="manage-patient.no-booking" />
+                          </td>
                         </tr>
                       )}
                     </tbody>
@@ -193,12 +216,14 @@ class ManagePatient extends Component {
             </div>
           </div>
         </div>
+        {/* <Spin spinning={loading} tip="Loading..."> */}
         <RemedyModal
           isOpenModal={isOpenModal}
           dataModal={dataModal}
           closeModal={this.closeModal}
           sendDataModal={this.sendDataModal}
         />
+        {/* </Spin> */}
       </>
     );
   }

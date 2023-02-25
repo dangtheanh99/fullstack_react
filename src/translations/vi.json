@@ -6,6 +6,7 @@
     "decentralize": "Phân quyền",
     "close": "Đóng",
     "save": "Lưu",
+    "cancel": "Hủy",
     "refresh": "Refresh",
     "accept": "Chấp nhận",
     "confirm": "Xác nhận",
@@ -186,7 +187,11 @@
     "address": "Địa chỉ",
     "action": "Hành động",
     "confirm": "Xác nhận",
-    "send": "Gửi hóa đơn"
+    "send": "Gửi hóa đơn",
+    "no-booking": "Không có lịch khám",
+    "email-patient": "Email bệnh nhân",
+    "file": "File đính kèm",
+    "bill": "Gửi hóa đơn khám bệnh"
   },
   "manage-specialty": {
     "title": "Quản lý chuyên khoa",
