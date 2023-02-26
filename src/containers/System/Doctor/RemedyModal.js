@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-// import "./RemedyModal.scss";
 import { FormattedMessage } from "react-intl";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
-import { CommonUtils } from "../../../utils";
+import { CommonUtils, languages } from "../../../utils";
 import { Spin } from "antd";
 
 class RemedyModal extends Component {
@@ -12,6 +11,7 @@ class RemedyModal extends Component {
     this.state = {
       email: "",
       imageBase64: "",
+      loading: false,
     };
   }
 
@@ -32,10 +32,6 @@ class RemedyModal extends Component {
     }
   }
 
-  //   closeModal = () => {
-  //     this.props.closeModal()
-  //   }
-
   handleOnChangeImage = async (event) => {
     let data = event.target.files;
     let file = data[0];
@@ -53,28 +49,24 @@ class RemedyModal extends Component {
     });
   };
   handleSaveInfo = async () => {
-    // this.setState({
-    //   loading: true,
-    // });
+    this.setState({
+      loading: true,
+    });
     await this.props.sendDataModal(this.state);
-    // this.setState({
-    //   loading: false,
-    // });
+    this.setState({
+      loading: false,
+    });
   };
 
   render() {
-    let { isOpenModal, dataModal, closeModal } = this.props;
-    let { email, imageBase64 } = this.state;
+    let { isOpenModal, dataModal, closeModal, language } = this.props;
+    let { email, imageBase64, loading } = this.state;
     console.log("check prop modal", this.props);
     return (
-      // <Spin spinning={loading} tip="Loading">
-      <>
-        <Modal
-          isOpen={isOpenModal}
-          // toggle={closeModal}
-          className="bookingModal"
-          size="lg"
-          centered
+      <Modal isOpen={isOpenModal} className="bookingModal" size="lg" centered>
+        <Spin
+          spinning={loading}
+          tip={language === languages.VI ? "Đang xử lý..." : "Loading..."}
         >
           <ModalHeader className="bookingModal__header" toggle={closeModal}>
             <FormattedMessage id="manage-patient.bill" />
@@ -83,7 +75,6 @@ class RemedyModal extends Component {
             <div className="row">
               <div className="col-6 form-group">
                 <label>
-                  {" "}
                   <FormattedMessage id="manage-patient.email-patient" />
                 </label>
                 <input
@@ -91,8 +82,6 @@ class RemedyModal extends Component {
                   value={email}
                   onChange={(event) => this.handleChangeEmail(event)}
                 />
-                {/* {dataModal ? dataModal.email : ""} */}
-                {/* {dataModal.email} */}
               </div>
               <div className="col-6 form-group">
                 <label>
@@ -119,16 +108,16 @@ class RemedyModal extends Component {
               <FormattedMessage id="common.cancel" />
             </Button>
           </ModalFooter>
-        </Modal>
-        <Spin spinning={true} />
-      </>
-      // </Spin>
+        </Spin>
+      </Modal>
     );
   }
 }
 
 const mapStateToProps = (state) => {
-  return {};
+  return {
+    language: state.app.language,
+  };
 };
 
 const mapDispatchToProps = (dispatch) => {

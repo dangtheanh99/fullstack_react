@@ -26,7 +26,6 @@ class Doctor extends Component {
   }
 
   viewDetailDoctor = (doctor) => {
-    // alert("view detail doctor");
     console.log("info doctor: ", doctor);
     this.props.history.push(`${path.DETAIL_DOCTOR}/${doctor.id}`);
   };
@@ -40,7 +39,12 @@ class Doctor extends Component {
           <div className="commonSection__header__title">
             <FormattedMessage id="homepage.out-standing-doctor" />
           </div>
-          <button className="commonSection__header__btn">
+          <button
+            className="commonSection__header__btn"
+            onClick={() => {
+              this.props.history.push(path.LIST_DOCTOR);
+            }}
+          >
             <FormattedMessage id="homepage.search" />
           </button>
         </div>

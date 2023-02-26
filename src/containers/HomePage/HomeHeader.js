@@ -42,6 +42,10 @@ const options = [
   },
 ];
 class HomeHeader extends Component {
+  constructor(props) {
+    super(props);
+    this.myRef = React.createRef();
+  }
   handleChangLanguage = (language) => {
     this.props.changeLanguageAppRedux(language);
   };
@@ -52,9 +56,9 @@ class HomeHeader extends Component {
         <div className="homeHeader">
           <div className="homeHeader__content">
             <div className="homeHeader__content__left">
-              <div className="homeHeader__content__left__menu">
+              {/* <div className="homeHeader__content__left__menu">
                 <i className="fas fa-bars"></i>
-              </div>
+              </div> */}
               <div
                 className="homeHeader__content__left__logo"
                 onClick={() => {
@@ -65,7 +69,14 @@ class HomeHeader extends Component {
               ></div>
             </div>
             <div className="homeHeader__content__center">
-              <div className="homeHeader__content__center__item">
+              <div
+                className="homeHeader__content__center__item"
+                onClick={() => {
+                  if (this.props.history) {
+                    this.props.history.push(path.LIST_SPECIALTY);
+                  }
+                }}
+              >
                 <div className="homeHeader__content__center__title">
                   <FormattedMessage id="homeheader.specialty" />
                 </div>
@@ -73,7 +84,14 @@ class HomeHeader extends Component {
                   <FormattedMessage id="homeheader.des-specialty" />
                 </div>
               </div>
-              <div className="homeHeader__content__center__item">
+              <div
+                className="homeHeader__content__center__item"
+                onClick={() => {
+                  if (this.props.history) {
+                    this.props.history.push(path.LIST_CLINIC);
+                  }
+                }}
+              >
                 <div className="homeHeader__content__center__title">
                   <FormattedMessage id="homeheader.health-facility" />
                 </div>
@@ -81,7 +99,14 @@ class HomeHeader extends Component {
                   <FormattedMessage id="homeheader.des-health-facility" />
                 </div>
               </div>
-              <div className="homeHeader__content__center__item">
+              <div
+                className="homeHeader__content__center__item"
+                onClick={() => {
+                  if (this.props.history) {
+                    this.props.history.push(path.LIST_DOCTOR);
+                  }
+                }}
+              >
                 <div className="homeHeader__content__center__title">
                   <FormattedMessage id="homeheader.doctor" />
                 </div>
@@ -89,12 +114,19 @@ class HomeHeader extends Component {
                   <FormattedMessage id="homeheader.des-doctor" />
                 </div>
               </div>
-              <div className="homeHeader__content__center__item">
+              <div
+                className="homeHeader__content__center__item"
+                onClick={() => {
+                  if (this.props.history) {
+                    this.props.history.push(path.LIST_HANDBOOK);
+                  }
+                }}
+              >
                 <div className="homeHeader__content__center__title">
-                  <FormattedMessage id="homeheader.checkup-package" />
+                  <FormattedMessage id="homeheader.handbook" />
                 </div>
                 <div className="homeHeader__content__center__des">
-                  <FormattedMessage id="homeheader.des-checkup-package" />
+                  <FormattedMessage id="homeheader.des-handbook" />
                 </div>
               </div>
             </div>

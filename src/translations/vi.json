@@ -19,7 +19,16 @@
     "fail-to-load-all-code": "Không thể tải về dữ liệu allcode",
     "sum": "Tổng",
     "date-range-invalid": "Khoảng thời gian không hợp lệ",
-    "select": "Chọn"
+    "select": "Chọn",
+    "specialty": "Chuyên khoa",
+    "doctor": "Bác sĩ",
+    "clinic": "Phòng khám",
+    "handbook": "Cẩm nang",
+    "search-specialty": "Tìm kiếm chuyên khoa",
+    "search-doctor": "Tìm kiếm bác sĩ",
+    "search-clinic": "Tìm kiếm phòng khám",
+    "search-handbook": "Tìm kiếm cẩm nang",
+    "no-data": "Không có dữ liệu"
   },
   "login": {
     "login": "Đăng nhập",
@@ -129,12 +138,12 @@
     "support": "Hỗ trợ",
     "specialty": "Chuyên khoa",
     "des-specialty": "Tìm bác sĩ theo chuyên khoa",
-    "health-facility": "Cơ sở y tế",
+    "health-facility": "Phòng khám",
     "des-health-facility": "Chọn bệnh viện phòng khám",
     "doctor": "Bác sĩ",
     "des-doctor": "Chọn bác sĩ giỏi",
-    "checkup-package": "Gói khám",
-    "des-checkup-package": "Khám sức khỏe tổng quát",
+    "handbook": "Cẩm nang",
+    "des-handbook": "Kiến thức hữu ích cho người bệnh",
     "medical-background": "Nền tảng y tế",
     "health-care": "Chăm sóc sức khỏe toàn diện",
     "find-hospital": "Tìm bệnh viện"
@@ -224,7 +233,7 @@
     "extra-infor-doctor": {
       "title": "Địa chỉ khám",
       "price": "Giá khám",
-      "methodPayment": "Phòng khám có thanh toán bằng hình thức",
+      "methodPayment": "Phòng khám thanh toán bằng hình thức:",
       "detail": "Xem chi tiết",
       "hide": "Ẩn bảng giá"
     },

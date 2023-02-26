@@ -13,6 +13,7 @@ import {
 import _, { orderBy } from "lodash";
 import Select from "react-select";
 import { languages } from "../../../utils";
+import { Empty } from "antd";
 
 class DetailSpecialty extends Component {
   constructor(props) {
@@ -68,37 +69,42 @@ class DetailSpecialty extends Component {
     }
   }
 
-  handleChangeSelect = async (selectedOption) => {
-    let { selectedProvince } = this.state;
-    await this.setState({
-      selectedProvince: selectedOption,
-    });
-    console.log("selectedOption", selectedOption);
-    if (this.props.match?.params?.id) {
-      let id = this.props.match.params.id;
-      let res = await getDetailSpecialtyById(id);
-      if (res && res.errCode === 0) {
-        let data = res.data;
-        let arrDoctorId = [];
-        if (data && !_.isEmpty(data)) {
-          let arr = orderBy(data.doctorSpecialty, "doctorId", "asc");
-          if (arr && arr.length > 0) {
-            if (selectedOption.value !== "ALL") {
-              arr = arr.filter(
-                (item) => item.provinceId === selectedOption.value
-              );
+  handleChangeSelect = (selectedOption) => {
+    this.setState(
+      {
+        selectedProvince: selectedOption,
+      },
+      async () => {
+        if (this.props.match?.params?.id) {
+          let id = this.props.match.params.id;
+          let res = await getDetailSpecialtyById(id);
+          if (res && res.errCode === 0) {
+            let data = res.data;
+            let arrDoctorId = [];
+            if (data && !_.isEmpty(data)) {
+              let arr = orderBy(data.doctorSpecialty, "doctorId", "asc");
+              if (arr && arr.length > 0) {
+                if (this.state.selectedProvince.value !== "ALL") {
+                  arr = arr.filter(
+                    (item) =>
+                      item.provinceId === this.state.selectedProvince.value
+                  );
+                }
+                arr.map((item) => {
+                  arrDoctorId.push(item.doctorId);
+                });
+              }
             }
-            arr.map((item) => {
-              arrDoctorId.push(item.doctorId);
+            this.setState({
+              detailSpecialty: res.data,
+              arrDoctorId,
             });
           }
         }
-        this.setState({
-          detailSpecialty: res.data,
-          arrDoctorId,
-        });
+
+        console.log("selectedOption", selectedOption);
       }
-    }
+    );
   };
   buildDataSelect = (inputData) => {
     let { language } = this.props;
@@ -129,12 +135,19 @@ class DetailSpecialty extends Component {
         <div className="detailSpecialty">
           <div className="detailSpecialty__description">
             {detailSpecialty && !_.isEmpty(detailSpecialty) && (
-              <div
-                // className="detailSpecialty__description__content"
-                dangerouslySetInnerHTML={{
-                  __html: detailSpecialty.descriptionHTML,
-                }}
-              ></div>
+              <>
+                <h4>
+                  {language === languages.VI
+                    ? detailSpecialty.nameVi
+                    : detailSpecialty.nameEn}
+                </h4>
+                <div
+                  // className="detailSpecialty__description__content"
+                  dangerouslySetInnerHTML={{
+                    __html: detailSpecialty.descriptionHTML,
+                  }}
+                ></div>
+              </>
             )}
           </div>
 
@@ -149,8 +162,7 @@ class DetailSpecialty extends Component {
                 }
               />
             </div>
-            {arrDoctorId &&
-              arrDoctorId.length > 0 &&
+            {arrDoctorId && arrDoctorId.length > 0 ? (
               arrDoctorId.map((item, index) => {
                 return (
                   <div className="detailSpecialty__item" key={index}>
@@ -173,7 +185,10 @@ class DetailSpecialty extends Component {
                     </div>
                   </div>
                 );
-              })}
+              })
+            ) : (
+              <Empty description={<FormattedMessage id="common.no-data" />} />
+            )}
           </div>
         </div>
       </>

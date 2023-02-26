@@ -37,7 +37,12 @@ class MedicalFacility extends Component {
           <div className="commonSection__header__title">
             <FormattedMessage id="homepage.outstanding-medical-facility" />
           </div>
-          <button className="commonSection__header__btn">
+          <button
+            className="commonSection__header__btn"
+            onClick={() => {
+              this.props.history.push(path.LIST_CLINIC);
+            }}
+          >
             <FormattedMessage id="homepage.search" />
           </button>
         </div>

@@ -216,14 +216,12 @@ class ManagePatient extends Component {
             </div>
           </div>
         </div>
-        {/* <Spin spinning={loading} tip="Loading..."> */}
         <RemedyModal
           isOpenModal={isOpenModal}
           dataModal={dataModal}
           closeModal={this.closeModal}
           sendDataModal={this.sendDataModal}
         />
-        {/* </Spin> */}
       </>
     );
   }

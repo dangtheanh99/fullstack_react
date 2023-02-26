@@ -306,18 +306,30 @@ export const saveDetailDoctor = (data) => {
         dispatch({
           type: actionTypes.SAVE_INFO_DOCTOR_SUCCESS,
         });
-        toast.success("Save info doctor successfully!");
+        if (data.language === languages.VI) {
+          toast.success("Lưu thông tin bác sĩ thành công!");
+        } else {
+          toast.success("Save info doctor successfully!");
+        }
       } else {
         dispatch({
           type: actionTypes.SAVE_INFO_DOCTOR_FAIL,
         });
-        toast.error("Save info doctor failed!");
+        if (data.language === languages.VI) {
+          toast.error("Lưu thông tin bác sĩ không thành công!");
+        } else {
+          toast.error("Save info doctor failed!");
+        }
       }
     } catch (e) {
       dispatch({
         type: actionTypes.SAVE_INFO_DOCTOR_FAIL,
       });
-      toast.error("Save info doctor failed!");
+      if (data.language === languages.VI) {
+        toast.error("Lưu thông tin bác sĩ không thành công!");
+      } else {
+        toast.error("Save info doctor failed!");
+      }
       console.log("Error: ", e);
     }
   };

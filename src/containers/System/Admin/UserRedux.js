@@ -85,6 +85,24 @@ class UserRedux extends Component {
       });
     }
   }
+
+  validateEmail = (email) => {
+    return String(email)
+      .toLowerCase()
+      .match(
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      );
+  };
+
+  validatePhoneNumber = (phoneNumber) => {
+    if (phoneNumber) {
+      var re =
+        /^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$/;
+      return re.test(phoneNumber);
+    }
+    return false;
+  };
+
   handleSaveUser = () => {
     let {
       email,
@@ -175,6 +193,7 @@ class UserRedux extends Component {
 
   checkValidateInput = () => {
     let { language } = this.props;
+    let { email, phoneNumber } = this.state;
     let isValid = true;
     let arrCheck = [
       "email",
@@ -196,7 +215,26 @@ class UserRedux extends Component {
         break;
       }
     }
-
+    if (email) {
+      if (!this.validateEmail(email)) {
+        isValid = false;
+        if (language === languages.VI) {
+          toast.error(`Chưa đúng định dạng email, vui lòng nhập lại!`);
+        } else {
+          toast.error(`Email format is not correct, please re-enter!`);
+        }
+      }
+    }
+    if (phoneNumber) {
+      if (!this.validatePhoneNumber(phoneNumber)) {
+        isValid = false;
+        if (language === languages.VI) {
+          toast.error(`Chưa đúng định dạng số điện thoại, vui lòng nhập lại!`);
+        } else {
+          toast.error(`Invalid phone number format, please re-enter!`);
+        }
+      }
+    }
     return isValid;
   };
 

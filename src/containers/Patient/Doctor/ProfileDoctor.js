@@ -166,7 +166,7 @@ class ProfileDoctor extends Component {
                   value={extraInforDoctor.priceData.valueVi}
                   displayType={"text"}
                   thousandSeparator={true}
-                  suffix={"VND"}
+                  suffix={" VND"}
                 />
               )}
             {extraInforDoctor &&
@@ -176,7 +176,7 @@ class ProfileDoctor extends Component {
                   value={extraInforDoctor.priceData.valueEn}
                   displayType={"text"}
                   thousandSeparator={true}
-                  suffix={"$"}
+                  suffix={" $"}
                 />
               )}
           </div>

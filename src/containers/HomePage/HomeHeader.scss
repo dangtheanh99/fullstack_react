@@ -39,12 +39,21 @@
       display: flex;
       justify-content: space-around;
       &__item {
+        transition: all 0.3s ease-in-out;
+        &:hover {
+          cursor: pointer;
+          color: #45c3d2;
+          .homeHeader__content__center__title {
+            color: #45c3d2;
+          }
+        }
       }
 
       &__title {
         color: #333;
         font-weight: bold;
         font-size: 12px;
+        transition: all 0.3s ease-in-out;
       }
 
       &__des {

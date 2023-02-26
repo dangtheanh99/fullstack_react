@@ -13,6 +13,7 @@ import {
 import _, { orderBy } from "lodash";
 import Select from "react-select";
 import { languages } from "../../../utils";
+import { Empty } from "antd";
 
 class DetailClinic extends Component {
   constructor(props) {
@@ -73,8 +74,7 @@ class DetailClinic extends Component {
           </div>
 
           <div className="detailClinic__content">
-            {arrDoctorId &&
-              arrDoctorId.length > 0 &&
+            {arrDoctorId && arrDoctorId.length > 0 ? (
               arrDoctorId.map((item, index) => {
                 return (
                   <div className="detailClinic__item" key={index}>
@@ -97,7 +97,10 @@ class DetailClinic extends Component {
                     </div>
                   </div>
                 );
-              })}
+              })
+            ) : (
+              <Empty description={<FormattedMessage id="common.no-data" />} />
+            )}
           </div>
         </div>
       </>

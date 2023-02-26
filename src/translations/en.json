@@ -19,7 +19,16 @@
     "sum": "Sum",
     "date-range-invalid": "Date range invalid",
     "select": "Select",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "specialty": "Specialty",
+    "doctor": "Doctor",
+    "clinic": "Clinic",
+    "handbook": "Handbook",
+    "search-specialty": "Search for a specialty",
+    "search-doctor": "Search for a doctor",
+    "search-clinic": "Search for a clinic",
+    "search-handbook": "Search for a handbook",
+    "no-data": "No data"
   },
   "login": {
     "login": "Login",
@@ -129,12 +138,12 @@
     "support": "Support",
     "specialty": "Specialty",
     "des-specialty": "Find a doctor by specialty",
-    "health-facility": "Health facilities",
+    "health-facility": "Clinic",
     "des-health-facility": "Choose hospital clinic",
     "doctor": "Doctor",
     "des-doctor": "Choose a good doctor",
-    "checkup-package": "Checkup package",
-    "des-checkup-package": "General health check",
+    "handbook": "Handbook",
+    "des-handbook": "Useful knowledge for patients",
     "medical-background": "Medical background",
     "health-care": "Comprehensive health care",
     "find-hospital": "Find a hospital"
@@ -224,7 +233,7 @@
     "extra-infor-doctor": {
       "title": "Clinic address",
       "price": "Examination price",
-      "methodPayment": "The clinic has payment in the form of",
+      "methodPayment": "The clinic pays in the form of:",
       "detail": "See details",
       "hide": "Hide price list"
     },

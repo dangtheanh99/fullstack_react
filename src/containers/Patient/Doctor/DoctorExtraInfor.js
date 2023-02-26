@@ -77,7 +77,7 @@ class DoctorExtraInfor extends Component {
                       value={extraInforDoctor.priceData.valueVi}
                       displayType={"text"}
                       thousandSeparator={true}
-                      suffix={"VND"}
+                      suffix={" VND"}
                     />
                   )}
                 {extraInforDoctor &&
@@ -87,7 +87,7 @@ class DoctorExtraInfor extends Component {
                       value={extraInforDoctor.priceData.valueEn}
                       displayType={"text"}
                       thousandSeparator={true}
-                      suffix={"$"}
+                      suffix={" $"}
                     />
                   )}
               </span>
@@ -124,7 +124,7 @@ class DoctorExtraInfor extends Component {
                         value={extraInforDoctor.priceData.valueVi}
                         displayType={"text"}
                         thousandSeparator={true}
-                        suffix={"VND"}
+                        suffix={" VND"}
                       />
                     )}
                   {extraInforDoctor &&
@@ -134,15 +134,14 @@ class DoctorExtraInfor extends Component {
                         value={extraInforDoctor.priceData.valueEn}
                         displayType={"text"}
                         thousandSeparator={true}
-                        suffix={"$"}
+                        suffix={" $"}
                       />
                     )}
                 </span>
               </div>
               <div className="secondBlock__payment">
                 <FormattedMessage id="patient.extra-infor-doctor.methodPayment" />
-                {/* Phòng khám có thanh toán bằng hình thức */}
-                <span style={{ marginLeft: "4px", textTransform: "lowercase" }}>
+                <span style={{ marginLeft: "4px" }}>
                   {extraInforDoctor &&
                   extraInforDoctor.paymentData &&
                   language === languages.VI

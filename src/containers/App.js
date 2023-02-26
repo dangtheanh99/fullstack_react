@@ -4,6 +4,7 @@ import { Route, Switch } from "react-router-dom";
 import { ConnectedRouter as Router } from "connected-react-router";
 import { history } from "../redux";
 import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import {
   userIsAuthenticated,
   userIsNotAuthenticated,
@@ -22,6 +23,10 @@ import Doctor from "../routes/Doctor";
 import VerifyEmail from "./Patient/VerifyEmail";
 import DetailSpecialty from "./Patient/Specialty/DetailSpecialty";
 import DetailClinic from "./Patient/Clinic/DetailClinic";
+import ListDoctor from "./Patient/Doctor/ListDoctor";
+import ListSpecialty from "./Patient/Specialty/ListSpecialty";
+import ListClinic from "./Patient/Clinic/ListClinic";
+import ListHandbook from "./Patient/Handbook/ListHandbook";
 
 class App extends Component {
   handlePersistorState = () => {
@@ -78,6 +83,10 @@ class App extends Component {
                     path={`${path.DETAIL_CLINIC}/:id`}
                     component={DetailClinic}
                   />
+                  <Route path={path.LIST_DOCTOR} component={ListDoctor} />
+                  <Route path={path.LIST_SPECIALTY} component={ListSpecialty} />
+                  <Route path={path.LIST_CLINIC} component={ListClinic} />
+                  <Route path={path.LIST_HANDBOOK} component={ListHandbook} />
                   <Route
                     path={`${path.VERIFY_EMAIL_BOOKING}`}
                     component={VerifyEmail}
@@ -98,8 +107,6 @@ class App extends Component {
               pauseOnHover
               theme="light"
             />
-            {/* Same as */}
-            <ToastContainer />
           </div>
         </Router>
       </Fragment>

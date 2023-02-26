@@ -30,6 +30,7 @@ class Specialty extends Component {
     console.log("info specialty: ", specialty);
     this.props.history.push(`${path.DETAIL_SPECIALTY}/${specialty.id}`);
   };
+
   render() {
     let { allSpecialty } = this.state;
 
@@ -39,7 +40,12 @@ class Specialty extends Component {
           <div className="commonSection__header__title">
             <FormattedMessage id="homepage.popular-specialty" />
           </div>
-          <button className="commonSection__header__btn">
+          <button
+            className="commonSection__header__btn"
+            onClick={() => {
+              this.props.history.push(path.LIST_SPECIALTY);
+            }}
+          >
             <FormattedMessage id="homepage.more" />
           </button>
         </div>

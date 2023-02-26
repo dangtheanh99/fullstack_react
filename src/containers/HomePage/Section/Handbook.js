@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 import Slider from "react-slick";
 import { FormattedMessage } from "react-intl";
 import { getAllHandbook } from "../../../services/userService";
+import { path } from "../../../utils";
+import { withRouter } from "react-router";
 
 class Handbook extends Component {
   constructor(props) {
@@ -28,7 +30,12 @@ class Handbook extends Component {
           <div className="commonSection__header__title">
             <FormattedMessage id="homepage.handbook" />
           </div>
-          <button className="commonSection__header__btn">
+          <button
+            className="commonSection__header__btn"
+            onClick={() => {
+              this.props.history.push(path.LIST_HANDBOOK);
+            }}
+          >
             <FormattedMessage id="homepage.all-posts" />
           </button>
         </div>
@@ -64,4 +71,6 @@ const mapDispatchToProps = (dispatch) => {
   return {};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Handbook);
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(Handbook)
+);
