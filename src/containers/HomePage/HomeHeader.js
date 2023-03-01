@@ -56,9 +56,10 @@ class HomeHeader extends Component {
         <div className="homeHeader">
           <div className="homeHeader__content">
             <div className="homeHeader__content__left">
-              {/* <div className="homeHeader__content__left__menu">
-                <i className="fas fa-bars"></i>
-              </div> */}
+              <div className="homeHeader__content__left__menu">
+                {/* <i className="fas fa-bars"></i> */}
+                <i className="fas fa-heartbeat"></i>
+              </div>
               <div
                 className="homeHeader__content__left__logo"
                 onClick={() => {
@@ -66,7 +67,9 @@ class HomeHeader extends Component {
                     this.props.history.push(path.HOMEPAGE);
                   }
                 }}
-              ></div>
+              >
+                Your Health
+              </div>
             </div>
             <div className="homeHeader__content__center">
               <div

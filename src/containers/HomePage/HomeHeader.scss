@@ -21,16 +21,22 @@
         cursor: pointer;
         i {
           font-size: 28px;
-          color: #969495;
-          margin-right: 10px;
+          color: #e74c3c;
+          margin-right: 4px;
         }
       }
 
       &__logo {
-        background: url("../../assets/logo.svg") center center no-repeat;
-        height: 40px;
-        width: 160px;
+        // background: url("../../assets/logo.svg") center center no-repeat;
+        // height: 40px;
+        // width: 160px;
+        font-family: "Shantell Sans", cursive;
         cursor: pointer;
+        text-transform: uppercase;
+        font-weight: 800;
+        font-style: oblique;
+        font-size: 24px;
+        color: #27ae60;
       }
     }
 
@@ -42,9 +48,9 @@
         transition: all 0.3s ease-in-out;
         &:hover {
           cursor: pointer;
-          color: #45c3d2;
+          color: #27ae60;
           .homeHeader__content__center__title {
-            color: #45c3d2;
+            color: #27ae60;
           }
         }
       }
@@ -84,7 +90,7 @@
         cursor: pointer;
         i {
           margin-right: 4px;
-          color: #45c3d2;
+          color: #27ae60;
         }
       }
     }
@@ -169,7 +175,7 @@
         cursor: pointer;
         i {
           font-size: 28px;
-          color: #45c3d2;
+          color: #27ae60;
         }
       }
 
@@ -182,7 +188,7 @@
         margin-top: 6px;
         &:hover {
           cursor: pointer;
-          color: #45c3d2;
+          color: #27ae60;
         }
       }
     }
