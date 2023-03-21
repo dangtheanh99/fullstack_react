@@ -144,9 +144,19 @@
     "des-doctor": "Chọn bác sĩ giỏi",
     "handbook": "Cẩm nang",
     "des-handbook": "Kiến thức hữu ích cho người bệnh",
-    "medical-background": "Nền tảng y tế",
-    "health-care": "Chăm sóc sức khỏe toàn diện",
+    "medical-background": "Your health",
+    "health-care": "Nơi trao gửi niềm tin",
     "find-hospital": "Tìm bệnh viện"
+  },
+  "homefooter": {
+    "name-company": "Công ty Cổ phần Your Health",
+    "address-company": "176 Trương Định, Hai Bà Trưng, Hà Nội",
+    "contact": "Liên hệ hợp tác",
+    "recruitment": "Tuyển dụng",
+    "question": "Câu hỏi thường gặp",
+    "rule": "Điều khoản sử dụng",
+    "privacy": "Chính sách bảo mật",
+    "support": "Hỗ trợ khách hàng"
   },
   "manage-user": {
     "title": "Quản lý người dùng",
@@ -174,7 +184,7 @@
     "more": "Xem thêm",
     "search": "Tìm kiếm",
     "popular-specialty": "Chuyên khoa phổ biến",
-    "outstanding-medical-facility": "Cơ sở y tế nổi bật",
+    "outstanding-medical-facility": "Cơ sở y tế",
     "handbook": "Cẩm nang",
     "all-posts": "Tất cả bài viết"
   },

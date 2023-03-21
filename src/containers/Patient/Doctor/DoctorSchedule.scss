@@ -44,17 +44,16 @@
         padding: 10px 16px;
         margin-right: 10px;
         margin-bottom: 10px;
-        background-color: #fff8ae;
+        background-color: #27ae60;
         text-align: center;
         font-weight: bolder;
-        color: #333;
-        // width: 160px;
+        color: #fff;
         &:hover {
           cursor: pointer;
           // background-color: yellow;
           //   border: 1px solid #33b0e3;
-          background-color: #33b0e3;
-          color: #fff;
+          background-color: #fff8ae;
+          color: #333;
         }
       }
     }

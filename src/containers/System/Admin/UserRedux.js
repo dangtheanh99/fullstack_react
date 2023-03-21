@@ -198,9 +198,9 @@ class UserRedux extends Component {
     let arrCheck = [
       "email",
       "password",
-      "lastName",
+      // "lastName",
       "firstName",
-      "address",
+      // "address",
       "phoneNumber",
     ];
 
@@ -274,6 +274,7 @@ class UserRedux extends Component {
               </div>
               <div className="col-3 form-group">
                 <label>
+                  *
                   <FormattedMessage id="manage-user.email" />
                 </label>
                 <input
@@ -286,6 +287,7 @@ class UserRedux extends Component {
               </div>
               <div className="col-3 form-group">
                 <label>
+                  *
                   <FormattedMessage id="manage-user.password" />
                 </label>
                 <input
@@ -309,6 +311,7 @@ class UserRedux extends Component {
               </div>
               <div className="col-3 form-group">
                 <label>
+                  *
                   <FormattedMessage id="manage-user.firstName" />
                 </label>
                 <input
@@ -320,6 +323,7 @@ class UserRedux extends Component {
               </div>
               <div className="col-3 form-group">
                 <label>
+                  *
                   <FormattedMessage id="manage-user.phoneNumber" />
                 </label>
                 <input
@@ -342,6 +346,7 @@ class UserRedux extends Component {
               </div>
               <div className="col-3 form-group">
                 <label>
+                  *
                   <FormattedMessage id="manage-user.gender" />
                 </label>
                 <select
@@ -362,6 +367,7 @@ class UserRedux extends Component {
               </div>
               <div className="col-3 form-group">
                 <label>
+                  *
                   <FormattedMessage id="manage-user.position" />
                 </label>
                 <select
@@ -382,6 +388,7 @@ class UserRedux extends Component {
               </div>
               <div className="col-3 form-group">
                 <label>
+                  *
                   <FormattedMessage id="manage-user.role" />
                 </label>
                 <select

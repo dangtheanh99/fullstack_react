@@ -173,7 +173,7 @@ class HomeHeader extends Component {
                   <FormattedMessage id="homeheader.health-care" />
                 </b>
               </div>
-              <div className="banner__search">
+              {/* <div className="banner__search">
                 <i className="fas fa-search"></i>
                 <input
                   type="text"
@@ -183,10 +183,10 @@ class HomeHeader extends Component {
                       : "Find a hospital"
                   }
                 />
-              </div>
+              </div> */}
             </div>
             <div className="banner__bottom">
-              <div className="banner__options">
+              {/* <div className="banner__options">
                 {options.map((item, index) => {
                   return (
                     <div className="banner__options__item" key={index}>
@@ -201,7 +201,7 @@ class HomeHeader extends Component {
                     </div>
                   );
                 })}
-              </div>
+              </div> */}
             </div>
           </div>
         )}

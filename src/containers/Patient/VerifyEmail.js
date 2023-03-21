@@ -5,7 +5,7 @@ import { FormattedMessage } from "react-intl";
 import { verifyBookingAppointment } from "../../services/userService";
 import HomeHeader from "../HomePage/HomeHeader";
 import { Spin } from "antd";
-
+import HomeFooter from "../HomePage/HomeFooter";
 class VerifyEmail extends Component {
   constructor(props) {
     super(props);
@@ -40,20 +40,32 @@ class VerifyEmail extends Component {
 
   render() {
     return (
-      <>
+      <div className="verifyEmail">
         <HomeHeader />
         <Spin spinning={this.state.loading}>
           {this.state.status === 0 ? (
-            <div className="statusVerify" style={{ color: "#28a745" }}>
-              Xác nhận lịch hẹn thành công.
+            <div className="statusVerify">
+              <h3 style={{ color: "#28a745" }}>Xác nhận lịch hẹn thành công</h3>
+              {/* <p>Vui lòng đến đúng giờ để thực hiện khám</p> */}
+              <p className="slogan">
+                Cảm ơn bạn đã luôn tin tưởng và ủng hộ Your Health, sức khỏe của
+                bạn là sứ mệnh của chúng tôi.
+              </p>
             </div>
           ) : (
-            <div className="statusVerify" style={{ color: "#c82333" }}>
-              Lịch hẹn không tồn tại hoặc đã được xác nhận.
+            <div className="statusVerify">
+              <h3 style={{ color: "#c82333" }}>
+                Lịch hẹn không tồn tại hoặc đã được xác nhận
+              </h3>
+              <p className="slogan">
+                Cảm ơn bạn đã luôn tin tưởng và ủng hộ Your Health, sức khỏe của
+                bạn là sứ mệnh của chúng tôi.
+              </p>
             </div>
           )}
         </Spin>
-      </>
+        <HomeFooter />
+      </div>
     );
   }
 }

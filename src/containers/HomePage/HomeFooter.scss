@@ -1,4 +1,4 @@
-.FooterSection {
+.footerSection {
   // display: flex;
 
   &__bigBlock {
@@ -9,8 +9,24 @@
     background: #efefef;
     &__about {
       &__logo {
-        max-width: 200px;
+        // max-width: 200px;
         cursor: pointer;
+        display: flex;
+        align-items: center;
+        i {
+          font-size: 28px;
+          color: #e74c3c;
+          margin-right: 4px;
+        }
+        &__text {
+          font-family: "Shantell Sans", cursive;
+          cursor: pointer;
+          text-transform: uppercase;
+          font-weight: 800;
+          font-style: oblique;
+          font-size: 24px;
+          color: #27ae60;
+        }
       }
       &__name {
         font-weight: bold;
@@ -24,7 +40,7 @@
     }
     &__contact {
       list-style-type: none;
-      color: #64b9e5;
+      color: #27ae60;
       li {
         cursor: pointer;
         margin-bottom: 8px;
@@ -44,7 +60,7 @@
     padding: 16px 24px;
     justify-content: space-between;
     align-items: center;
-    background-color: #64b9e5;
+    background-color: #27ae60;
     &__copyright {
       color: #fff;
     }

@@ -144,9 +144,19 @@
     "des-doctor": "Choose a good doctor",
     "handbook": "Handbook",
     "des-handbook": "Useful knowledge for patients",
-    "medical-background": "Medical background",
-    "health-care": "Comprehensive health care",
+    "medical-background": "Your health",
+    "health-care": "Place of trust",
     "find-hospital": "Find a hospital"
+  },
+  "homefooter": {
+    "name-company": "Your Health Joint Stock Company",
+    "address-company": "176 Truong Dinh, Hai Ba Trung, Hanoi",
+    "contact": "Contact for cooperation",
+    "recruitment": "Recruitment",
+    "question": "Frequently asked questions",
+    "rule": "Terms of use",
+    "privacy": "Privacy Policy",
+    "support": "Customer support"
   },
   "manage-user": {
     "title": "User management",
@@ -174,7 +184,7 @@
     "more": "More",
     "search": "Search",
     "popular-specialty": "Popular specialties",
-    "outstanding-medical-facility": "Outstanding medical facility",
+    "outstanding-medical-facility": "Medical facility",
     "handbook": "Handbook",
     "all-posts": "All posts"
   },

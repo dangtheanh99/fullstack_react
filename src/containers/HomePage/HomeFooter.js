@@ -1,41 +1,67 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import "./HomeFooter.scss";
+import { path } from "../../utils";
+import { withRouter } from "react-router";
+import { FormattedMessage } from "react-intl";
 
 class HomeFooter extends Component {
   render() {
     return (
-      <div className="FooterSection">
-        <div className="FooterSection__bigBlock">
-          <div className="FooterSection__bigBlock__about">
-            <div className="FooterSection__bigBlock__about__logo">
-              <img src="https://bookingcare.vn/assets/icon/bookingcare-2020.svg" />
+      <div className="footerSection">
+        <div className="footerSection__bigBlock">
+          <div className="footerSection__bigBlock__about">
+            <div
+              className="footerSection__bigBlock__about__logo"
+              onClick={() => {
+                if (this.props.history) {
+                  this.props.history.push(path.HOMEPAGE);
+                }
+              }}
+            >
+              <i className="fas fa-heartbeat"></i>
+              <div className="footerSection__bigBlock__about__logo__text">
+                Your Health
+              </div>
             </div>
-            <div className="FooterSection__bigBlock__about__name">
-              Công ty Cổ phần Công nghệ BookingCare
+            <div className="footerSection__bigBlock__about__name">
+              <FormattedMessage id="homefooter.name-company" />
             </div>
-            <div className="FooterSection__bigBlock__about__address">
-              <i className="fas fa-location-arrow"></i> 28 Thành Thái, Dịch
-              Vọng, Cầu Giấy, Hà Nội
+            <div className="footerSection__bigBlock__about__address">
+              <i className="fas fa-location-arrow"></i>{" "}
+              <FormattedMessage id="homefooter.address-company" />
             </div>
           </div>
-          <ul className="FooterSection__bigBlock__contact">
-            <li>Liên hệ hợp tác</li>
-            <li>Tuyển dụng</li>
-            <li>Câu hỏi thường gặp</li>
-            <li>Điều khoản sử dụng</li>
-            <li>Chính sách Bảo mật</li>
+          <ul className="footerSection__bigBlock__contact">
+            <li>
+              {" "}
+              <FormattedMessage id="homefooter.contact" />
+            </li>
+            <li>
+              <FormattedMessage id="homefooter.recruitment" />
+            </li>
+            <li>
+              <FormattedMessage id="homefooter.question" />
+            </li>
+            <li>
+              <FormattedMessage id="homefooter.rule" />
+            </li>
+            <li>
+              <FormattedMessage id="homefooter.privacy" />
+            </li>
           </ul>
-          <div className="FooterSection__bigBlock__support">
-            <div>Hỗ trợ khách hàng</div>
-            <span>support@bookingcare.vn (7h - 18h)</span>
+          <div className="footerSection__bigBlock__support">
+            <div>
+              <FormattedMessage id="homefooter.support" />
+            </div>
+            <span>support@yourhealth.vn</span>
           </div>
         </div>
-        <div className="FooterSection__smallBlock">
-          <div className="FooterSection__smallBlock__copyright">
-            &copy; 2023 BookingCare.
+        <div className="footerSection__smallBlock">
+          <div className="footerSection__smallBlock__copyright">
+            &copy; 2023 YourHealth.
           </div>
-          <div className="FooterSection__smallBlock__social">
+          <div className="footerSection__smallBlock__social">
             <a href="https://www.facebook.com/" target="_blank">
               <i
                 className="fab fa-facebook-square"
@@ -62,4 +88,6 @@ const mapDispatchToProps = (dispatch) => {
   return {};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(HomeFooter);
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(HomeFooter)
+);

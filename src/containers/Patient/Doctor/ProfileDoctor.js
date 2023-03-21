@@ -107,7 +107,10 @@ class ProfileDoctor extends Component {
           <div className="profileDoctor__info__img">
             <img src={profileDoctor.image} />
             {isShowDetail && (
-              <Link to={`${path.DETAIL_DOCTOR}/${doctorId}`}>
+              <Link
+                style={{ color: "#27ae60" }}
+                to={`${path.DETAIL_DOCTOR}/${doctorId}`}
+              >
                 <FormattedMessage id="patient.profile.more" />
               </Link>
             )}

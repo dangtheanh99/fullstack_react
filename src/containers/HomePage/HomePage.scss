@@ -20,7 +20,7 @@
       color: #282e41;
       padding: 10px 15px;
       &:hover {
-        background-color: #f7d800;
+        background-color: #27ae60;
         color: #fff;
         cursor: pointer;
       }
@@ -69,7 +69,7 @@
       //   background: rgba(0, 0, 0, 0.6);
     }
     & .test {
-      fill: #ed1b34 !important;
+      fill: #27ae60 !important;
       transition: all 0.3s ease-in-out;
     }
 
@@ -94,7 +94,7 @@
       //   background: rgba(0, 0, 0, 0.6);
     }
     & .test {
-      fill: #ed1b34 !important;
+      fill: #27ae60 !important;
       transition: all 0.3s ease-in-out;
     }
     &.slick-disabled {
