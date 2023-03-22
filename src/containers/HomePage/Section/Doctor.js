@@ -60,6 +60,8 @@ class Doctor extends Component {
                   "binary"
                 );
               }
+              let specialtyVi = item.Doctor_infor.specialtyData.nameVi;
+              let specialtyEn = item.Doctor_infor.specialtyData.nameEn;
               return (
                 <div
                   className="commonSection__slider__item"
@@ -74,7 +76,11 @@ class Doctor extends Component {
                     <h5 className="hover-effect">
                       {language === languages.VI ? nameVi : nameEn}
                     </h5>
-                    <span>Cơ Xương Khớp</span>
+                    <span>
+                      {item.Doctor_infor && language === languages.VI
+                        ? specialtyVi
+                        : specialtyEn}
+                    </span>
                   </div>
                 </div>
               );

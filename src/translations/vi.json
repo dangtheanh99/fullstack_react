@@ -177,7 +177,8 @@
     "reset": "Đặt lại",
     "table": "Thông tin tất cả người dùng",
     "action": "Hành động",
-    "upload": "Tải ảnh"
+    "upload": "Tải ảnh",
+    "uploadFile": "Tải file"
   },
   "homepage": {
     "out-standing-doctor": "Bác sỹ nổi bật tuần qua",

@@ -16,7 +16,7 @@ class Specialty extends Component {
   }
   async componentDidMount() {
     let res = await getAllSpecialty();
-    console.log("check res: ", res);
+    // console.log("check res: ", res);
     if (res && res.errCode === 0) {
       this.setState({
         allSpecialty: res.data ? res.data : [],
@@ -27,7 +27,7 @@ class Specialty extends Component {
   componentDidUpdate(prevProps, prevState) {}
 
   viewDetailSpecialty = (specialty) => {
-    console.log("info specialty: ", specialty);
+    // console.log("info specialty: ", specialty);
     this.props.history.push(`${path.DETAIL_SPECIALTY}/${specialty.id}`);
   };
 

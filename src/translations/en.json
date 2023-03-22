@@ -177,7 +177,8 @@
     "reset": "Reset",
     "table": "All User Information",
     "action": "Action",
-    "upload": "Upload"
+    "upload": "Upload",
+    "uploadFile": "Upload File"
   },
   "homepage": {
     "out-standing-doctor": "Outstanding Doctor of the Week",

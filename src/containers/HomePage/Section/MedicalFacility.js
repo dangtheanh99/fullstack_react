@@ -15,7 +15,7 @@ class MedicalFacility extends Component {
   }
   async componentDidMount() {
     let res = await getAllClinic();
-    console.log("check res clinic: ", res);
+    // console.log("check res clinic: ", res);
     if (res && res.errCode === 0) {
       this.setState({
         allClinic: res.data ? res.data : [],
@@ -26,7 +26,7 @@ class MedicalFacility extends Component {
   componentDidUpdate(prevProps, prevState) {}
 
   viewDetailClinic = (clinic) => {
-    console.log("info clinic: ", clinic);
+    // console.log("info clinic: ", clinic);
     this.props.history.push(`${path.DETAIL_CLINIC}/${clinic.id}`);
   };
   render() {
