@@ -61,24 +61,6 @@ class RemedyModal extends Component {
   render() {
     let { isOpenModal, dataModal, closeModal, language } = this.props;
     let { email, imageBase64, loading } = this.state;
-    console.log("check prop modal", this.props);
-    const props = {
-      name: "file",
-      // action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
-      // headers: {
-      //   authorization: "authorization-text",
-      // },
-      onChange(info) {
-        if (info.file.status !== "uploading") {
-          console.log(info.file, info.fileList);
-        }
-        // if (info.file.status === "done") {
-        //   message.success(`Tải file ${info.file.name} thành công`);
-        // } else if (info.file.status === "error") {
-        //   message.error(`Tải file ${info.file.name} không thành công`);
-        // }
-      },
-    };
     return (
       <Modal isOpen={isOpenModal} className="bookingModal" size="lg" centered>
         <Spin
@@ -109,25 +91,7 @@ class RemedyModal extends Component {
                   type="file"
                   className="form-control-file"
                   onChange={(event) => this.handleOnChangeImage(event)}
-                  // hidden
-                  // id="upload"
                 />
-                {/* <label htmlFor="upload" className="uploadBtn">
-                  <UploadOutlined className="uploadBtn__icon" />{" "}
-                  <FormattedMessage id="manage-user.uploadFile" />
-                </label> */}
-                {/* <Upload {...props}>
-                  <Button
-                    style={{
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                    }}
-                    icon={<UploadOutlined style={{ marginRight: "4px" }} />}
-                  >
-                    <FormattedMessage id="manage-user.uploadFile" />
-                  </Button>
-                </Upload> */}
               </div>
             </div>
           </ModalBody>

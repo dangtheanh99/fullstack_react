@@ -5,6 +5,8 @@ import { FormattedMessage } from "react-intl";
 import { getAllHandbook } from "../../../services/userService";
 import { path } from "../../../utils";
 import { withRouter } from "react-router";
+import "./Handbook.scss";
+import { Empty } from "antd";
 
 class Handbook extends Component {
   constructor(props) {
@@ -22,6 +24,9 @@ class Handbook extends Component {
       });
     }
   }
+  viewDetailHandbook = (handbook) => {
+    this.props.history.push(`${path.DETAIL_HANDBOOK}/${handbook.id}`);
+  };
   render() {
     let { arrHandbook } = this.state;
     return (
@@ -39,12 +44,16 @@ class Handbook extends Component {
             <FormattedMessage id="homepage.all-posts" />
           </button>
         </div>
+
         <Slider {...this.props.settings} className="commonSection__slider">
-          {arrHandbook &&
-            arrHandbook.length > 0 &&
+          {arrHandbook && arrHandbook.length > 0 ? (
             arrHandbook.map((item, index) => {
               return (
-                <div className="commonSection__slider__item" key={index}>
+                <div
+                  className="commonSection__slider__item"
+                  key={index}
+                  onClick={() => this.viewDetailHandbook(item)}
+                >
                   <img
                     src={item.image}
                     className="commonSection__slider__item__img"
@@ -54,7 +63,10 @@ class Handbook extends Component {
                   </div>
                 </div>
               );
-            })}
+            })
+          ) : (
+            <Empty description={<FormattedMessage id="common.no-data" />} />
+          )}
         </Slider>
       </div>
     );

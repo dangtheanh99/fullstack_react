@@ -1,5 +1,10 @@
 .footerSection {
-  // display: flex;
+  border-top: 1px solid #ddd;
+  // position: absolute;
+  // bottom: 0;
+  // right: 0;
+  // left: 0;
+  // width: 100%;
 
   &__bigBlock {
     display: flex;

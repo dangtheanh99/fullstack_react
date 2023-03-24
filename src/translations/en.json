@@ -32,8 +32,12 @@
   },
   "login": {
     "login": "Login",
-    "username": "Username",
+    "username": "Email",
     "password": "Password",
+    "enter-email": "Enter your email",
+    "enter-password": "Enter your password",
+    "forget-password": "Forget password?",
+    "login-with": "Or login with",
     "userpass-wrong": "Invalid username or password!"
   },
   "menu": {
@@ -145,7 +149,7 @@
     "handbook": "Handbook",
     "des-handbook": "Useful knowledge for patients",
     "medical-background": "Your health",
-    "health-care": "Place of trust",
+    "health-care": "Your smile is our mission",
     "find-hospital": "Find a hospital"
   },
   "homefooter": {
@@ -232,7 +236,7 @@
     "title": "Handbook Management",
     "name": "Name of the handbook",
     "image": "Handbook photo",
-    "description": "Description of the handbook",
+    "description": "Handbook details",
     "save": "Save"
   },
   "patient": {
@@ -249,7 +253,7 @@
       "hide": "Hide price list"
     },
     "booking": {
-      "title": "Information to book a medical appointment",
+      "title": "Book a medical appointment",
       "fullName": "Full name",
       "phoneNumber": "Phone number",
       "email": "Email",

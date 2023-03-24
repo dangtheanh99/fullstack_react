@@ -32,9 +32,13 @@
   },
   "login": {
     "login": "Đăng nhập",
-    "username": "Tên đăng nhập",
+    "email": "Email",
     "password": "Mật khẩu",
-    "userpass-wrong": "Sai tên đăng nhập hoặc mật khẩu!"
+    "enter-email": "Nhập email của bạn",
+    "enter-password": "Nhập mật khẩu của bạn",
+    "forget-password": "Quên mật khẩu?",
+    "login-with": "Hoặc đăng nhập với",
+    "userpass-wrong": "Sai email hoặc mật khẩu!"
   },
   "menu": {
     "admin": {
@@ -145,7 +149,7 @@
     "handbook": "Cẩm nang",
     "des-handbook": "Kiến thức hữu ích cho người bệnh",
     "medical-background": "Your health",
-    "health-care": "Nơi trao gửi niềm tin",
+    "health-care": "Nụ cười của bạn là sứ mệnh của chúng tôi",
     "find-hospital": "Tìm bệnh viện"
   },
   "homefooter": {
@@ -232,7 +236,7 @@
     "title": "Quản lý cẩm nang",
     "name": "Tên cẩm nang",
     "image": "Ảnh cẩm nang",
-    "description": "Mô tả cẩm nang",
+    "description": "Chi tiết cẩm nang",
     "save": "Lưu"
   },
   "patient": {
@@ -249,7 +253,7 @@
       "hide": "Ẩn bảng giá"
     },
     "booking": {
-      "title": "Thông tin đặt lịch khám bệnh",
+      "title": "Đặt lịch khám bệnh",
       "fullName": "Họ và tên",
       "phoneNumber": "Số điện thoại",
       "email": "Email",

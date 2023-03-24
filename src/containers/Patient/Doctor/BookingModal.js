@@ -2,12 +2,12 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import "./BookingModal.scss";
 import { FormattedMessage } from "react-intl";
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
+import { Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import ProfileDoctor from "./ProfileDoctor";
 import Select from "react-select";
 import * as actions from "../../../store/actions";
 import { languages } from "../../../utils";
-import { DatePicker, Spin } from "antd";
+import { DatePicker, Spin, Button } from "antd";
 import moment from "moment";
 import { postBookingAppointment } from "../../../services/userService";
 import { toast } from "react-toastify";
@@ -145,9 +145,58 @@ class BookingModal extends Component {
     return "";
   };
 
+  checkValidateInput = () => {
+    let { language } = this.props;
+    let { email, phoneNumber } = this.state;
+    let isValid = true;
+    let arrCheck = [
+      "email",
+      "fullName",
+      "phoneNumber",
+      "reason",
+      "selectedGender",
+      "address",
+    ];
+
+    for (let i = 0; i < arrCheck.length; i++) {
+      if (!this.state[arrCheck[i]]) {
+        isValid = false;
+        if (language === languages.VI) {
+          toast.error(`Thiếu trường, vui lòng nhập đủ thông tin`);
+        } else {
+          toast.error(`Missing field, please enter enough information`);
+        }
+        break;
+      }
+    }
+    if (email) {
+      if (!this.validateEmail(email)) {
+        isValid = false;
+        if (language === languages.VI) {
+          toast.error(`Chưa đúng định dạng email, vui lòng nhập lại!`);
+        } else {
+          toast.error(`Email format is not correct, please re-enter!`);
+        }
+      }
+    }
+    if (phoneNumber) {
+      if (!this.validatePhoneNumber(phoneNumber)) {
+        isValid = false;
+        if (language === languages.VI) {
+          toast.error(`Chưa đúng định dạng số điện thoại, vui lòng nhập lại!`);
+        } else {
+          toast.error(`Invalid phone number format, please re-enter!`);
+        }
+      }
+    }
+    return isValid;
+  };
+
   handleSaveInfo = async () => {
     let { dataTime, language } = this.props;
     console.log("save infor", this.state);
+    let isValidated = this.checkValidateInput();
+    if (!isValidated) return;
     let timeText = this.buildTimeBooking(dataTime);
     let doctorName = this.buildDoctorName(dataTime);
     this.setState({
@@ -173,9 +222,13 @@ class BookingModal extends Component {
         loading: false,
       });
       if (language === languages.VI) {
-        toast.success("Đặt lịch hẹn thành công!");
+        toast.success(
+          "Đặt lịch hẹn thành công. Vui lòng check email để xác nhận đặt lịch!"
+        );
       } else {
-        toast.success("Book a appointment successfully!");
+        toast.success(
+          "Book a appointment successfully. Please check your email to confirm your booking!"
+        );
       }
       this.props.closeModal();
       this.setState({
@@ -185,7 +238,6 @@ class BookingModal extends Component {
         address: "",
         reason: "",
         date: "",
-        // birthday: "",
         selectedGender: undefined,
         doctorId: "",
         timeType: "",
@@ -209,7 +261,11 @@ class BookingModal extends Component {
       <Modal isOpen={isOpen} className="bookingModal" size="lg" centered>
         <Spin
           spinning={loading}
-          tip={language === languages.VI ? "Đang xử lý..." : "Loading..."}
+          tip={
+            language === languages.VI
+              ? "Đang thực hiện đặt lịch..."
+              : "Loading..."
+          }
         >
           <ModalHeader className="bookingModal__header" toggle={closeModal}>
             <FormattedMessage id="patient.booking.title" />
@@ -228,7 +284,7 @@ class BookingModal extends Component {
 
               <div className="col-6 form-group">
                 <label>
-                  <FormattedMessage id="patient.booking.fullName" />
+                  *<FormattedMessage id="patient.booking.fullName" />
                 </label>
                 <input
                   className="form-control"
@@ -238,7 +294,7 @@ class BookingModal extends Component {
               </div>
               <div className="col-6 form-group">
                 <label>
-                  <FormattedMessage id="patient.booking.phoneNumber" />
+                  *<FormattedMessage id="patient.booking.phoneNumber" />
                 </label>
                 <input
                   className="form-control"
@@ -248,7 +304,7 @@ class BookingModal extends Component {
               </div>
               <div className="col-6 form-group">
                 <label>
-                  <FormattedMessage id="patient.booking.email" />
+                  *<FormattedMessage id="patient.booking.email" />
                 </label>
                 <input
                   className="form-control"
@@ -258,7 +314,7 @@ class BookingModal extends Component {
               </div>
               <div className="col-6 form-group">
                 <label>
-                  <FormattedMessage id="patient.booking.address" />
+                  *<FormattedMessage id="patient.booking.address" />
                 </label>
                 <input
                   className="form-control"
@@ -268,7 +324,7 @@ class BookingModal extends Component {
               </div>
               <div className="col-12 form-group">
                 <label>
-                  <FormattedMessage id="patient.booking.reason" />
+                  *<FormattedMessage id="patient.booking.reason" />
                 </label>
                 <input
                   className="form-control"
@@ -276,31 +332,9 @@ class BookingModal extends Component {
                   value={this.state.reason}
                 ></input>
               </div>
-              {/* <div className="col-6 form-group">
-              <label>
-                <FormattedMessage id="patient.booking.birthday" />
-              </label>
-              <DatePicker
-                onChange={this.onChangeDate}
-                className="form-control"
-                // disabledDate={(current) => {
-                //   let customDate = moment().format("DD-MM-YYYY");
-                //   return current && current < moment(customDate, "DD-MM-YYYY");
-                // }}
-                locale="vi"
-                format="DD/MM/YYYY"
-                placeholder={
-                  // <FormattedMessage id="patient.booking.chooseDate" />
-                  language === languages.VI
-                    ? "Chọn ngày sinh"
-                    : "Choose date of birth"
-                }
-                value={this.state.birthday}
-              />
-            </div> */}
               <div className="col-6 form-group">
                 <label>
-                  <FormattedMessage id="patient.booking.gender" />
+                  *<FormattedMessage id="patient.booking.gender" />
                 </label>
                 <Select
                   value={selectedGender}
@@ -314,14 +348,10 @@ class BookingModal extends Component {
             </div>
           </ModalBody>
           <ModalFooter className="bookingModal__footer">
-            <Button
-              color="primary"
-              className="px-3"
-              onClick={() => this.handleSaveInfo()}
-            >
+            <Button type="primary" onClick={() => this.handleSaveInfo()}>
               <FormattedMessage id="patient.booking.confirm" />
-            </Button>{" "}
-            <Button color="secondary" className="px-3" onClick={closeModal}>
+            </Button>
+            <Button onClick={closeModal}>
               <FormattedMessage id="patient.booking.cancel" />
             </Button>
           </ModalFooter>

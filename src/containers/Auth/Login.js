@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { push } from "connected-react-router";
-
 import * as actions from "../../store/actions";
 import "./Login.scss";
 import { FormattedMessage } from "react-intl";
 import { handleLoginApi } from "../../services/userService";
 import adminService from "../../services/adminService";
 import { userLoginSuccess } from "../../store/actions/userActions";
+import { languages } from "../../utils";
 
 class Login extends Component {
   constructor(props) {
@@ -74,31 +74,46 @@ class Login extends Component {
     });
   };
   render() {
+    let { language } = this.props;
     return (
       <div className="login-background">
         <div className="login-container">
           <div className="login-content">
-            <h2 className="login-content-heading">Login</h2>
+            <h2 className="login-content-heading">
+              <FormattedMessage id="login.login" />
+            </h2>
             <form>
               <div className="form-group">
-                <label for="exampleInputEmail1">Username</label>
+                <label for="exampleInputEmail1">
+                  <FormattedMessage id="login.email" />
+                </label>
                 <input
                   type="text"
                   className="form-control"
                   id="exampleInputEmail1"
-                  placeholder="Enter your username"
+                  placeholder={
+                    language === languages.VI
+                      ? "Nhập email của bạn"
+                      : "Enter your email"
+                  }
                   value={this.state.username}
                   onChange={(event) => this.handleOnChange(event, "username")}
                 />
               </div>
               <div className="form-group">
-                <label for="exampleInputPassword1">Password</label>
+                <label for="exampleInputPassword1">
+                  <FormattedMessage id="login.password" />
+                </label>
                 <div className="custom-password">
                   <input
                     type={this.state.isShowPassword ? "text" : "password"}
                     className="form-control"
                     id="exampleInputPassword1"
-                    placeholder="Enter your password"
+                    placeholder={
+                      language === languages.VI
+                        ? "Nhập mật khẩu của bạn"
+                        : "Enter your password"
+                    }
                     value={this.state.password}
                     onChange={(event) => this.handleOnChange(event, "password")}
                     onKeyPress={(event) => this.handleOnPressEnter(event)}
@@ -117,20 +132,23 @@ class Login extends Component {
               <div className="col-12" style={{ color: "red" }}>
                 {this.state.errMessage}
               </div>
-              <div className="col-12 text-right">Forgot password?</div>
+              <div className="col-12 text-right">
+                <FormattedMessage id="login.forget-password" />
+              </div>
 
               <div>
                 <button
                   // type="submit"
                   className="btn btn-primary btn-login"
                   onClick={(e) => this.handleLogin(e)}
+                  style={{ textTransform: "uppercase" }}
                 >
-                  LOGIN
+                  <FormattedMessage id="login.login" />
                 </button>
               </div>
               <div className="other-login">
                 <div className="other-login-text text-center">
-                  Or login with
+                  <FormattedMessage id="login.login-with" />
                 </div>
                 <div className="social-login">
                   <a href="#" className="btn-face m-b-10" role={"button"}>
@@ -166,7 +184,6 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     navigate: (path) => dispatch(push(path)),
-    // userLoginFail: () => dispatch(actions.userLoginFail()),
     userLoginSuccess: (userInfo) =>
       dispatch(actions.userLoginSuccess(userInfo)),
   };

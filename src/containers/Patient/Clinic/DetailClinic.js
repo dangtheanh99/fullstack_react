@@ -14,6 +14,7 @@ import _, { orderBy } from "lodash";
 import Select from "react-select";
 import { languages } from "../../../utils";
 import { Empty } from "antd";
+import HomeFooter from "../../HomePage/HomeFooter";
 
 class DetailClinic extends Component {
   constructor(props) {
@@ -103,6 +104,7 @@ class DetailClinic extends Component {
             )}
           </div>
         </div>
+        <HomeFooter />
       </>
     );
   }

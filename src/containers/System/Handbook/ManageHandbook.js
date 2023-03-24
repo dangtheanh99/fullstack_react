@@ -163,7 +163,7 @@ class ManageHandbook extends Component {
               <FormattedMessage id="manage-handbook.description" />
             </label>
             <MdEditor
-              style={{ height: "300px" }}
+              style={{ height: "380px" }}
               renderHTML={(text) => mdParser.render(text)}
               onChange={this.handleEditorChange}
               value={descriptionMarkdown}

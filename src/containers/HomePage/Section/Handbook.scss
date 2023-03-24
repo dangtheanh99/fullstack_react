@@ -1,0 +1,11 @@
+.HandbookSection {
+  .commonSection__slider__item__title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 2;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    word-break: break-word;
+    text-align: left;
+  }
+}

@@ -82,9 +82,7 @@ class ManagePatient extends Component {
   sendDataModal = async (dataFromModal) => {
     let { dataModal } = this.state;
     let { language } = this.props;
-    // this.setState({
-    //   loading: true,
-    // });
+    console.log("dataFromModal", dataFromModal);
     let res = await sendRemedyService({
       ...dataFromModal,
       doctorId: dataModal.doctorId,
@@ -173,8 +171,8 @@ class ManagePatient extends Component {
                         listPatient.map((item, index) => {
                           let timeVi = item.timeTypePatient.valueVi;
                           let timeEn = item.timeTypePatient.valueEn;
-                          let genderVi = item.patientData.genderData.valueVi;
-                          let genderEn = item.patientData.genderData.valueEn;
+                          let genderVi = item.patientData?.genderData.valueVi;
+                          let genderEn = item.patientData?.genderData.valueEn;
 
                           return (
                             <tr key={index}>

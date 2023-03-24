@@ -140,7 +140,7 @@ class ManageSchedule extends Component {
         return { ...item, isSelected: false };
       });
       this.setState({
-        selectedDate: moment(),
+        // selectedDate: moment(),
         // selectedOption: "",
         rangeTime: initRangeTime,
       });
