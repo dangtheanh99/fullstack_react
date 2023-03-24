@@ -32,7 +32,7 @@
   },
   "login": {
     "login": "Login",
-    "username": "Email",
+    "email": "Email",
     "password": "Password",
     "enter-email": "Enter your email",
     "enter-password": "Enter your password",
@@ -189,7 +189,7 @@
     "more": "More",
     "search": "Search",
     "popular-specialty": "Popular specialties",
-    "outstanding-medical-facility": "Medical facility",
+    "outstanding-medical-facility": "Clinic",
     "handbook": "Handbook",
     "all-posts": "All posts"
   },
